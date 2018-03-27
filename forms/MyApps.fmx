@@ -1,0 +1,355 @@
+object FormMyApps: TFormMyApps
+  Left = 0
+  Top = 0
+  Caption = 'My Apps'
+  ClientHeight = 480
+  ClientWidth = 486
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  DesignerMasterStyle = 3
+  object ListView1: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Align = Client
+    Size.Width = 486.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    ParentShowHint = False
+    ShowHint = False
+    ItemAppearance.ItemHeight = 140
+    ItemAppearance.HeaderHeight = 1
+    ItemAppearance.FooterHeight = 1
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'app_service_type_name'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 13.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.WordWrap = True
+        Appearance.Height = 30.000000000000000000
+        Appearance.Align = Trailing
+        Appearance.PlaceOffset.Y = 42.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'deadlineby_user'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 13.000000000000000000
+        Appearance.Font.StyleExt = {00070000000000000004000000}
+        Appearance.TextAlign = Leading
+        Appearance.WordWrap = True
+        Appearance.TextColor = claSeagreen
+        Appearance.Height = 30.000000000000000000
+        Appearance.Align = Trailing
+        Appearance.PlaceOffset.Y = 100.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'app_property_type_name'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 13.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.WordWrap = True
+        Appearance.Height = 30.000000000000000000
+        Appearance.PlaceOffset.Y = 71.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'create_date'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 13.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.WordWrap = True
+        Appearance.Height = 30.000000000000000000
+        Appearance.PlaceOffset.Y = 13.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <>
+    ItemAppearanceObjects.HeaderObjects.Text.TextColor = claSeagreen
+    ItemAppearanceObjects.HeaderObjects.Text.Height = 0.009999999776482582
+    ItemAppearanceObjects.HeaderObjects.Text.Visible = False
+    ItemAppearanceObjects.FooterObjects.Text.Height = 1.000000000000000000
+    ItemAppearanceObjects.FooterObjects.Text.Visible = False
+    StyleLookup = 'ListView1Style1'
+    OnItemClick = ListView1ItemClick
+    OnPullRefresh = ListView1PullRefresh
+    AutoTapScroll = True
+    SearchVisible = True
+    PullToRefresh = True
+  end
+  object RectangleHeader: TRectangle
+    Align = Top
+    Fill.Color = xFF198D60
+    Size.Width = 486.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    object ButtonBack: TButton
+      Align = Left
+      IconTintColor = claWhite
+      Position.Y = 1.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'priortoolbutton'
+      TabOrder = 0
+      Text = 'ButtonBack'
+      OnClick = ButtonBackClick
+    end
+    object Label1: TLabel
+      Align = Client
+      StyledSettings = [Family, Style]
+      Size.Width = 438.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = #4329#4308#4315#4312' '#4306#4304#4316#4330#4334#4304#4307#4308#4305#4308#4305#4312
+      TabOrder = 1
+    end
+  end
+  object PreloaderRectangle: TRectangle
+    Align = Client
+    Fill.Bitmap.Bitmap.PNG = {
+      89504E470D0A1A0A0000000D49484452000000010000000108060000001F15C4
+      89000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+      000D49444154185763606060480300006B0067166DC4120000000049454E44AE
+      426082}
+    Fill.Bitmap.WrapMode = Tile
+    Fill.Kind = Bitmap
+    Size.Width = 486.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    Visible = False
+    object FMXLoadingIndicator1: TFMXLoadingIndicator
+      Align = Center
+      HitTest = False
+      Size.Width = 100.000000000000000000
+      Size.Height = 100.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Color = xFF198D60
+      Kind = BallClipRotatePulse
+    end
+  end
+  object RESTRequestMyApps: TRESTRequest
+    Client = DModule.RESTClient
+    Params = <
+      item
+        name = 'sesskey'
+        Value = '240fe30ad8388abed257a498709cd6a0'
+      end
+      item
+        name = 'user_id'
+        Value = '27'
+      end>
+    Resource = 'apps/getmyapps'
+    Response = RESTResponseMyApps
+    OnAfterExecute = RESTRequestMyAppsAfterExecute
+    SynchronizedEvents = False
+    Left = 112
+    Top = 48
+  end
+  object RESTResponseMyApps: TRESTResponse
+    ContentType = 'application/json'
+    Left = 112
+    Top = 96
+  end
+  object RESTResponseDataSetAdapterMyApps: TRESTResponseDataSetAdapter
+    Active = True
+    Dataset = FDMemTableMyApps
+    FieldDefs = <>
+    ResponseJSON = RESTResponseMyApps
+    Left = 112
+    Top = 144
+  end
+  object FDMemTableMyApps: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'user_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'app_service_type_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'app_service_type_name'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'app_property_type_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'app_property_type_name'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'create_date'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'deadlineby_user'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'imageIndex'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'username'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'note'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'address'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'area'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'cadcode'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'location_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'lon_lat'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'status_name'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'status_color'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'status_progress'
+        DataType = ftWideString
+        Size = 255
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 112
+    Top = 200
+    object FDMemTableMyAppsid: TWideStringField
+      FieldName = 'id'
+      Size = 255
+    end
+    object FDMemTableMyAppsuser_id: TWideStringField
+      FieldName = 'user_id'
+      Size = 255
+    end
+    object FDMemTableMyAppsapp_service_type_id: TWideStringField
+      FieldName = 'app_service_type_id'
+      Size = 255
+    end
+    object FDMemTableMyAppsapp_service_type_name: TWideStringField
+      FieldName = 'app_service_type_name'
+      Size = 255
+    end
+    object FDMemTableMyAppsapp_property_type_id: TWideStringField
+      FieldName = 'app_property_type_id'
+      Size = 255
+    end
+    object FDMemTableMyAppsapp_property_type_name: TWideStringField
+      FieldName = 'app_property_type_name'
+      Size = 255
+    end
+    object FDMemTableMyAppscreate_date: TWideStringField
+      FieldName = 'create_date'
+      Size = 255
+    end
+    object FDMemTableMyAppsdeadlineby_user: TWideStringField
+      FieldName = 'deadlineby_user'
+      Size = 255
+    end
+    object FDMemTableMyAppsimageIndex: TWideStringField
+      FieldName = 'imageIndex'
+      Size = 255
+    end
+    object FDMemTableMyAppsusername: TWideStringField
+      FieldName = 'username'
+      Size = 255
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = FDMemTableMyApps
+    ScopeMappings = <>
+    Left = 304
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 116
+    Top = 13
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      Control = ListView1
+      FillExpressions = <
+        item
+          SourceMemberName = 'app_service_type_name'
+          ControlMemberName = 'app_service_type_name'
+        end
+        item
+          SourceMemberName = 'app_property_type_name'
+          ControlMemberName = 'app_property_type_name'
+        end
+        item
+          SourceMemberName = 'create_date'
+          ControlMemberName = 'create_date'
+        end
+        item
+          SourceMemberName = 'deadlineby_user'
+          ControlMemberName = 'deadlineby_user'
+        end>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+end
