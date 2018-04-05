@@ -8,7 +8,7 @@ object DModule: TDModule
     BaseURL = 'http://azomva.com/rest'
     Params = <>
     HandleRedirects = True
-    UserAgent = 'azomva.com mobile RESTClient'
+    UserAgent = 'azomva.com mobile RESTClient / Amzomvelebi'
     Left = 144
     Top = 64
   end

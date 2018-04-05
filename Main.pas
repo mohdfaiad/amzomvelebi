@@ -189,6 +189,7 @@ type
     FDMemTableBidedAppsdropdownarrow_imageindex: TWideStringField;
     BindSourceDB3: TBindSourceDB;
     LinkListControlToField1: TLinkListControlToField;
+    Action1: TAction;
     procedure AuthActionExecute(Sender: TObject);
     procedure ActionUserAreaExecute(Sender: TObject);
     procedure TimerVersioningTimer(Sender: TObject);
@@ -226,6 +227,7 @@ type
     procedure clearINIParams;
     function getDeviceID: string;
     procedure loadMyBidedApps;
+    procedure onReceiveNotificationActionForInit;
     // procedure OnServiceConnectionChange(Sender: TObject; AChange: TPushService.TChanges);
     // function isServiceStarted: Boolean;
 
@@ -233,7 +235,8 @@ type
   public
     { Public declarations }
     FPushClient: TPushClient;
-    app_id, user_id, action: string;
+    v_app_id, v_user_id, v_action: string;
+    v_notification_received: Boolean;
     procedure DoAuthenticate;
   end;
 
@@ -268,6 +271,7 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  self.v_notification_received := False;
   self.PreloaderRectangle.Visible := True;
   TabItemBidedApps.Visible := False;
   FPushClient := TPushClient.Create;
@@ -286,65 +290,52 @@ end;
 procedure TMainForm.PushClientReceiveNotificationHandler(Sender: TObject; const ANotification: TPushServiceNotification);
 var
   MyNotification: TNotification;
-  Ini: TIniFile;
 begin
-  Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath, DModule.settingsIniFile));
   MyNotification := NotificationCenter1.CreateNotification;
   try
-    self.action := ANotification.DataObject.Values['action'].ToString.Replace('"', '');
-    self.app_id := ANotification.DataObject.Values['app_id'].ToString.Replace('"', '');
-    self.user_id := ANotification.DataObject.Values['user_id'].ToString.Replace('"', '');
+    self.v_action := ANotification.DataObject.Values['action'].ToString.Replace('"', '');
+    self.v_app_id := ANotification.DataObject.Values['app_id'].ToString.Replace('"', '');
+    self.v_user_id := ANotification.DataObject.Values['user_id'].ToString.Replace('"', '');
+    self.v_notification_received := True;
 
     MyNotification.Name := ANotification.DataObject.Values['app_id'].ToString.Replace('"', '');
     MyNotification.Title := ANotification.DataObject.Values['title'].ToString.Replace('"', '');
-    MyNotification.AlertBody := ANotification.DataObject.Values['message'].ToString.Replace('"', '') + self.action;
+    MyNotification.AlertBody := ANotification.DataObject.Values['message'].ToString.Replace('"', '');
     MyNotification.EnableSound := True;
     MyNotification.Number := 18;
     MyNotification.HasAction := True;
     MyNotification.AlertAction := 'Launch';
     NotificationCenter1.PresentNotification(MyNotification);
-
-    Ini.AutoSave := True;
-    Ini.WriteString('notification', 'action', self.action);
-    Ini.WriteString('notification', 'app_id', self.app_id);
-    Ini.WriteString('notification', 'user_id', self.user_id);
   finally
-    Ini.Free;
     MyNotification.DisposeOf;
   end;
 end;
 
 procedure TMainForm.NotificationCenter1ReceiveLocalNotification(Sender: TObject; ANotification: TNotification);
-var
-  Ini: TIniFile;
 begin
   self.NotificationCenter1.CancelNotification(ANotification.Name);
-  Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath, DModule.settingsIniFile));
-  try
-    action := Ini.ReadString('notification', 'action', '');
-    ShowMessage(self.action);
-    app_id := Ini.ReadString('notification', 'app_id', '');
-    user_id := Ini.ReadString('notification', 'user_id', '');
-    if action = 'TAppDetailForm' then
+  if self.v_action = 'TAppDetailForm' then
+  begin
+    with TAppDetailForm.Create(Application) do
     begin
-      with TAppDetailForm.Create(Application) do
-      begin
-        initForm(self.app_id.ToInteger);
-      end;
-    end
-    else if action = 'TUser2ReviewForm' then
+      initForm(self.v_app_id.ToInteger);
+    end;
+  end
+  else if self.v_action = 'TUser2ReviewForm' then
+  begin
+    if self.v_user_id.ToInteger > 0 then
     begin
-      if user_id.ToInteger > 0 then
+      with TUser2ReviewForm.Create(Application) do
       begin
-        with TUser2ReviewForm.Create(Application) do
-        begin
-          initForm(user_id.ToInteger);
-        end;
+        initForm(self.v_user_id.ToInteger);
       end;
     end;
-  finally
-    Ini.Free;
   end;
+end;
+
+procedure TMainForm.onReceiveNotificationActionForInit;
+begin
+  //
 end;
 
 procedure TMainForm.Rectangle1Click(Sender: TObject);
@@ -699,6 +690,7 @@ begin
     FPushClient.UseSandbox := True; // Change this to False for production use!
     FPushClient.OnChange := PushClientChangeHandler;
     FPushClient.OnReceiveNotification := PushClientReceiveNotificationHandler;
+    self.onReceiveNotificationActionForInit;
   finally
     jsonObject.Free;
     UserObject.Free;

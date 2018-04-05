@@ -8,6 +8,7 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
+  OnKeyUp = FormKeyUp
   DesignerMasterStyle = 3
   object RectangleMain: TRectangle
     Align = Client
@@ -235,6 +236,11 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
       end
     end
   end
+  object Timer1: TTimer
+    Enabled = False
+    Left = 360
+    Top = 280
+  end
   object RESTRequestReg: TRESTRequest
     Client = DModule.RESTClient
     Method = rmPOST
@@ -268,10 +274,5 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
     UpdateOptions.AutoCommitUpdates = True
     Left = 360
     Top = 224
-  end
-  object Timer1: TTimer
-    Enabled = False
-    Left = 360
-    Top = 280
   end
 end

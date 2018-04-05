@@ -15,9 +15,8 @@ uses
   FMX.Controls.Presentation, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Threading,
   FMX.MultiView, FMX.Layouts, FMX.ListBox, FMX.Ani, FMX.LoadingIndicator,
-  FMX.TMSBaseControl, FMX.TMSCustomPicker, FMX.TMSCheckGroupPicker,
-  FMX.TMSTreeViewBase, FMX.TMSTreeViewData, FMX.TMSCustomTreeView,
-  FMX.TMSTreeView, FMX.TMSCheckedTreeView;
+  FMX.TMSBaseControl, FMX.TreeView, FMX.Edit, FMX.BezierPanel, FMX.TMSPanel,
+  FMX.ExtCtrls, FMX.TMSPopup;
 
 type
   TAppListForm = class(TForm)
@@ -80,15 +79,31 @@ type
     RectangleFilteringDetailsContent: TRectangle;
     Label3: TLabel;
     Line3: TLine;
-    Line4: TLine;
     Rectangle4: TRectangle;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     RectangleFiltering: TRectangle;
     SpeedButtonSort: TSpeedButton;
-    FloatAnimation1: TFloatAnimation;
     SpeedButton3: TSpeedButton;
-    TMSFMXCheckedTreeView1: TTMSFMXCheckedTreeView;
+    RadioButtonByLocation: TRadioButton;
+    RadioButtonByDate: TRadioButton;
+    RadioButtonByBids: TRadioButton;
+    Rectangle2: TRectangle;
+    Button2: TButton;
+    Edit1: TEdit;
+    TreeViewLocations: TTreeView;
+    ComboBoxApp_property_types: TComboBox;
+    FDMemTableAppServiceTypes: TFDMemTable;
+    RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter;
+    FDMemTableAppServiceTypesid: TWideStringField;
+    FDMemTableAppServiceTypestitle: TWideStringField;
+    BindSourceDB3: TBindSourceDB;
+    LinkListControlToField2: TLinkListControlToField;
+    ListBox1: TListBox;
+    ListBoxItem1: TListBoxItem;
+    ListBoxItem2: TListBoxItem;
+    ListBoxItem3: TListBoxItem;
+    FloatAnimationListBoxPosition: TFloatAnimation;
     procedure ButtonBackClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ListView1PullRefresh(Sender: TObject);
@@ -101,13 +116,18 @@ type
       const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
     procedure SpeedButtonCloseClick(Sender: TObject);
     procedure SpeedButtonSortClick(Sender: TObject);
-    procedure ButtonSortingClick(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButtonApplyClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure ListBoxItem1Click(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
+    v_loadLocationTree: boolean;
     procedure reloadItems(sort_field, sort: String);
+    procedure loadLocationTree;
     { Private declarations }
   public
     { Public declarations }
@@ -131,6 +151,20 @@ begin
   self.MultiView1.HideMaster;
 end;
 
+procedure TAppListForm.Button2Click(Sender: TObject);
+var
+  sort: string;
+begin
+  if RadioButtonByLocation.IsChecked then
+    sort := 'location'
+  else if RadioButtonByBids.IsChecked then
+    sort := 'bids'
+  else if RadioButtonByDate.IsChecked then
+    sort := 'create_date';
+  self.reloadItems(sort, 'desc');
+  // models/apps.php line:18
+end;
+
 procedure TAppListForm.Button3Click(Sender: TObject);
 begin
   self.PreloaderRectangle.Visible := True;
@@ -141,10 +175,35 @@ end;
 procedure TAppListForm.Button4Click(Sender: TObject);
 var
   aTask: ITask;
+  v_locations: String;
+  i, iChildren: Integer;
 begin
+  v_locations := '';
+  for i := 0 to TreeViewLocations.Count - 1 do
+  begin
+
+    if TreeViewLocations.ItemByIndex(i).IsChecked = True then
+    begin
+      v_locations := v_locations + ',' + TreeViewLocations.ItemByIndex(i)
+        .Tag.ToString;
+      if TreeViewLocations.ItemByIndex(i).ChildrenCount > 0 then
+      begin
+        for iChildren := 0 to TreeViewLocations.ItemByIndex(i)
+          .ChildrenCount - 1 do
+        begin
+          if TreeViewLocations.ItemByIndex(i).ItemByIndex(iChildren).IsChecked = True
+          then
+          begin
+            v_locations := v_locations + ',' + TreeViewLocations.ItemByIndex(i)
+              .ItemByIndex(iChildren).Tag.ToString;
+          end;
+        end;
+      end;
+    end;
+  end;
+
   self.PreloaderRectangle.Visible := True;
-  self.MultiView1.HideMaster;
-  PreloaderRectangle.Visible := True;
+  self.RectangleFilteringDetails.Visible := False;
   aTask := TTask.Create(
     procedure()
     begin
@@ -161,16 +220,66 @@ begin
           name := 'user_id';
           Value := DModule.id.ToString;
         end;
+        with RESTRequestApps.Params.AddItem do
+        begin
+          name := 'locations';
+          Value := v_locations;
+        end;
+        with RESTRequestApps.Params.AddItem do
+        begin
+          name := 'app_service_type_id';
+          Value := FDMemTableAppServiceTypes.FieldByName('id').AsString;
+        end;
+        with RESTRequestApps.Params.AddItem do
+        begin
+          name := 'app_service_type_id';
+          Value := FDMemTableAppServiceTypes.FieldByName('id').AsString;
+        end;
       end;
       RESTRequestApps.Execute;
     end);
   aTask.Start;
-  { TMSFMXCheckedTreeView1.Nodes.BeginUpdate;
-    with TMSFMXCheckedTreeView1.Nodes.Add do
-    begin
+end;
 
+procedure TAppListForm.loadLocationTree;
+var
+  v_pid: Integer;
+begin
+  self.v_loadLocationTree := True;
+  FDMemTableLocations.First;
+  if TreeViewLocations.Count = 0 then
+  begin
+    TreeViewLocations.BeginUpdate;
+    while not FDMemTableLocations.Eof do
+    begin
+      v_pid := FDMemTableLocations.FieldByName('pid').AsInteger;
+      if v_pid = 0 then
+      begin
+        with TTreeViewItem.Create(TreeViewLocations) do
+        begin
+          Parent := TreeViewLocations;
+          Text := FDMemTableLocations.FieldByName('title').AsString;
+          Tag := FDMemTableLocations.FieldByName('id').AsInteger;
+        end;
+      end
+      else
+      begin
+        with TTreeViewItem.Create
+          (TreeViewLocations.ItemByIndex(FDMemTableLocations.FieldByName('pid')
+          .AsInteger)) do
+        begin
+          Parent := TreeViewLocations.ItemByIndex
+            (FDMemTableLocations.FieldByName('pid').AsInteger);
+          Text := FDMemTableLocations.FieldByName('title').AsString;
+          Tag := FDMemTableLocations.FieldByName('id').AsInteger;
+        end;
+      end;
+      FDMemTableLocations.Next;
     end;
-  }
+    TreeViewLocations.EndUpdate;
+    TreeViewLocations.ExpandAll;
+  end;
+
 end;
 
 procedure TAppListForm.ButtonBackClick(Sender: TObject);
@@ -178,20 +287,23 @@ begin
   self.Close;
 end;
 
-procedure TAppListForm.ButtonSortingClick(Sender: TObject);
-begin
-  self.MultiView1.ShowMaster;
-end;
-
 procedure TAppListForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := TCloseAction.caFree;
+end;
+
+procedure TAppListForm.FormKeyUp(Sender: TObject; var Key: Word;
+var KeyChar: Char; Shift: TShiftState);
+begin
+  if Key = 137 then
+    self.Free;
 end;
 
 procedure TAppListForm.initForm;
 var
   aTask: ITask;
 begin
+  self.v_loadLocationTree := False;
   self.Show;
   PreloaderRectangle.Visible := True;
   aTask := TTask.Create(
@@ -237,6 +349,13 @@ begin
       RESTRequestApps.Execute;
     end);
   aTask.Start;
+end;
+
+procedure TAppListForm.ListBoxItem1Click(Sender: TObject);
+begin
+  FloatAnimationListBoxPosition.StopValue := ListBox1.Width;
+  FloatAnimationListBoxPosition.Enabled := True;
+  TreeViewLocations.Visible := True;
 end;
 
 procedure TAppListForm.ListView1ItemClickEx(const Sender: TObject;
@@ -303,6 +422,8 @@ end;
 
 procedure TAppListForm.SpeedButton3Click(Sender: TObject);
 begin
+  if self.v_loadLocationTree = False then
+    self.loadLocationTree;
   RectangleFilteringDetails.Visible := True;
 end;
 
@@ -318,7 +439,7 @@ end;
 
 procedure TAppListForm.SpeedButtonSortClick(Sender: TObject);
 begin
-  RectangleSorting.Visible := True;
+  self.MultiView1.ShowMaster;
 end;
 
 end.

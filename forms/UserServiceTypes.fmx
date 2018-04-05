@@ -8,6 +8,7 @@ object UserServiceTypesForm: TUserServiceTypesForm
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
+  OnKeyUp = FormKeyUp
   DesignerMasterStyle = 3
   object RectangleLocation: TRectangle
     Align = Client

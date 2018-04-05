@@ -3,14 +3,16 @@ unit UserLocations;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
   FMX.ListBox, FMX.Ani, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Objects,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.Components, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, REST.Response.Adapter, REST.Client, Data.Bind.ObjectScope,
+  FireDAC.Comp.Client, REST.Response.Adapter, REST.Client,
+  Data.Bind.ObjectScope,
   Data.Bind.DBScope, System.Threading, IdURI, System.Actions, FMX.ActnList,
   FMX.Gestures, FMX.LoadingIndicator;
 
@@ -63,12 +65,16 @@ type
     procedure Button1Click(Sender: TObject);
     procedure ListBoxDetailsChangeCheck(Sender: TObject);
     procedure ListBoxLocationsMasterChangeCheck(Sender: TObject);
-    procedure ListBoxLocationsMasterItemClick(const Sender: TCustomListBox; const Item: TListBoxItem);
+    procedure ListBoxLocationsMasterItemClick(const Sender: TCustomListBox;
+      const Item: TListBoxItem);
     procedure RESTRequestSetLocationsAfterExecute(Sender: TCustomRESTRequest);
-    procedure RESTRequestLocationDetailsAfterExecute(Sender: TCustomRESTRequest);
+    procedure RESTRequestLocationDetailsAfterExecute
+      (Sender: TCustomRESTRequest);
     procedure ActionCloseDetailPanelExecute(Sender: TObject);
     procedure RESTRequestLocationAfterExecute(Sender: TCustomRESTRequest);
     procedure TimerSetCheckedTimer(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     procedure setLocations;
     { Private declarations }
@@ -107,9 +113,17 @@ begin
     self.Close;
 end;
 
-procedure TUserLocationsForm.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TUserLocationsForm.FormClose(Sender: TObject;
+  var Action: TCloseAction);
 begin
   Action := TCloseAction.caFree;
+end;
+
+procedure TUserLocationsForm.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  if Key = 137 then
+    self.Free;
 end;
 
 procedure TUserLocationsForm.initForm;
@@ -178,7 +192,8 @@ begin
   end;
 end;
 
-procedure TUserLocationsForm.ListBoxLocationsMasterItemClick(const Sender: TCustomListBox; const Item: TListBoxItem);
+procedure TUserLocationsForm.ListBoxLocationsMasterItemClick
+  (const Sender: TCustomListBox; const Item: TListBoxItem);
 var
   aTask: ITask;
 begin
@@ -191,7 +206,8 @@ begin
   else
   begin
     RectangleDetail.Visible := True;
-    if not self.FDMemTableL.FieldByName('id').AsInteger <> self.v_detailRequestId then
+    if not self.FDMemTableL.FieldByName('id').AsInteger <> self.v_detailRequestId
+    then
     begin
       self.v_detailRequestId := self.FDMemTableL.FieldByName('id').AsInteger;
       RectanglePreloader.Visible := True;
@@ -225,19 +241,22 @@ begin
   end;
 end;
 
-procedure TUserLocationsForm.RESTRequestLocationAfterExecute(Sender: TCustomRESTRequest);
+procedure TUserLocationsForm.RESTRequestLocationAfterExecute
+  (Sender: TCustomRESTRequest);
 begin
   self.checkCheckBoxesMaster := True;
   TimerSetChecked.Enabled := True;
 end;
 
-procedure TUserLocationsForm.RESTRequestLocationDetailsAfterExecute(Sender: TCustomRESTRequest);
+procedure TUserLocationsForm.RESTRequestLocationDetailsAfterExecute
+  (Sender: TCustomRESTRequest);
 begin
   self.checkCheckBoxesMaster := False;
   TimerSetChecked.Enabled := True;
 end;
 
-procedure TUserLocationsForm.RESTRequestSetLocationsAfterExecute(Sender: TCustomRESTRequest);
+procedure TUserLocationsForm.RESTRequestSetLocationsAfterExecute
+  (Sender: TCustomRESTRequest);
 begin
   RectanglePreloader.Visible := False;
   if RESTResponseLocations.Content = 'success' then
@@ -333,4 +352,3 @@ begin
 end;
 
 end.
-

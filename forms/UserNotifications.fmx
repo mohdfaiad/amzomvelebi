@@ -8,13 +8,13 @@ object UserNotificationsForm: TUserNotificationsForm
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
+  OnKeyUp = FormKeyUp
   DesignerMasterStyle = 3
   object ListView1: TListView
     ItemAppearanceClassName = 'TDynamicAppearance'
     ItemEditAppearanceClassName = 'TDynamicAppearance'
     HeaderAppearanceClassName = 'TListHeaderObjects'
     FooterAppearanceClassName = 'TListHeaderObjects'
-    ItemIndex = 1
     Align = Client
     Size.Width = 369.000000000000000000
     Size.Height = 430.000000000000000000

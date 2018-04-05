@@ -42,3 +42,12 @@ Coordinates=206,1,91,36
 [FMXLoadingIndicator1]
 Coordinates=182,53,144,36
 
+[AppDetailForm.FDMemTableApp]
+Visible=False
+
+[AppDetailForm.FDMemTableBids]
+Visible=False
+
+[AppDetailForm.FDMemTableapp_property_requisites]
+Visible=False
+

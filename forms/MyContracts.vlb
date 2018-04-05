@@ -101,3 +101,6 @@ Coordinates=1153,105,215,33
 [FDMemTableContractsamzomveli_id]
 Coordinates=1153,157,194,33
 
+[MainForm.FDMemTableBidedApps]
+Visible=False
+

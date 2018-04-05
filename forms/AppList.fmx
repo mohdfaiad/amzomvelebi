@@ -2,18 +2,19 @@ object AppListForm: TAppListForm
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 524
-  ClientWidth = 554
+  ClientHeight = 579
+  ClientWidth = 935
   Position = MainFormCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
+  OnKeyUp = FormKeyUp
   DesignerMasterStyle = 3
   object RectangleHeader: TRectangle
     Align = Top
     Fill.Color = xFF198D60
-    Size.Width = 554.000000000000000000
+    Size.Width = 935.000000000000000000
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
@@ -32,7 +33,7 @@ object AppListForm: TAppListForm
     object Label1: TLabel
       Align = Client
       StyledSettings = [Family, Size, Style]
-      Size.Width = 458.000000000000000000
+      Size.Width = 839.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TextSettings.FontColor = claWhitesmoke
@@ -43,7 +44,7 @@ object AppListForm: TAppListForm
     object ButtonSorting: TButton
       Align = Right
       IconTintColor = claWhitesmoke
-      Position.X = 506.000000000000000000
+      Position.X = 887.000000000000000000
       Position.Y = 1.000000000000000000
       Size.Width = 48.000000000000000000
       Size.Height = 48.000000000000000000
@@ -56,8 +57,8 @@ object AppListForm: TAppListForm
   object RectangleMain: TRectangle
     Align = Client
     Fill.Kind = None
-    Size.Width = 554.000000000000000000
-    Size.Height = 474.000000000000000000
+    Size.Width = 935.000000000000000000
+    Size.Height = 529.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
     object ListView1: TListView
@@ -67,8 +68,8 @@ object AppListForm: TAppListForm
       FooterAppearanceClassName = 'TListHeaderObjects'
       Images = MainForm.ImageList1
       Align = Client
-      Size.Width = 554.000000000000000000
-      Size.Height = 427.000000000000000000
+      Size.Width = 935.000000000000000000
+      Size.Height = 482.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       ParentShowHint = False
@@ -163,31 +164,111 @@ object AppListForm: TAppListForm
     object RectangleFiltering: TRectangle
       Align = Top
       Fill.Color = xFF198D60
-      Size.Width = 554.000000000000000000
+      Size.Width = 935.000000000000000000
       Size.Height = 47.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = xFF20B67C
       Stroke.Thickness = 0.200000002980232200
       object SpeedButtonSort: TSpeedButton
-        Align = Left
+        Align = Client
         StyledSettings = [Family, Style]
         Images = MainForm.ImageList1
         ImageIndex = 54
-        Size.Width = 257.000000000000000000
+        Size.Width = 710.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Text = #4321#4317#4320#4322#4312#4320#4308#4305#4304
         TextSettings.Font.Size = 13.000000000000000000
         TextSettings.FontColor = claWhite
-        OnClick = SpeedButtonSortClick
+        object MultiView1: TMultiView
+          DrawerOptions.Mode = PushingDetailView
+          MasterButton = SpeedButtonSort
+          Mode = Popover
+          Size.Width = 250.000000000000000000
+          Size.Height = 400.000000000000000000
+          Size.PlatformDefault = False
+          Visible = False
+          TabOrder = 0
+          object Rectangle2: TRectangle
+            Align = Client
+            Fill.Kind = None
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Size.Width = 240.000000000000000000
+            Size.Height = 390.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            object RadioButtonByLocation: TRadioButton
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Margins.Left = 5.000000000000000000
+              Margins.Top = 15.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Margins.Bottom = 15.000000000000000000
+              Position.X = 5.000000000000000000
+              Position.Y = 15.000000000000000000
+              Size.Width = 230.000000000000000000
+              Size.Height = 19.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              Text = #4320#4308#4306#4312#4317#4316#4312#4321' '#4315#4312#4334#4308#4307#4309#4312#4311
+              TextSettings.Font.Size = 13.000000000000000000
+            end
+            object RadioButtonByDate: TRadioButton
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Margins.Left = 5.000000000000000000
+              Margins.Top = 15.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Margins.Bottom = 15.000000000000000000
+              Position.X = 5.000000000000000000
+              Position.Y = 64.000000000000000000
+              Size.Width = 230.000000000000000000
+              Size.Height = 19.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              Text = #4311#4304#4320#4312#4326#4312#4321' '#4315#4312#4334#4308#4307#4309#4312#4311
+              TextSettings.Font.Size = 13.000000000000000000
+            end
+            object RadioButtonByBids: TRadioButton
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Margins.Left = 5.000000000000000000
+              Margins.Top = 15.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Margins.Bottom = 15.000000000000000000
+              Position.X = 5.000000000000000000
+              Position.Y = 113.000000000000000000
+              Size.Width = 230.000000000000000000
+              Size.Height = 19.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+              Text = #4328#4308#4311#4304#4309#4304#4310#4308#4305#4308#4305#4312#4321' '#4320#4304#4317#4307#4308#4316#4317#4305#4312#4311
+              TextSettings.Font.Size = 13.000000000000000000
+            end
+            object Button2: TButton
+              Align = MostBottom
+              Images = MainForm.ImageList1
+              ImageIndex = 39
+              Position.Y = 346.000000000000000000
+              Size.Width = 240.000000000000000000
+              Size.Height = 44.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 3
+              Text = #4307#4304#4314#4304#4306#4308#4305#4304
+              OnClick = Button2Click
+            end
+          end
+        end
       end
       object SpeedButton3: TSpeedButton
         Align = Left
         StyledSettings = [Family, Style]
         Images = MainForm.ImageList1
         ImageIndex = 55
-        Position.X = 257.000000000000000000
-        Size.Width = 185.000000000000000000
+        Size.Width = 225.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Text = #4324#4312#4314#4322#4320#4304#4330#4312#4304
@@ -195,16 +276,6 @@ object AppListForm: TAppListForm
         TextSettings.FontColor = claWhite
         OnClick = SpeedButton3Click
       end
-    end
-    object MultiView1: TMultiView
-      TargetControl = ListView1
-      MasterButton = ButtonSorting
-      Mode = Popover
-      Size.Width = 250.000000000000000000
-      Size.Height = 400.000000000000000000
-      Size.PlatformDefault = False
-      Visible = False
-      TabOrder = 1
     end
   end
   object PreloaderRectangle: TRectangle
@@ -356,16 +427,15 @@ object AppListForm: TAppListForm
       426082}
     Fill.Bitmap.WrapMode = Tile
     Fill.Kind = Bitmap
-    Size.Width = 554.000000000000000000
-    Size.Height = 474.000000000000000000
+    Size.Width = 935.000000000000000000
+    Size.Height = 529.000000000000000000
     Size.PlatformDefault = False
-    Visible = False
     object RectangleFilteringDetailsContent: TRectangle
       Align = Center
       Anchors = [akLeft, akTop, akRight, akBottom]
       Fill.Color = claWhite
-      Size.Width = 523.000000000000000000
-      Size.Height = 439.000000000000000000
+      Size.Width = 904.000000000000000000
+      Size.Height = 494.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = claDarkgray
       object Label3: TLabel
@@ -373,7 +443,7 @@ object AppListForm: TAppListForm
         StyledSettings = [Family, Style]
         Margins.Top = 10.000000000000000000
         Position.Y = 10.000000000000000000
-        Size.Width = 523.000000000000000000
+        Size.Width = 904.000000000000000000
         Size.Height = 23.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -386,26 +456,16 @@ object AppListForm: TAppListForm
         Align = Top
         LineType = Bottom
         Position.Y = 33.000000000000000000
-        Size.Width = 523.000000000000000000
+        Size.Width = 904.000000000000000000
         Size.Height = 15.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = xFF198D60
-      end
-      object Line4: TLine
-        Align = Top
-        LineType = Bottom
-        Position.Y = 345.000000000000000000
-        Size.Width = 523.000000000000000000
-        Size.Height = 15.000000000000000000
-        Size.PlatformDefault = False
-        Stroke.Color = xFF198D60
-        Stroke.Thickness = 0.300000011920929000
       end
       object Rectangle4: TRectangle
         Align = Top
         Fill.Kind = None
         Position.Y = 48.000000000000000000
-        Size.Width = 523.000000000000000000
+        Size.Width = 904.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
@@ -423,14 +483,14 @@ object AppListForm: TAppListForm
         Anchors = [akTop, akRight]
         Images = MainForm.ImageList1
         ImageIndex = 22
-        Position.X = 475.000000000000000000
+        Position.X = 856.000000000000000000
         Size.Width = 50.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         OnClick = SpeedButton2Click
       end
       object Button4: TButton
-        Align = Top
+        Align = Bottom
         StyledSettings = [Family, Style, FontColor]
         Images = MainForm.ImageList1
         ImageIndex = 30
@@ -439,8 +499,8 @@ object AppListForm: TAppListForm
         Margins.Right = 5.000000000000000000
         Margins.Bottom = 10.000000000000000000
         Position.X = 5.000000000000000000
-        Position.Y = 370.000000000000000000
-        Size.Width = 513.000000000000000000
+        Position.Y = 440.000000000000000000
+        Size.Width = 894.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
@@ -448,277 +508,98 @@ object AppListForm: TAppListForm
         TextSettings.Font.Size = 14.000000000000000000
         OnClick = Button4Click
       end
-      object TMSFMXCheckedTreeView1: TTMSFMXCheckedTreeView
-        Align = Top
-        ClipChildren = True
-        DisableFocusEffect = False
-        Position.Y = 73.000000000000000000
-        TabOrder = 2
-        Size.Width = 523.000000000000000000
-        Size.Height = 272.000000000000000000
+      object ListBox1: TListBox
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 107.000000000000000000
+        Size.Width = 894.000000000000000000
+        Size.Height = 182.000000000000000000
         Size.PlatformDefault = False
-        AdaptToStyle = True
-        Fill.Color = claWhite
-        Stroke.Kind = None
-        Groups = <>
-        GroupsAppearance.TopSize = 50.000000000000000000
-        GroupsAppearance.BottomSize = 50.000000000000000000
-        GroupsAppearance.TopFill.Bitmap.Bitmap.PNG = {
-          89504E470D0A1A0A0000000D49484452000000C8000000C80806000000AD58AE
-          9E000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          021749444154785EEDD33101804010C0B003194839FFC258189F2A48962AE8B5
-          BBCF0047F757E0C020100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02BF665E71F00258BC6027
-          2A0000000049454E44AE426082}
-        GroupsAppearance.TopFill.Bitmap.WrapMode = TileStretch
-        GroupsAppearance.TopFill.Kind = Bitmap
-        GroupsAppearance.BottomFill.Bitmap.Bitmap.PNG = {
-          89504E470D0A1A0A0000000D49484452000000C8000000C80806000000AD58AE
-          9E000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          021749444154785EEDD33101804010C0B003194839FFC258189F2A48962AE8B5
-          BBCF0047F757E0C020100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02BF665E71F00258BC6027
-          2A0000000049454E44AE426082}
-        GroupsAppearance.BottomFill.Bitmap.WrapMode = TileStretch
-        GroupsAppearance.BottomFill.Kind = Bitmap
-        GroupsAppearance.TopFontColor = xFF222222
-        GroupsAppearance.BottomFontColor = xFF222222
-        GroupsAppearance.TopStroke.Kind = None
-        GroupsAppearance.BottomStroke.Kind = None
-        Columns = <
-          item
-            Name = 'ColLocation'
-            Text = #4320#4308#4306#4312#4317#4316#4312' / '#4325#4304#4314#4304#4325#4312
-            Width = 100.000000000000000000
-          end>
-        Nodes = <
-          item
-            Values = <
-              item
-                Text = 'Audi'
-                CheckType = tvntCheckBox
-              end>
-            Expanded = True
-            Extended = True
-            Tag = 0
-            Nodes = <
-              item
-                Values = <
-                  item
-                    Text = 'A3'
-                    CheckType = tvntCheckBox
-                  end>
-                Expanded = True
-                Tag = 0
-                Nodes = <>
-              end
-              item
-                Values = <
-                  item
-                    Text = 'A5 series'
-                    CheckType = tvntCheckBox
-                  end>
-                Expanded = True
-                Tag = 0
-                Nodes = <
-                  item
-                    Values = <
-                      item
-                        Text = 'S5'
-                        CheckType = tvntCheckBox
-                      end>
-                    Expanded = True
-                    Tag = 0
-                    Nodes = <>
-                  end
-                  item
-                    Values = <
-                      item
-                        Text = 'RS5'
-                        CheckType = tvntCheckBox
-                      end>
-                    Expanded = True
-                    Tag = 0
-                    Nodes = <>
-                  end>
-              end
-              item
-                Values = <
-                  item
-                    Text = 'A8'
-                    CheckType = tvntCheckBox
-                  end>
-                Expanded = True
-                Tag = 0
-                Nodes = <>
-              end>
+        TabOrder = 2
+        DisableFocusEffect = True
+        Images = MainForm.ImageList1
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        Viewport.Width = 894.000000000000000000
+        Viewport.Height = 182.000000000000000000
+        object ListBoxItem1: TListBoxItem
+          ItemData.Accessory = aMore
+          ImageIndex = 23
+          TabOrder = 0
+          Text = #4315#4317#4315#4321#4304#4334#4323#4320#4308#4305#4312#4321' '#4322#4312#4318#4308#4305#4312
+          OnClick = ListBoxItem1Click
+        end
+        object ListBoxItem2: TListBoxItem
+          ItemData.Accessory = aMore
+          ImageIndex = 46
+          Position.Y = 44.000000000000000000
+          TabOrder = 1
+          Text = #4325#4317#4316#4308#4305#4312#4321' '#4322#4312#4318#4308#4305#4312
+        end
+        object ListBoxItem3: TListBoxItem
+          Position.Y = 88.000000000000000000
+          TabOrder = 2
+          Text = #4324#4304#4320#4311#4317#4305#4312
+          object Edit1: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Right
+            TabOrder = 0
+            Position.X = 579.000000000000000000
+            Position.Y = 10.000000000000000000
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 5.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 310.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = '750'
           end
-          item
-            Values = <
-              item
-                Text = 'Mercedes'
-                CheckType = tvntCheckBox
-              end>
-            Expanded = True
-            Extended = True
-            Tag = 0
-            Nodes = <
-              item
-                Values = <
-                  item
-                    Text = 'SLS'
-                    CheckType = tvntCheckBox
-                  end>
-                Expanded = True
-                Tag = 0
-                Nodes = <>
-              end
-              item
-                Values = <
-                  item
-                    Text = 'SLK'
-                    CheckType = tvntCheckBox
-                  end>
-                Expanded = True
-                Tag = 0
-                Nodes = <>
-              end
-              item
-                Values = <
-                  item
-                    Text = 'GLA'
-                    CheckType = tvntCheckBox
-                  end>
-                Expanded = True
-                Tag = 0
-                Nodes = <>
-              end>
-          end>
-        ColumnsAppearance.TopSize = 25.000000000000000000
-        ColumnsAppearance.BottomSize = 25.000000000000000000
-        ColumnsAppearance.TopFontColor = xFF222222
-        ColumnsAppearance.BottomFontColor = xFF222222
-        ColumnsAppearance.TopFill.Bitmap.Bitmap.PNG = {
-          89504E470D0A1A0A0000000D49484452000000C8000000C80806000000AD58AE
-          9E000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          021749444154785EEDD33101804010C0B003194839FFC258189F2A48962AE8B5
-          BBCF0047F757E0C020100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02BF665E71F00258BC6027
-          2A0000000049454E44AE426082}
-        ColumnsAppearance.TopFill.Bitmap.WrapMode = TileStretch
-        ColumnsAppearance.TopFill.Kind = Bitmap
-        ColumnsAppearance.BottomFill.Bitmap.Bitmap.PNG = {
-          89504E470D0A1A0A0000000D49484452000000C8000000C80806000000AD58AE
-          9E000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          021749444154785EEDD33101804010C0B003194839FFC258189F2A48962AE8B5
-          BBCF0047F757E0C020100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02
-          C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120
-          100C02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C
-          02C120100C02C120100C02C120100C02C120100C02C120100C02C120100C02C1
-          20100C02C120100C02C120100C02C120100C02C120100C02C120100C02C12010
-          0C02C120100C02C120100C02C120100C02C120100C02BF665E71F00258BC6027
-          2A0000000049454E44AE426082}
-        ColumnsAppearance.BottomFill.Bitmap.WrapMode = TileStretch
-        ColumnsAppearance.BottomFill.Kind = Bitmap
-        ColumnsAppearance.TopStroke.Kind = None
-        ColumnsAppearance.BottomStroke.Kind = None
-        NodesAppearance.ExpandWidth = 15.000000000000000000
-        NodesAppearance.ExpandHeight = 15.000000000000000000
-        NodesAppearance.LevelIndent = 20.000000000000000000
-        NodesAppearance.FixedHeight = 25.000000000000000000
-        NodesAppearance.VariableMinimumHeight = 25.000000000000000000
-        NodesAppearance.LineStroke.Dash = Dot
-        NodesAppearance.SelectedFill.Color = x7F33B5E5
-        NodesAppearance.ExtendedFill.Color = xFFEEEEEE
-        NodesAppearance.ExtendedStroke.Color = xFFEEEEEE
-        NodesAppearance.ExpandNodeIcon.PNG = {
-          89504E470D0A1A0A0000000D494844520000000B0000000B0806000000A9AC77
-          26000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          004B49444154285363ACAEADFECF402C0029260680D43141F5A0006F3F6F280B
-          1560558C0B90A498054A63588DCCDFBA692B98862B860980004821321F0668E7
-          66AC8AB1390104488841060600EED939BB858B0ECD0000000049454E44AE4260
-          82}
-        NodesAppearance.CollapseNodeIcon.PNG = {
-          89504E470D0A1A0A0000000D494844520000000B0000000B0806000000A9AC77
-          26000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          003A49444154285363ACAEADFECF402C0029260680D43141F5100568A798054A
-          8381B79F379485005B376D85B2D014234B600383C48324C420030300D49232D7
-          2010A6750000000049454E44AE426082}
-        NodesAppearance.ExpandNodeIconLarge.PNG = {
-          89504E470D0A1A0A0000000D4948445200000016000000160806000000C4B46C
-          3B000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          006849444154484B63ACAEADFECF4003C004A5A90EE02E6E696A010B500A6AEA
-          6AC034CD5C4CB4C1DE7EDE604C2C187817930A460D860316280D0784621E97FC
-          D64D5BA12C08A09F8BD16D8601984B71C9A383D1540107C3D860506A20364580
-          00CD5C3CD4EA3C060600D2401984154F98460000000049454E44AE426082}
-        NodesAppearance.CollapseNodeIconLarge.PNG = {
-          89504E470D0A1A0A0000000D4948445200000016000000160806000000C4B46C
-          3B000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          005149444154484B63ACAEADFECF4003C004A5A90EE02E6E696A010B500A6AEA
-          6AC034CD5C3C6A301C8C1A0C072C501A0378FB794359F8C1D64D5BA12C544033
-          178FE63C381835180E869EC143ADCE636000009C2E12F3AF5420C80000000049
-          454E44AE426082}
-        Interaction.KeyboardEdit = False
-        Version = '1.0.1.1'
+        end
+        object FloatAnimationListBoxPosition: TFloatAnimation
+          Enabled = True
+          Duration = 0.200000002980232200
+          Inverse = True
+          PropertyName = 'Position.X'
+          StartValue = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue = 0.000000000000000000
+        end
       end
-    end
-    object FloatAnimation1: TFloatAnimation
-      Duration = 0.200000002980232200
-      PropertyName = 'Position.X'
-      StartValue = 0.000000000000000000
-      StopValue = 0.000000000000000000
+      object ComboBoxApp_property_types: TComboBox
+        Align = Client
+        ItemIndex = 0
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 894.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+      end
+      object TreeViewLocations: TTreeView
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 904.000000000000000000
+        Size.Height = 682.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Visible = False
+        Images = MainForm.ImageList1
+        MultiSelect = True
+        ShowCheckboxes = True
+        Viewport.Width = 904.000000000000000000
+        Viewport.Height = 682.000000000000000000
+      end
     end
   end
   object BindSourceDB1: TBindSourceDB
@@ -979,11 +860,20 @@ object AppListForm: TAppListForm
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
+    object LinkListControlToField2: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB3
+      FieldName = 'title'
+      Control = ComboBoxApp_property_types
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
   end
   object RESTRequestLists: TRESTRequest
     Client = DModule.RESTClient
     Params = <>
-    Resource = 'lists/get'
+    Resource = 'lists/getp'
     Response = RESTResponseLists
     OnAfterExecute = RESTRequestListsAfterExecute
     SynchronizedEvents = False
@@ -1069,5 +959,53 @@ object AppListForm: TAppListForm
     ScopeMappings = <>
     Left = 138
     Top = 392
+  end
+  object FDMemTableAppServiceTypes: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'title'
+        DataType = ftWideString
+        Size = 255
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 360
+    Top = 328
+    object FDMemTableAppServiceTypesid: TWideStringField
+      FieldName = 'id'
+      Size = 255
+    end
+    object FDMemTableAppServiceTypestitle: TWideStringField
+      FieldName = 'title'
+      Size = 255
+    end
+  end
+  object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
+    Active = True
+    Dataset = FDMemTableAppServiceTypes
+    FieldDefs = <>
+    ResponseJSON = RESTResponseLists
+    RootElement = 'app_service_types'
+    Left = 360
+    Top = 280
+  end
+  object BindSourceDB3: TBindSourceDB
+    DataSet = FDMemTableAppServiceTypes
+    ScopeMappings = <>
+    Left = 264
+    Top = 248
   end
 end

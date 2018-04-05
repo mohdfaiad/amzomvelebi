@@ -4,3 +4,12 @@ Visible=False
 [MainForm.FDMemTableInit]
 Visible=False
 
+[MainForm.FDMemTableBidedApps]
+Visible=False
+
+[UserLocationsForm.FDMemTableL]
+Visible=False
+
+[UserLocationsForm.FDMemTableLocationDetails]
+Visible=False
+

@@ -135,3 +135,6 @@ Coordinates=1014,105,198,33
 [FDMemTableUserDetailscreate_date]
 Coordinates=1014,157,192,33
 
+[MainForm.FDMemTableBidedApps]
+Visible=False
+

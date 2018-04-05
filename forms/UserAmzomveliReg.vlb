@@ -62,3 +62,6 @@ Coordinates=233,876,111,33
 [FullNameEdit]
 Coordinates=431,763,61,51
 
+[MainForm.FDMemTableBidedApps]
+Visible=False
+

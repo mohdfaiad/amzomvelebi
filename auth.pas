@@ -12,7 +12,8 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, REST.Response.Adapter, FMX.Ani,
   System.JSON, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti, IdURI,
-  System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.DBScope, REST.JSON, System.Threading,
+  System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.DBScope, REST.JSON,
+  System.Threading,
   Inifiles,
   System.IOUtils, FMX.Layouts, FMX.LoadingIndicator, Header;
 
@@ -83,6 +84,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     function equalPassword(pass1, pass2: string): boolean;
     function checkEmailPass(EmailAddress, password, op: string): boolean;
@@ -180,15 +183,18 @@ begin
   if FDMemTableAuth.FieldByName('loginstatus').AsInteger = 1 then
   begin
     DModule.id := FDMemTableAuth.FieldByName('id').AsInteger;
-    DModule.user_type_id := FDMemTableAuth.FieldByName('user_type_id').AsInteger;
+    DModule.user_type_id := FDMemTableAuth.FieldByName('user_type_id')
+      .AsInteger;
     DModule.full_name := FDMemTableAuth.FieldByName('full_name').AsString;
     DModule.phone := FDMemTableAuth.FieldByName('phone').AsString;
     DModule.email := FDMemTableAuth.FieldByName('email').AsString;
     DModule.sesskey := FDMemTableAuth.FieldByName('sesskey').AsString;
-    DModule.notifications := FDMemTableAuth.FieldByName('notifications').AsInteger;
+    DModule.notifications := FDMemTableAuth.FieldByName('notifications')
+      .AsInteger;
 
     // ---------------
-    Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath , DModule.settingsIniFile));
+    Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath,
+      DModule.settingsIniFile));
     try
       Ini.AutoSave := True;
       Ini.WriteInteger('auth', 'id', DModule.id);
@@ -205,7 +211,8 @@ begin
     MainForm.DoAuthenticate;
     // ----------------
 
-    if (FDMemTableAuth.FieldByName('isSetLocations').AsInteger = 0) and (DModule.user_type_id = 2) then
+    if (FDMemTableAuth.FieldByName('isSetLocations').AsInteger = 0) and
+      (DModule.user_type_id = 2) then
     begin
       with TUserLocationsForm.Create(Application) do
       begin
@@ -322,6 +329,13 @@ begin
   self.closeAfterReg := False;
 end;
 
+procedure TauthForm.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+Shift: TShiftState);
+begin
+  if Key = 137 then
+    self.Free;
+end;
+
 procedure TauthForm.HeaderFrame1ButtonBackClick(Sender: TObject);
 begin
   self.Close;
@@ -343,7 +357,8 @@ var
   JSONValue, jv: TJsonValue;
   v_result: string;
 begin
-  jsonObject := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(self.RESTResponseAuth.Content), 0) as TJSONObject;
+  jsonObject := TJSONObject.ParseJSONValue
+    (TEncoding.UTF8.GetBytes(self.RESTResponseAuth.Content), 0) as TJSONObject;
   v_result := jsonObject.GetValue('result').ToString;
   JSONValue := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(v_result), 0);
   try
@@ -351,9 +366,12 @@ begin
     begin
       for jv in TJSONArray(JSONValue) do
       begin
-        DModule.id := (jv as TJSONObject).Get('id').JSONValue.ToString.ToInteger;
-        DModule.user_type_id := (jv as TJSONObject).Get('user_type_id').JSONValue.ToString.ToInteger;
-        DModule.full_name := (jv as TJSONObject).Get('full_name').JSONValue.ToString;
+        DModule.id := (jv as TJSONObject).Get('id')
+          .JSONValue.ToString.ToInteger;
+        DModule.user_type_id := (jv as TJSONObject).Get('user_type_id')
+          .JSONValue.ToString.ToInteger;
+        DModule.full_name := (jv as TJSONObject).Get('full_name')
+          .JSONValue.ToString;
         DModule.phone := (jv as TJSONObject).Get('phone').JSONValue.ToString;
         DModule.email := (jv as TJSONObject).Get('email').JSONValue.ToString;
       end;

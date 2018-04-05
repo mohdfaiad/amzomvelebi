@@ -3,7 +3,8 @@ unit UserServiceTypes;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
@@ -43,8 +44,11 @@ type
     procedure RESTRequestServiceTypesAfterExecute(Sender: TCustomRESTRequest);
     procedure ButtonBackClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure RESTRequestSetServiceTypesAfterExecute(Sender: TCustomRESTRequest);
+    procedure RESTRequestSetServiceTypesAfterExecute
+      (Sender: TCustomRESTRequest);
     procedure TimerSetCheckedTimer(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     procedure setServiceTypes;
     procedure checkCheckboxSelections;
@@ -170,12 +174,14 @@ begin
   self.checkCheckboxSelections;
 end;
 
-procedure TUserServiceTypesForm.RESTRequestServiceTypesAfterExecute(Sender: TCustomRESTRequest);
+procedure TUserServiceTypesForm.RESTRequestServiceTypesAfterExecute
+  (Sender: TCustomRESTRequest);
 begin
   TimerSetChecked.Enabled := True;
 end;
 
-procedure TUserServiceTypesForm.RESTRequestSetServiceTypesAfterExecute(Sender: TCustomRESTRequest);
+procedure TUserServiceTypesForm.RESTRequestSetServiceTypesAfterExecute
+  (Sender: TCustomRESTRequest);
 begin
   if RESTResponseSetServiceTypes.Content = 'success' then
     RectanglePreloader.Visible := False;
@@ -200,9 +206,17 @@ begin
   end;
 end;
 
-procedure TUserServiceTypesForm.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TUserServiceTypesForm.FormClose(Sender: TObject;
+var Action: TCloseAction);
 begin
   Action := TCloseAction.caFree;
+end;
+
+procedure TUserServiceTypesForm.FormKeyUp(Sender: TObject; var Key: Word;
+var KeyChar: Char; Shift: TShiftState);
+begin
+  if Key = 137 then
+    self.Free;
 end;
 
 end.

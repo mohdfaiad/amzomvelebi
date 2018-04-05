@@ -171,3 +171,6 @@ Coordinates=287,763,89,51
 [FloatAnimation3]
 Coordinates=665,702,95,33
 
+[MainForm.FDMemTableBidedApps]
+Visible=False
+
