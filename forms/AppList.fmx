@@ -430,6 +430,7 @@ object AppListForm: TAppListForm
     Size.Width = 935.000000000000000000
     Size.Height = 529.000000000000000000
     Size.PlatformDefault = False
+    Visible = False
     object RectangleFilteringDetailsContent: TRectangle
       Align = Center
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -573,7 +574,6 @@ object AppListForm: TAppListForm
       end
       object ComboBoxApp_property_types: TComboBox
         Align = Client
-        ItemIndex = 0
         Margins.Left = 5.000000000000000000
         Margins.Top = 10.000000000000000000
         Margins.Right = 5.000000000000000000

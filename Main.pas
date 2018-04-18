@@ -215,6 +215,7 @@ type
     procedure RESTRequestMyBidedAppsAfterExecute(Sender: TCustomRESTRequest);
     procedure ListView1UpdatingObjects(const Sender: TObject; const AItem: TListViewItem; var AHandled: Boolean);
     procedure TabControl1Change(Sender: TObject);
+    procedure ListView1ItemClick(const Sender: TObject; const AItem: TListViewItem);
   private
     procedure PushClientChangeHandler(Sender: TObject; AChange: TPushService.TChanges);
     procedure PushClientReceiveNotificationHandler(Sender: TObject; const ANotification: TPushServiceNotification);
@@ -342,16 +343,15 @@ procedure TMainForm.Rectangle1Click(Sender: TObject);
 var
   MyNotification: TNotification;
 begin
+  // Create an instance of TNotification
   MyNotification := NotificationCenter1.CreateNotification;
   try
-    MyNotification.Name := '12';
-    MyNotification.Title := 'test';
-    MyNotification.AlertBody :=
-      'When users set notifications for apps on their mobile devices, notifications can be delivered from apps in the three basic styles shown here. The banner appears briefly, but the alert dialog box requires dismissal by the user.';
-    MyNotification.EnableSound := True;
+    // --- your code goes here ---
+    // Set the icon or notification number
     MyNotification.Number := 18;
-    MyNotification.HasAction := True;
-    MyNotification.AlertAction := 'Launch';
+    // Set the alert message
+    MyNotification.AlertBody := 'Delphi for your mobile device is here!';
+    // Note: You must send the notification to the notification center for the Icon Badge Number to be displayed.
     NotificationCenter1.PresentNotification(MyNotification);
   finally
     MyNotification.DisposeOf;
@@ -747,6 +747,17 @@ begin
   Result := identifier;
 end;
 {$ENDIF ANDROID}
+
+procedure TMainForm.ListView1ItemClick(const Sender: TObject; const AItem: TListViewItem);
+var
+  id: integer;
+begin
+  id := self.FDMemTableBidedApps.FieldByName('id').AsInteger;
+  with TAppDetailForm.Create(Application) do
+  begin
+    initForm(id);
+  end;
+end;
 
 procedure TMainForm.ListView1UpdatingObjects(const Sender: TObject; const AItem: TListViewItem; var AHandled: Boolean);
 begin
