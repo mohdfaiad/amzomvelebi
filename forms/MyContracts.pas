@@ -39,12 +39,12 @@ type
     FDMemTableContractsoffer_description: TWideStringField;
     FDMemTableContractscreate_date: TWideStringField;
     FDMemTableContractsimageindex: TWideStringField;
-    NavigatorBindSourceDB1: TBindNavigator;
     ImageList1: TImageList;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure RESTRequestContractsAfterExecute(Sender: TCustomRESTRequest);
+    procedure ListView1ItemClick(const Sender: TObject; const AItem: TListViewItem);
   private
     { Private declarations }
   public
@@ -59,7 +59,7 @@ implementation
 
 {$R *.fmx}
 
-uses DataModule, Main;
+uses DataModule, Main, AppDetails;
 { TMyContractsForm }
 
 procedure TMyContractsForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -67,8 +67,7 @@ begin
   Action := TCloseAction.caFree;
 end;
 
-procedure TMyContractsForm.FormKeyUp(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
+procedure TMyContractsForm.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
   if Key = 137 then
     self.Free;
@@ -92,22 +91,30 @@ begin
       RESTRequestContracts.Params.Clear;
       if not DModule.sesskey.IsEmpty then
       begin
-        with RESTRequestContracts.Params.AddItem do
-        begin
-          name := 'sesskey';
-          Value := DModule.sesskey;
-        end;
-        with RESTRequestContracts.Params.AddItem do
-        begin
-          name := 'user_id';
-          Value := DModule.id.ToString;
-        end;
+        RESTRequestContracts.AddParameter('user_id', DModule.id.ToString);
+        RESTRequestContracts.AddParameter('sesskey', DModule.sesskey);
       end
       else
         self.Close;
       self.RESTRequestContracts.Execute;
     end);
   aTask.Start;
+end;
+
+procedure TMyContractsForm.ListView1ItemClick(const Sender: TObject; const AItem: TListViewItem);
+var
+  v_app_id: integer;
+begin
+  v_app_id := self.FDMemTableContracts.FieldByName('app_id').AsInteger;
+  with TAppDetailForm.Create(Application) do
+  begin
+    initForm(v_app_id, True);
+  end;
+end;
+
+procedure TMyContractsForm.RESTRequestContractsAfterExecute(Sender: TCustomRESTRequest);
+begin
+  RectanglePreloader.Visible := False;
 end;
 
 end.

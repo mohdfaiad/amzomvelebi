@@ -23,7 +23,7 @@ Coordinates=424,10,139,285
 Coordinates=164,764,111,33
 
 [FDMemTableContracts]
-Coordinates=976,420,126,33
+Coordinates=1112,430,126,33
 Visible=True
 
 [RESTResponseDataSetAdapterContracts]
@@ -69,7 +69,7 @@ Coordinates=690,380,147,231
 Coordinates=833,10,144,249
 
 [BindSourceDB1]
-Coordinates=840,410,112,213
+Coordinates=976,420,126,33
 
 [BindingsList1]
 Coordinates=182,314,82,33
@@ -102,5 +102,14 @@ Coordinates=1153,105,215,33
 Coordinates=1153,157,194,33
 
 [MainForm.FDMemTableBidedApps]
+Visible=False
+
+[AppDetailForm.FDMemTableApp]
+Visible=False
+
+[AppDetailForm.FDMemTableBids]
+Visible=False
+
+[AppDetailForm.FDMemTableapp_property_requisites]
 Visible=False
 

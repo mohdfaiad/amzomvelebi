@@ -30,32 +30,32 @@ object AppDetailForm: TAppDetailForm
           PNG = {
             89504E470D0A1A0A0000000D4948445200000029000000250806000000DFA2C0
             8D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-            0321494441545847ED98EF4B13711CC73FDFBB39E7A00223B040ED0FC8C232EF
-            CAB4B42745E53397500FCB3434CD3DA82751164430709B8AA660CFA430E841F6
-            C028A207A9BB997B126160102E48215AF46BE8B6FB7EFBDEF6C11F31F2EEB6C9
-            0A5F30F6FDBCBFDCEDC5DDF773773B0206F01D2BDF1C8B080EC298809129A818
-            1BAD7C3E15C4724D0C498E554B0D7C8B7E2CCD43A1A7E2A5D282D59A183A220C
-            408C7F13A8A70CCACC7CE23B12587C3F19E155B5D4345623B1F1A372094686D1
-            B61FAB29EFC5521729ADADF5E2FF9364020D07F85754A03F313241E40703F20B
-            0B5D18928CC5EC437B80ED3AFCCCFF0123C33096571A556D1D58EA227E09F278
-            3C4594524B3CC9222C160B2B282808122E58C7181BC63C1BB945DC6E77131FF4
-            72510F21643E91670D77B857DF92243FDDBB9D4EE79BC45C76C0DDB823EBDBB8
-            4EA68B8C4BD60D0F8BB25BE92FF52ADF658FF2647FB7B215A7749371C98F9F8A
-            BAF9AF34E4026CE217BC1302A54338A59B8C4A4A1EE52A10A235E61224BA5089
-            43DD644C52F62A67C8D7C06D2C97C9C91BC1916E322259DEE5AB0108DF83FCBD
-            AB1EAA2965EFA236CB052C75937649B97BBC44A0D14700762B4609A28B5FF87A
-            3C3575A1EC1B26BA49ABE4216F601BFF03F31888750B46483842AD5687CF79F0
-            3D0686302419BF9C787CD725EFC4085F730E8CE3ECEB7F6D8F41545B6F3B13C9
-            0A98BDD57F497E8195610C4906E78A5DBC5B6F10104E4228F08077EF352DD7E4
-            7316D4FB7C2869F52A18EBF2B54977B13285214916621771085A5310023765AF
-            6F203857D8C393DAC4C4320CE8D3C21DC1762C4D634892E4B3691CAE809CE747
-            B6118B954CC76C39A71F3A1C2AD6A631244955E12CD0E89A8F7334C23E434CAD
-            35D3C9C9302439D92EBD6544ACE2A7F12F6F1FC211C8857AB39D9C0C43921A4A
-            DB811941A4557C38934856C320AF25954E4E8661498D89E68A5955842A95C19F
-            0FC95EA5551EC071DA3025A931D92CCD8BAA7A84DFEA4669882D3280C1C2EDB3
-            4E9C4E2BA62535F8BA0BF92FCBC7FD1DB24D6995CEA5A393939192E47AB12199
-            2EFE0949D2D9D9D9C86FC27D586723BDC4E572158BA278858B66EEED6B0A504A
-            077F0312E9337B384F6C680000000049454E44AE426082}
+            0321494441545847ED98EF4B13711CC73FDFBB39E7A00223B040ED0FC8C052EF
+            CAB4B42745E53397500FCB1FA169EE413D89B2208281DB5434057B2685410FB2
+            0746113D48DD6DD99308038370410AD1A25F43B7DDF7DBF7B60FFE889177B74D
+            56F882B1EFE7FDE56E2FEEBE9FBBDB113080EF58C5D658447010C6048C4C41C5
+            D878D5B3E92096EB624872A2466AE45B0C62691E0A7D952F9436ACD6C5D01161
+            0062FC9B4003655066E613DF91C0E2FBC9082F6BA496895A894D1E954B30328C
+            B6FD446D453F96BA48696D6D14FF9F24136838C0BFA202FD899109223F18905F
+            58E8C290642C661FD9076CCFE1A7FE0F181986B1BCD2A86AEBC25217F14B90C7
+            E329A2945AE2491661B158584141419070C17AC6D828E6D9C84DE276BB5BF8A0
+            9F8B7A08210B893C6BB8CDBD069625F9E9DEEB743ADF24E6B203EEC61DD9C0E6
+            75325D645CB27E745494DDCA60A957F92E7B94C7E5BDCA769CD24DC6253F7E2A
+            EAE5BFD2980BB0855FF04E08948EE0946E322A2979942B4088D698CB90E86215
+            0E75933149D9AB9C215F03B7B05C21276F0C47BAC98864458FAF16207C17F2CB
+            D73C5453CADE456D96262C75937649B977B244A0D18700762B4609A24B5FF87A
+            3C35DD54F60D13DDA455F290F7F50EFE07E61110EB368C9070845AAD0E9FF3E0
+            7B0C0C6148327E39F1F8AE49DEA931BEE61C18C7D93FF8CA1E83A8B6DE762792
+            55307BBBFFA2FC1C2BC318920CCE17BB78B75E27209C8450E03EEFDEAB5AAEC9
+            E72CAAF7F850D2EA3530D6E3EB90EE60650A43922CC42EE010B4A620046EC85E
+            DF5070BEB08F277589891518D02785BB829D589AC69024C96733385C0539CF8F
+            6C3316AB9989D9724E3F703854AC4D634892AAC259A0D1751FE768847D86985A
+            67A69393614832D029BD6544ACE6A7F12F6F1FC211C88506B39D9C0C43921A4A
+            C7815941A4D57C389B48D6C220AF2D954E4E8661498DA9D6CA3955846A95C19F
+            0FC95EA55D1EC271DA3025A91168951644553DC26F75E334C49618C070E1CE39
+            274EA715D3921A7CDD85FC97E4E3FE2ED9A6B44BE7D2D1C9C9484972A3D8944C
+            17FF8424E9EEEE6EE637E101ACB3917EE272B98A4551BCCC4533F7F6350528A5
+            C3BF010D1C337BDC0DC2E80000000049454E44AE426082}
           FileName = 'E:\Dropbox\projects\azomva.com\icons\applied-icon.png'
         end>
       Align = Left
@@ -88,6 +88,8 @@ object AppDetailForm: TAppDetailForm
         594s
         441s
         594s
+        441s
+        594s
         441s)
       object TabItemProperties: TTabItem
         CustomIcon = <
@@ -97,7 +99,7 @@ object AppDetailForm: TAppDetailForm
         StyledSettings = [Family, FontColor]
         IsSelected = True
         ImageIndex = 46
-        Size.Width = 198.000000000000000000
+        Size.Width = 148.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'TabItemUserAreaStyle1'
@@ -110,6 +112,7 @@ object AppDetailForm: TAppDetailForm
           ItemEditAppearanceClassName = 'TDynamicAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
+          ItemIndex = 0
           Align = Client
           Size.Width = 594.000000000000000000
           Size.Height = 441.000000000000000000
@@ -187,7 +190,7 @@ object AppDetailForm: TAppDetailForm
         StyledSettings = [Family, FontColor]
         IsSelected = False
         ImageIndex = 47
-        Size.Width = 198.000000000000000000
+        Size.Width = 148.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -315,7 +318,7 @@ object AppDetailForm: TAppDetailForm
         StyledSettings = [Family, FontColor]
         IsSelected = False
         ImageIndex = 7
-        Size.Width = 198.000000000000000000
+        Size.Width = 148.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -328,6 +331,7 @@ object AppDetailForm: TAppDetailForm
           ItemEditAppearanceClassName = 'TDynamicAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
+          ItemIndex = 0
           Align = Client
           Size.Width = 594.000000000000000000
           Size.Height = 441.000000000000000000
@@ -404,6 +408,58 @@ object AppDetailForm: TAppDetailForm
           ItemAppearanceObjects.FooterObjects.Text.Visible = False
           CanSwipeDelete = False
           ShowSelection = False
+        end
+      end
+      object TabItemOwner: TTabItem
+        CustomIcon = <
+          item
+          end>
+        TextSettings.Font.Size = 8.000000000000000000
+        StyledSettings = [Family, FontColor]
+        IsSelected = False
+        ImageIndex = 6
+        Size.Width = 150.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = #4306#4304#4316#4315#4330#4334#4304#4307#4308#4305#4308#4314#4312
+        ExplicitSize.cx = 150.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object ListView2: TListView
+          ItemAppearanceClassName = 'TImageListItemAppearance'
+          ItemEditAppearanceClassName = 'TImageListItemDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Images = MainForm.ImageList1
+          Align = Client
+          Size.Width = 594.000000000000000000
+          Size.Height = 441.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          ItemAppearance.ItemHeight = 200
+          ItemAppearanceObjects.ItemObjects.Text.TextVertAlign = Leading
+          ItemAppearanceObjects.ItemObjects.Text.WordWrap = True
+          ItemAppearanceObjects.ItemObjects.Text.Trimming = Word
+          ItemAppearanceObjects.ItemObjects.Text.Width = 370.000000000000000000
+          ItemAppearanceObjects.ItemObjects.Text.Height = 100.000000000000000000
+          ItemAppearanceObjects.ItemObjects.Text.PlaceOffset.X = 1.000000000000000000
+          ItemAppearanceObjects.ItemObjects.Text.PlaceOffset.Y = 112.000000000000000000
+          ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
+          ItemAppearanceObjects.ItemObjects.Image.ScalingMode = Stretch
+          ItemAppearanceObjects.ItemObjects.Image.Width = 0.000000000000000000
+          ItemAppearanceObjects.ItemObjects.Image.Height = 80.000000000000000000
+          ItemAppearanceObjects.ItemObjects.Image.PlaceOffset.X = 1.000000000000000000
+          ItemAppearanceObjects.ItemObjects.Image.PlaceOffset.Y = -48.000000000000000000
+          ItemAppearanceObjects.HeaderObjects.Text.TextColor = xFF198D60
+          object PanelDetails: TPanel
+            Align = Client
+            Size.Width = 481.000000000000000000
+            Size.Height = 674.000000000000000000
+            Size.PlatformDefault = False
+            Visible = False
+            TabOrder = 0
+          end
         end
       end
     end
@@ -483,7 +539,7 @@ object AppDetailForm: TAppDetailForm
       end
       object DateEditStartDate: TDateEdit
         ShowClearButton = True
-        Date = 43194.000000000000000000
+        Date = 43209.000000000000000000
         Format = 'dd-mm-yyyy'
         TodayDefault = True
         Align = Top
@@ -616,11 +672,15 @@ object AppDetailForm: TAppDetailForm
       end
       item
         name = 'sesskey'
-        Value = '04cd41fa847a5ee2be07e756c5cf64e4'
+        Value = 'd8d7cbabf020e29bbe1b3f94e255280b'
       end
       item
         name = 'user_id'
         Value = '27'
+      end
+      item
+        name = 'op'
+        Value = 'showownerinfo'
       end>
     Resource = 'apps/details'
     Response = RESTResponseApp
@@ -1254,5 +1314,128 @@ object AppDetailForm: TAppDetailForm
     ScopeMappings = <>
     Left = 80
     Top = 208
+  end
+  object FDMemTableAmzomveli: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'rating'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'contact_info'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'user_type_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'user_status_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'full_name'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'phone'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'email'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'create_date'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'modify_date'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'regipaddr'
+        DataType = ftWideString
+        Size = 255
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 344
+    Top = 331
+    object FDMemTableAmzomveliid: TWideStringField
+      FieldName = 'id'
+      Size = 255
+    end
+    object FDMemTableAmzomveliuser_type_id: TWideStringField
+      FieldName = 'user_type_id'
+      Size = 255
+    end
+    object FDMemTableAmzomveliuser_status_id: TWideStringField
+      FieldName = 'user_status_id'
+      Size = 255
+    end
+    object FDMemTableAmzomvelirating: TWideStringField
+      FieldName = 'rating'
+      Size = 255
+    end
+    object FDMemTableAmzomvelifull_name: TWideStringField
+      FieldName = 'full_name'
+      Size = 255
+    end
+    object FDMemTableAmzomveliphone: TWideStringField
+      FieldName = 'phone'
+      Size = 255
+    end
+    object FDMemTableAmzomveliemail: TWideStringField
+      FieldName = 'email'
+      Size = 255
+    end
+    object FDMemTableAmzomvelicreate_date: TWideStringField
+      FieldName = 'create_date'
+      Size = 255
+    end
+    object FDMemTableAmzomvelimodify_date: TWideStringField
+      FieldName = 'modify_date'
+      Size = 255
+    end
+    object FDMemTableAmzomveliregipaddr: TWideStringField
+      FieldName = 'regipaddr'
+      Size = 255
+    end
+    object FDMemTableAmzomvelicontact_info: TWideStringField
+      FieldName = 'contact_info'
+      Size = 255
+    end
+  end
+  object RESTResponseDataSetAdapterAmzomveli: TRESTResponseDataSetAdapter
+    Active = True
+    Dataset = FDMemTableAmzomveli
+    FieldDefs = <>
+    ResponseJSON = RESTResponseApp
+    RootElement = 'user'
+    Left = 344
+    Top = 387
   end
 end

@@ -106,6 +106,22 @@ type
     FDMemTableAppcreate_date: TWideStringField;
     FDMemTableAppbidscount: TWideStringField;
     FDMemTableApplocation_name: TWideStringField;
+    TabItemOwner: TTabItem;
+    ListView2: TListView;
+    PanelDetails: TPanel;
+    FDMemTableAmzomveli: TFDMemTable;
+    FDMemTableAmzomveliid: TWideStringField;
+    FDMemTableAmzomveliuser_type_id: TWideStringField;
+    FDMemTableAmzomveliuser_status_id: TWideStringField;
+    FDMemTableAmzomvelirating: TWideStringField;
+    FDMemTableAmzomvelifull_name: TWideStringField;
+    FDMemTableAmzomveliphone: TWideStringField;
+    FDMemTableAmzomveliemail: TWideStringField;
+    FDMemTableAmzomvelicreate_date: TWideStringField;
+    FDMemTableAmzomvelimodify_date: TWideStringField;
+    FDMemTableAmzomveliregipaddr: TWideStringField;
+    FDMemTableAmzomvelicontact_info: TWideStringField;
+    RESTResponseDataSetAdapterAmzomveli: TRESTResponseDataSetAdapter;
     procedure RESTRequestAppAfterExecute(Sender: TCustomRESTRequest);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ButtonBackClick(Sender: TObject);
@@ -114,15 +130,14 @@ type
     procedure RESTRequestOfferAfterExecute(Sender: TCustomRESTRequest);
     procedure Button1Click(Sender: TObject);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
   private
     { Private declarations }
   public
     { Public declarations }
     app_id: integer;
     aTask: ITask;
-    procedure initForm(app_id: integer);
+    procedure initForm(papp_id: integer; showOwner: boolean = false);
   end;
 
 var
@@ -149,36 +164,12 @@ begin
         procedure
         begin
           RESTRequestOffer.Params.Clear;
-          with RESTRequestOffer.Params.AddItem do
-          begin
-            name := 'app_id';
-            Value := self.app_id.ToString;
-          end;
-          with RESTRequestOffer.Params.AddItem do
-          begin
-            name := 'offered_price';
-            Value := EditOfferedPrice.Text;
-          end;
-          with RESTRequestOffer.Params.AddItem do
-          begin
-            name := 'start_date';
-            Value := DateEditStartDate.Text;
-          end;
-          with RESTRequestOffer.Params.AddItem do
-          begin
-            name := 'offer_description';
-            Value := TIdURI.ParamsEncode(MemoOfferDescription.Text);
-          end;
-          with RESTRequestOffer.Params.AddItem do
-          begin
-            name := 'sesskey';
-            Value := DModule.sesskey;
-          end;
-          with RESTRequestOffer.Params.AddItem do
-          begin
-            name := 'user_id';
-            Value := DModule.id.ToString;
-          end;
+          RESTRequestOffer.AddParameter('app_id', self.app_id.ToString);
+          RESTRequestOffer.AddParameter('offered_price', EditOfferedPrice.Text);
+          RESTRequestOffer.AddParameter('start_date', DateEditStartDate.Text);
+          RESTRequestOffer.AddParameter('offer_description', TIdURI.ParamsEncode(MemoOfferDescription.Text));
+          RESTRequestOffer.AddParameter('sesskey', DModule.sesskey);
+          RESTRequestOffer.AddParameter('user_id', DModule.id.ToString);
           RESTRequestOffer.Execute;
         end);
     end);
@@ -187,7 +178,7 @@ end;
 
 procedure TAppDetailForm.Button1Click(Sender: TObject);
 begin
-  self.PanelBids.Visible := False;
+  self.PanelBids.Visible := false;
 end;
 
 procedure TAppDetailForm.ButtonBackClick(Sender: TObject);
@@ -200,8 +191,7 @@ begin
   Action := TCloseAction.caFree;
 end;
 
-procedure TAppDetailForm.FormKeyUp(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
+procedure TAppDetailForm.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
   if Key = 137 then
     self.Free;
@@ -212,42 +202,38 @@ begin
   self.Close;
 end;
 
-procedure TAppDetailForm.initForm(app_id: integer);
+procedure TAppDetailForm.initForm(papp_id: integer; showOwner: boolean = false);
 begin
-  self.app_id := app_id;
-  HeaderFrame1.LabelAppName.Text := 'განცხადება N ' + app_id.ToString;
+  TabItemOwner.Visible := showOwner;
+  self.app_id := papp_id;
+  HeaderFrame1.LabelAppName.Text := 'განცხადება N ' + papp_id.ToString;
   self.Show;
   RectanglePreloader.Visible := True;
   if not DModule.sesskey.IsEmpty then
     ButtonOffer.Visible := True
   else
-    ButtonOffer.Visible := False;
+    ButtonOffer.Visible := false;
 
   aTask := TTask.Create(
     procedure()
     begin
       RESTRequestApp.Params.Clear;
-      with RESTRequestApp.Params.AddItem do
-      begin
-        name := 'app_id';
-        Value := self.app_id.ToString;
-      end;
+      RESTRequestApp.AddParameter('app_id', self.app_id.ToString);
       if not DModule.sesskey.IsEmpty then
       begin
-        with RESTRequestApp.Params.AddItem do
+        RESTRequestApp.AddParameter('sesskey', DModule.sesskey);
+        RESTRequestApp.AddParameter('user_id', DModule.id.ToString);
+        if showOwner = True then
         begin
-          name := 'sesskey';
-          Value := DModule.sesskey;
-        end;
-        with RESTRequestApp.Params.AddItem do
-        begin
-          name := 'user_id';
-          Value := DModule.id.ToString;
-        end;
+          RESTRequestApp.AddParameter('op', 'showownerinfo');
+          TabControl1.ActiveTab := TabItemOwner;
+        end
+        else
+          TabControl1.ActiveTab := TabItemDetails;
       end
       else
       begin
-        TabItemOffer.Visible := False;
+        TabItemOffer.Visible := false;
       end;
       RESTRequestApp.Execute;
     end);
@@ -256,15 +242,14 @@ end;
 
 procedure TAppDetailForm.RESTRequestAppAfterExecute(Sender: TCustomRESTRequest);
 begin
-  self.RectanglePreloader.Visible := False;
+  self.RectanglePreloader.Visible := false;
 end;
 
-procedure TAppDetailForm.RESTRequestOfferAfterExecute
-  (Sender: TCustomRESTRequest);
+procedure TAppDetailForm.RESTRequestOfferAfterExecute(Sender: TCustomRESTRequest);
 begin
   self.initForm(self.app_id);
-  PanelBids.Visible := False;
-  RectanglePreloader.Visible := False;
+  PanelBids.Visible := false;
+  RectanglePreloader.Visible := false;
   ShowMessage(self.RESTResponse1.Content);
 end;
 
