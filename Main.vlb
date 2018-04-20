@@ -67,9 +67,6 @@ Coordinates=1409,56,345,36
 [BindSourceDB1]
 Coordinates=878,992,116,278
 
-[DModule.RESTClient]
-Coordinates=1265,1362,137,80
-
 [FDMemTableAuthfname]
 Coordinates=1030,903,154,36
 

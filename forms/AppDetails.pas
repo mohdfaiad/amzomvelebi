@@ -122,6 +122,8 @@ type
     FDMemTableAmzomveliregipaddr: TWideStringField;
     FDMemTableAmzomvelicontact_info: TWideStringField;
     RESTResponseDataSetAdapterAmzomveli: TRESTResponseDataSetAdapter;
+    BindSourceDB4: TBindSourceDB;
+    LinkListControlToField4: TLinkListControlToField;
     procedure RESTRequestAppAfterExecute(Sender: TCustomRESTRequest);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ButtonBackClick(Sender: TObject);
@@ -208,6 +210,8 @@ begin
   self.app_id := papp_id;
   HeaderFrame1.LabelAppName.Text := 'განცხადება N ' + papp_id.ToString;
   self.Show;
+  DateEditStartDate.Format := 'dd-mm-yyyy';
+  DateEditStartDate.DateTime := Now()+1;
   RectanglePreloader.Visible := True;
   if not DModule.sesskey.IsEmpty then
     ButtonOffer.Visible := True

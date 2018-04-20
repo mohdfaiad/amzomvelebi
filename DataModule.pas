@@ -51,8 +51,9 @@ begin
   self.phone := '';
   self.email := '';
 
-  MainForm.ButtonAmzReg.Visible:=True;
-  MainForm.ButtonAuth.Visible:=True;
+  MainForm.ButtonAmzReg.Visible := True;
+  MainForm.ButtonAuth.Visible := True;
+  MainForm.SpeedButtonNotifications.Visible := False;
 end;
 
 {

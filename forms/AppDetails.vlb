@@ -3,7 +3,7 @@ Visible=False
 Coordinates=518,317,156,33
 
 [FDMemTableApp]
-Coordinates=1012,958,98,33
+Coordinates=1262,978,98,33
 Visible=True
 
 [RectanglePreloader]
@@ -21,9 +21,6 @@ Coordinates=337,10,168,285
 [MainForm.RESTRequestVersioning]
 Coordinates=271,704,187,105
 
-[DModule.RESTClient]
-Coordinates=908,704,116,69
-
 [RESTResponseApp]
 Coordinates=533,393,111,285
 
@@ -34,7 +31,7 @@ Coordinates=518,369,188,33
 Coordinates=319,305,160,87
 
 [RESTRequestApp]
-Coordinates=143,704,102,141
+Coordinates=143,704,102,159
 Visible=True
 
 [MainForm.RESTResponseSignOut]
@@ -91,7 +88,7 @@ Coordinates=140,1025,78,33
 Coordinates=791,948,87,33
 
 [BindSourceDB1]
-Coordinates=904,948,108,357
+Coordinates=1137,968,108,357
 
 [BindingsList1]
 Coordinates=0,0,82,33
@@ -309,7 +306,73 @@ Coordinates=1626,551,179,33
 
 [MainForm.FDMemTableBidedApps]
 Visible=False
+Coordinates=1349,991,184,33
 
 [DateEditStartDate]
 Coordinates=89,871,115,51
+
+[FDMemTableAmzomvelifull_name]
+Coordinates=1349,881,180,33
+
+[PanelDetails]
+Coordinates=815,1163,75,33
+
+[FDMemTableAmzomveli]
+Coordinates=1814,100,132,33
+Visible=True
+
+[MainForm.RESTRequestMyBidedApps]
+Coordinates=922,712,203,123
+
+[FDMemTableAmzomveliregipaddr]
+Coordinates=1349,936,180,33
+
+[TabItemOwner]
+Coordinates=706,1163,85,33
+
+[MainForm.BindSourceDB3]
+Coordinates=0,0,167,483
+
+[RESTResponseDataSetAdapterAmzomveli]
+Coordinates=2016,1,222,33
+
+[FDMemTableAmzomveliuser_type_id]
+Coordinates=1626,606,196,33
+
+[ListView2]
+Coordinates=1400,80,89,177
+Visible=True
+
+[FDMemTableAmzomvelicreate_date]
+Coordinates=1626,661,190,33
+
+[FDMemTableAmzomveliuser_status_id]
+Coordinates=1626,716,205,33
+
+[FDMemTableAmzomvelimodify_date]
+Coordinates=1626,771,193,33
+
+[FDMemTableAmzomveliemail]
+Coordinates=1349,1046,159,33
+
+[FDMemTableAmzomvelirating]
+Coordinates=1349,1101,161,33
+
+[FDMemTableAmzomveliid]
+Coordinates=1349,1156,141,33
+
+[FDMemTableAmzomveliphone]
+Coordinates=1349,1211,163,33
+
+[MainForm.RESTResponseBidedApps]
+Coordinates=219,1,197,285
+
+[FDMemTableAmzomvelicontact_info]
+Coordinates=1626,826,194,33
+
+[DModule.RESTClient]
+Coordinates=1123,1036,116,69
+
+[BindSourceDB4]
+Coordinates=1672,90,119,267
 

@@ -189,7 +189,7 @@ type
     FDMemTableBidedAppsdropdownarrow_imageindex: TWideStringField;
     BindSourceDB3: TBindSourceDB;
     LinkListControlToField1: TLinkListControlToField;
-    Action1: TAction;
+    SpeedButtonNotifications: TSpeedButton;
     procedure AuthActionExecute(Sender: TObject);
     procedure ActionUserAreaExecute(Sender: TObject);
     procedure TimerVersioningTimer(Sender: TObject);
@@ -263,6 +263,8 @@ begin
   self.RectangleNonAuth.Visible := False;
   LabelFullName.Text := DModule.full_name;
   ButtonUserNotifications.Text := '(' + DModule.notifications.ToString + ') შეტყობინებები';
+  SpeedButtonNotifications.Text := DModule.notifications.ToString;
+  SpeedButtonNotifications.Visible := True;
   self.RectangleProfile.Visible := True;
   FPushClient.Active := True;
   ButtonAmzReg.Visible := False;
@@ -273,6 +275,7 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   self.v_notification_received := False;
+  self.SpeedButtonNotifications.Visible := False;
   self.PreloaderRectangle.Visible := True;
   TabItemBidedApps.Visible := False;
   FPushClient := TPushClient.Create;
@@ -505,16 +508,8 @@ begin
           if not DModule.sesskey.IsEmpty then
           begin
             RESTRequestMyBidedApps.Params.Clear;
-            with RESTRequestMyBidedApps.Params.AddItem do
-            begin
-              name := 'sesskey';
-              Value := DModule.sesskey;
-            end;
-            with RESTRequestMyBidedApps.Params.AddItem do
-            begin
-              name := 'user_id';
-              Value := DModule.id.ToString;
-            end;
+            RESTRequestMyBidedApps.AddParameter('sesskey', DModule.sesskey);
+            RESTRequestMyBidedApps.AddParameter('user_id', DModule.id.ToString);
             RESTRequestMyBidedApps.Execute;
           end;
         end);
@@ -678,6 +673,7 @@ begin
       DModule.phone := UserObject.GetValue('phone').Value;
       DModule.email := UserObject.GetValue('email').Value;
       DModule.sesskey := UserObject.GetValue('sesskey').Value;
+      DModule.notifications := UserObject.GetValue('notifications').Value.ToInteger;
       self.DoAuthenticate;
     end
     else
