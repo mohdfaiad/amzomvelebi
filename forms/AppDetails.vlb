@@ -98,7 +98,7 @@ Coordinates=10,73,109,249
 Visible=True
 
 []
-Coordinates=1149,823,107,33
+Coordinates=110,1,107,33
 Visible=True
 
 [FloatAnimation1]
@@ -255,54 +255,6 @@ Coordinates=728,479,207,33
 
 [FDMemTableapp_property_requisitesapp_user_param]
 Coordinates=1236,716,281,33
-
-[FDMemTableAppid]
-Coordinates=110,1,107,33
-
-[FDMemTableAppstatus_color]
-Coordinates=1345,1,159,33
-
-[FDMemTableAppapp_status_id]
-Coordinates=1345,56,167,33
-
-[FDMemTableApplocation_name]
-Coordinates=1345,111,170,33
-
-[FDMemTableAppimageIndex]
-Coordinates=1169,826,155,33
-
-[FDMemTableAppcreate_date]
-Coordinates=1345,166,155,33
-
-[FDMemTableAppnotification_on_device]
-Coordinates=1345,771,210,33
-
-[FDMemTableAppuser_id]
-Coordinates=1602,111,135,33
-
-[FDMemTableAppusername]
-Coordinates=1602,166,147,33
-
-[FDMemTableAppstatus_progress]
-Coordinates=1626,221,178,33
-
-[FDMemTableAppstatus_name]
-Coordinates=1626,276,161,33
-
-[FDMemTableAppexecute_days]
-Coordinates=1626,331,166,33
-
-[FDMemTableAppnotification_on_email]
-Coordinates=1626,386,204,33
-
-[FDMemTableAppbidscount]
-Coordinates=1602,441,147,33
-
-[FDMemTableAppnote]
-Coordinates=1602,496,120,33
-
-[FDMemTableAppdeadlineby_user]
-Coordinates=1626,551,179,33
 
 [MainForm.FDMemTableBidedApps]
 Visible=False

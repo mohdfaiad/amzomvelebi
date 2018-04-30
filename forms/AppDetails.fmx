@@ -30,32 +30,32 @@ object AppDetailForm: TAppDetailForm
           PNG = {
             89504E470D0A1A0A0000000D4948445200000029000000250806000000DFA2C0
             8D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-            031F494441545847ED98DD4B14511887DF33B3AEEB4205456081DA1F9081683B
-            53A6A5DD1495776E425D961FA169EE45DD44591081E0EEAA680A7627854117D9
-            85514417A93B6B76136160106E9042B4D1D7A23B3BE77466F7C58F5872667657
-            B6F08165CFFB3BCCECC3CC79676687800902C75C5B6351C14D181330B2041563
-            6315CFA64358AE8B29C9F12AA99E6F3180A57528F496BF505AB05A1753478401
-            88F16F0275944199954F7C47028BEF2723BCAC929AC6AB253671542EC6C834FA
-            F6E3D5AE3E2C0D91D2DADA28FE3F4926D048907FA902FD899105A23F18905F58
-            18C294642CE61C2E05B6F7F0D3E0078C4CC3585E89AA393AB03444FC12E4F3F9
-            0A29A5B6789245D86C36969F9F1F225CB0963136827936729378BDDE263EE8E3
-            A23E42C84222CF1A6E73AFFE65497EBAF7793C9E3789B9EC80BB7147D6BF799D
-            4C171997AC1D191165AF3250E257BECB3EE5F1FE1E65074E1926E3921F3F15F6
-            F05FA9CF05D8C22F7827044A8771CA301995947CCA1520446FCC6588BA588143
-            C3644C52F62B67C8D7E02D2C57C8C91BC591613222E9EA0E540344EEC276D79A
-            876A4AD93BD5616BC0D2306997947B268A05AA3E0470DA314AA02E7DE1EBF1D4
-            7443D9374C0C9356C943FED73BF91F984740ECDB304222516AB7BB039E83EF31
-            308529C9F8E5C417B826F92747F99A73631CA774E0953306AABEDEF624925530
-            676BF0A2FC1C2BD398920CCD1775F26EBD4E403809E1E07DDEBD57F55C97CF59
-            D4EEF1A1A4D76B60AC3BD026DDC1CA12A62459985DC021E84D4108DC90FD81C1
-            D07C412F4F6A12132B30A04F0A7687DAB1B48C2949B29DCDE07015E43C3FB28D
-            58AC6626E6C839FDC0EDD6B0B68C2949AA096781AAEB3ECED128FB0C31ADC64A
-            2727C394E454BBF49611B1929FC6BFBC7D88442117EAAC7672324C49EA286D07
-            66059156F2E16C22590B83BC96543A3919A62575269BCBE734112A35067F3E24
-            FB95567910C769C392A4CE54B3B4206ADA117EAB1BA361B6C400860A76CD7970
-            3AAD5896D4E1EB2E1CBC241F0F76C80EA5553A978E4E4E464A921BC5A664BAF8
-            27244957575723BF09F7639D8DF491CECECE2251142F73D1CCBD7D4D014AE9D0
-            6F0B2D337B8545D80C0000000049454E44AE426082}
+            0320494441545847ED98EF4B13711CC73FDFBB39E7A08222B040ED0FC840B2DD
+            9969694F8ACA672EA11E963F42D3DC837A1265410403B7A9680AF64C0A831E64
+            0F8C227A906E37B327110606E18214A245BF866EBBEFB7EF6D1FFC1123EF6E9B
+            ACF00563DFCFFBCBDD5EDC7D3F77B7236080C031C7D678547012C6048C4C41C5
+            F878D5B3E91096EB624872A2466AE45B0C62691E0A7D952F9436ACD6C5D01161
+            0062E29B400365506EE693D891C012FBC90A2F6BA496895A894D1E954B31328C
+            B6FD44ADA31F4B5DA4B5B6368AFF4F920934E2E75F3181FEC4C804D11F0CC82F
+            2C746148321EB78F3880ED3DFC34F80123C330565016536D5D58EA227109F27A
+            BDC594524B22C9212C160B2B2C2C0C112E58CF181BC53C17B9493C1E4F0B1FF4
+            73512F21642199E70CB7B9D7C0B2243FDDFB5C2ED79BE45C6EC0DDB8231BD8BC
+            4E668AAC4BD68F8E8AB247192CF329DF65AFF2F840AFB203A7749375C98F9F8A
+            7BF9AF34E6036CE117BC1302A52338A59BAC4A4A5EE50A10A235E63224B65885
+            43DD644D52F62967C857FF2D2C57C82B18C3916EB222E9E809D40244EEC2F68A
+            350FD594B277319BA5094BDD645C52EE9D2C1568EC2180DD8A5192D8D217BE1E
+            4F4D37957FC3443719953CE47BBD93FF817904C4BA0D232412A556AB33E03AF8
+            1E034318924C5C4EBC816B92CF3FC6D79C13E304FB075FD9E310D3D6DB9E64B2
+            0A666F0F5E949F6365184392A1F91237EFD6EB04849310F6DFE7DD7B55CB35F9
+            BC45F51E1F4A5ABD06C67A021DD21DAC4C61489285D9051C82D61484C00DD917
+            180ACD17F5F1A42E39B10203FAA46877A8134BD3189224DBD90C0E5741CEF323
+            DB8CC56A66E2B6BCD30F9C4E156BD31892A4AA7016686CDDC7391A659F21AED6
+            99E9E45418929CEA94DE322256F3D3F897B70F9128E44383D94E4E8521490DA5
+            A362561069351FCE2693B53028684BA79353615852C3DF5A39A78A50AD32F8F3
+            21D9A7B4CB4338CE18A62435A65AA50551558FF05BDD380DB32506305CB46BCE
+            85D319C5B4A4065F77E1E025F978B04BB629EDD2B94C74722AD292DC28362533
+            C53F2149BABBBB9BF94D7800EB5CA49FB8DDEE1251142F73D1ECBD7D4D034AE9
+            F06F0560337BEF8AB9FE0000000049454E44AE426082}
           FileName = 'E:\Dropbox\projects\azomva.com\icons\applied-icon.png'
         end>
       Align = Left
@@ -82,6 +82,7 @@ object AppDetailForm: TAppDetailForm
       TabIndex = 0
       TabOrder = 0
       TabPosition = PlatformDefault
+      OnChange = TabControl1Change
       Sizes = (
         594s
         441s
@@ -112,6 +113,7 @@ object AppDetailForm: TAppDetailForm
           ItemEditAppearanceClassName = 'TDynamicAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
+          ItemIndex = 0
           Align = Client
           Size.Width = 594.000000000000000000
           Size.Height = 441.000000000000000000
@@ -217,6 +219,7 @@ object AppDetailForm: TAppDetailForm
           ItemEditAppearanceClassName = 'TDynamicAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
+          ItemIndex = 0
           Images = MainForm.ImageList1
           Align = Client
           Size.Width = 594.000000000000000000
@@ -330,6 +333,7 @@ object AppDetailForm: TAppDetailForm
           ItemEditAppearanceClassName = 'TDynamicAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
+          ItemIndex = 0
           Align = Client
           Size.Width = 594.000000000000000000
           Size.Height = 441.000000000000000000
@@ -430,6 +434,7 @@ object AppDetailForm: TAppDetailForm
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
           AllowSelection = False
+          ItemIndex = 0
           Images = MainForm.ImageList1
           Align = Client
           Size.Width = 594.000000000000000000
@@ -539,7 +544,7 @@ object AppDetailForm: TAppDetailForm
       end
       object DateEditStartDate: TDateEdit
         ShowClearButton = True
-        Date = 43210.000000000000000000
+        Date = 43219.000000000000000000
         Format = 'dd-mm-yyyy'
         TodayDefault = True
         Align = Top
@@ -668,11 +673,11 @@ object AppDetailForm: TAppDetailForm
     Params = <
       item
         name = 'app_id'
-        Value = '19'
+        Value = '97'
       end
       item
         name = 'sesskey'
-        Value = 'd8d7cbabf020e29bbe1b3f94e255280b'
+        Value = 'c4bb97d781ec548c769d362d2f48113a'
       end
       item
         name = 'user_id'
@@ -786,6 +791,11 @@ object AppDetailForm: TAppDetailForm
         Name = 'location_name'
         DataType = ftWideString
         Size = 255
+      end
+      item
+        Name = 'canbid'
+        DataType = ftWideString
+        Size = 255
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -860,6 +870,10 @@ object AppDetailForm: TAppDetailForm
     end
     object FDMemTableApplocation_name: TWideStringField
       FieldName = 'location_name'
+      Size = 255
+    end
+    object FDMemTableAppcanbid: TWideStringField
+      FieldName = 'canbid'
       Size = 255
     end
   end
@@ -1332,16 +1346,6 @@ object AppDetailForm: TAppDetailForm
     Active = True
     FieldDefs = <
       item
-        Name = 'rating'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'contact_info'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
         Name = 'id'
         DataType = ftWideString
         Size = 255
@@ -1353,6 +1357,11 @@ object AppDetailForm: TAppDetailForm
       end
       item
         Name = 'user_status_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'rating'
         DataType = ftWideString
         Size = 255
       end
@@ -1383,6 +1392,11 @@ object AppDetailForm: TAppDetailForm
       end
       item
         Name = 'regipaddr'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'contact_info'
         DataType = ftWideString
         Size = 255
       end>

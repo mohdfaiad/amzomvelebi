@@ -144,16 +144,6 @@ type
     Image1: TImage;
     User2ListFrame1: TUser2ListFrame;
     Label2: TLabel;
-    FDMemTableInitaction: TWideStringField;
-    FDMemTableInittotal_apps_count: TWideStringField;
-    FDMemTableInitweek_apps_count: TWideStringField;
-    FDMemTableInitusers2count: TWideStringField;
-    FDMemTableInitmsg: TWideStringField;
-    FDMemTableInitpages: TWideStringField;
-    FDMemTableInitapp_name: TWideStringField;
-    FDMemTableInitGCMAppID: TWideStringField;
-    FDMemTableInitGCMServerKey: TWideStringField;
-    FDMemTableInituser: TWideStringField;
     LinkPropertyToFieldText4: TLinkPropertyToField;
     ButtonContracts: TButton;
     ActionMyContracts: TAction;
@@ -190,6 +180,38 @@ type
     BindSourceDB3: TBindSourceDB;
     LinkListControlToField1: TLinkListControlToField;
     SpeedButtonNotifications: TSpeedButton;
+    FDMemTableInittotal_apps_count: TWideStringField;
+    FDMemTableInitweek_apps_count: TWideStringField;
+    FDMemTableInitusers2count: TWideStringField;
+    FDMemTableInitpages: TWideStringField;
+    FDMemTableInitpagesid: TWideStringField;
+    FDMemTableInitpagestitle: TWideStringField;
+    FDMemTableInitpagescontent: TWideStringField;
+    FDMemTableInitpagesmeta_keywords: TWideStringField;
+    FDMemTableInitpagesmeta_description: TWideStringField;
+    FDMemTableInitpagescreate_date: TWideStringField;
+    FDMemTableInitpagesmodify_date: TWideStringField;
+    FDMemTableInitapp_name: TWideStringField;
+    FDMemTableInitAmzomvelebi_GCMAppID: TWideStringField;
+    FDMemTableInitAmzomvelebi_GCMServerKey: TWideStringField;
+    FDMemTableInituserAgent: TWideStringField;
+    FDMemTableInitaction: TWideStringField;
+    FDMemTableInitmsg: TWideStringField;
+    FDMemTableInituser: TWideStringField;
+    FDMemTableInituserid: TWideStringField;
+    FDMemTableInituseruser_type_id: TWideStringField;
+    FDMemTableInituseruser_status_id: TWideStringField;
+    FDMemTableInituserfull_name: TWideStringField;
+    FDMemTableInituserphone: TWideStringField;
+    FDMemTableInituseremail: TWideStringField;
+    FDMemTableInitusercreate_date: TWideStringField;
+    FDMemTableInitusermodify_date: TWideStringField;
+    FDMemTableInituserregipaddr: TWideStringField;
+    FDMemTableInitusersesskey: TWideStringField;
+    FDMemTableInituserloginstatus: TWideStringField;
+    FDMemTableInituserisSetLocations: TWideStringField;
+    FDMemTableInitusernotifications: TWideStringField;
+    LinkPropertyToFieldText5: TLinkPropertyToField;
     procedure AuthActionExecute(Sender: TObject);
     procedure ActionUserAreaExecute(Sender: TObject);
     procedure TimerVersioningTimer(Sender: TObject);
@@ -224,7 +246,6 @@ type
     // function isServiceStarted: Boolean;
 {$ENDIF ANDROID}
     procedure checkVersion;
-    procedure loginRequest(hash, phone, email: string);
     procedure clearINIParams;
     function getDeviceID: string;
     procedure loadMyBidedApps;
@@ -263,7 +284,7 @@ begin
   self.RectangleNonAuth.Visible := False;
   LabelFullName.Text := DModule.full_name;
   ButtonUserNotifications.Text := '(' + DModule.notifications.ToString + ') შეტყობინებები';
-  SpeedButtonNotifications.Text := DModule.notifications.ToString;
+  //SpeedButtonNotifications.Text := DModule.notifications.ToString;
   SpeedButtonNotifications.Visible := True;
   self.RectangleProfile.Visible := True;
   FPushClient.Active := True;
@@ -318,6 +339,7 @@ end;
 procedure TMainForm.NotificationCenter1ReceiveLocalNotification(Sender: TObject; ANotification: TNotification);
 begin
   self.NotificationCenter1.CancelNotification(ANotification.Name);
+  ShowMessage(self.v_action);
   if self.v_action = 'TAppDetailForm' then
   begin
     with TAppDetailForm.Create(Application) do
@@ -370,32 +392,12 @@ begin
     aTask := TTask.Create(
       procedure()
       begin
-        TThread.Synchronize(nil,
-          procedure
-          begin
-            RESTRequestDeviceToken.Params.Clear;
-            with RESTRequestDeviceToken.Params.AddItem do
-            begin
-              name := 'deviceid';
-              Value := self.getDeviceID;
-            end;
-            with RESTRequestDeviceToken.Params.AddItem do
-            begin
-              name := 'devicetoken';
-              Value := TIdURI.ParamsEncode(FPushClient.DeviceToken);
-            end;
-            with RESTRequestDeviceToken.Params.AddItem do
-            begin
-              name := 'sesskey';
-              Value := DModule.sesskey;
-            end;
-            with RESTRequestDeviceToken.Params.AddItem do
-            begin
-              name := 'user_id';
-              Value := DModule.id.ToString;
-            end;
-            RESTRequestDeviceToken.Execute;
-          end);
+        RESTRequestDeviceToken.Params.Clear;
+        RESTRequestDeviceToken.AddParameter('deviceid', self.getDeviceID);
+        RESTRequestDeviceToken.AddParameter('devicetoken', TIdURI.ParamsEncode(FPushClient.DeviceToken));
+        RESTRequestDeviceToken.AddParameter('sesskey', DModule.sesskey);
+        RESTRequestDeviceToken.AddParameter('user_id', DModule.id.ToString);
+        RESTRequestDeviceToken.Execute;
       end);
     aTask.Start;
   end;
@@ -447,28 +449,12 @@ begin
   aTask := TTask.Create(
     procedure()
     begin
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          RESTRequestSignOut.Params.Clear;
-          with RESTRequestSignOut.Params.AddItem do
-          begin
-            name := 'sesskey';
-            Value := DModule.sesskey;
-          end;
-          with RESTRequestSignOut.Params.AddItem do
-          begin
-            name := 'user_id';
-            Value := DModule.id.ToString;
-          end;
-          RESTRequestSignOut.Execute;
-        end);
+      RESTRequestSignOut.Params.Clear;
+      RESTRequestSignOut.AddParameter('sesskey', DModule.sesskey);
+      RESTRequestSignOut.AddParameter('user_id', DModule.id.ToString);
+      RESTRequestSignOut.Execute;
     end);
-  try
-    aTask.Start;
-  finally
-    // aTask.Free;
-  end;
+  aTask.Start;
 end;
 
 procedure TMainForm.ActionUserAreaExecute(Sender: TObject);
@@ -502,17 +488,13 @@ begin
   aTask := TTask.Create(
     procedure()
     begin
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          if not DModule.sesskey.IsEmpty then
-          begin
-            RESTRequestMyBidedApps.Params.Clear;
-            RESTRequestMyBidedApps.AddParameter('sesskey', DModule.sesskey);
-            RESTRequestMyBidedApps.AddParameter('user_id', DModule.id.ToString);
-            RESTRequestMyBidedApps.Execute;
-          end;
-        end);
+      if not DModule.sesskey.IsEmpty then
+      begin
+        RESTRequestMyBidedApps.Params.Clear;
+        RESTRequestMyBidedApps.AddParameter('sesskey', DModule.sesskey);
+        RESTRequestMyBidedApps.AddParameter('user_id', DModule.id.ToString);
+        RESTRequestMyBidedApps.Execute;
+      end;
     end);
   aTask.Start;
 end;
@@ -595,49 +577,29 @@ begin
   TimerVersioning.Enabled := False;
   aTask := TTask.Create(
     procedure()
+    var
+      Ini: TIniFile;
+      hash, phone, email: String;
     begin
-      TThread.Synchronize(nil,
-        procedure
-        var
-          Ini: TIniFile;
+      Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath, DModule.settingsIniFile));
+      try
+        Ini.AutoSave := True;
+        RESTRequestVersioning.Params.Clear;
+        RESTRequestVersioning.AddParameter('version', DModule.currentVersion);
+        hash := Ini.ReadString('auth', 'hash', '');
+        phone := Ini.ReadString('auth', 'phone', '');
+        email := Ini.ReadString('auth', 'email', '');
+        if Ini.ReadString('auth', 'hash', '').IsEmpty = False then
         begin
-          Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath, DModule.settingsIniFile));
-          try
-            Ini.AutoSave := True;
-            RESTRequestVersioning.Params.Clear;
-            with RESTRequestVersioning.Params.AddItem do
-            begin
-              name := 'version';
-              Value := DModule.currentVersion;
-            end;
-            if Ini.ReadString('auth', 'hash', '').IsEmpty = False then
-            begin
-              with RESTRequestVersioning.Params.AddItem do
-              begin
-                name := 'op';
-                Value := 'login_with_hash';
-              end;
-              with RESTRequestVersioning.Params.AddItem do
-              begin
-                name := 'hash';
-                Value := Ini.ReadString('auth', 'hash', '');
-              end;
-              with RESTRequestVersioning.Params.AddItem do
-              begin
-                name := 'phone';
-                Value := Ini.ReadString('auth', 'phone', '');
-              end;
-              with RESTRequestVersioning.Params.AddItem do
-              begin
-                name := 'email';
-                Value := Ini.ReadString('auth', 'email', '');
-              end;
-            end;
-            RESTRequestVersioning.Execute;
-          finally
-            Ini.Free;
-          end;
-        end);
+          RESTRequestVersioning.AddParameter('op', 'login_with_hash');
+          RESTRequestVersioning.AddParameter('hash', hash);
+          RESTRequestVersioning.AddParameter('phone', phone);
+          RESTRequestVersioning.AddParameter('email', email);
+        end;
+        RESTRequestVersioning.Execute;
+      finally
+        Ini.Free;
+      end;
     end);
   aTask.Start;
 end;
@@ -708,11 +670,6 @@ begin
   finally
     Ini.Free;
   end;
-end;
-
-procedure TMainForm.loginRequest(hash, phone, email: string);
-begin
-  PreloaderRectangle.Visible := True;
 end;
 
 {$IFDEF IOS}

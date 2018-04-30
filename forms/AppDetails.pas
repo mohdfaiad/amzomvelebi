@@ -90,22 +90,6 @@ type
     FDMemTableapp_property_requisiteslon_lat: TWideStringField;
     FDMemTableapp_property_requisitesservice_types: TWideStringField;
     FDMemTableapp_property_requisitesapp_user_param: TWideStringField;
-    FDMemTableAppid: TWideStringField;
-    FDMemTableAppuser_id: TWideStringField;
-    FDMemTableAppdeadlineby_user: TWideStringField;
-    FDMemTableAppexecute_days: TWideStringField;
-    FDMemTableAppimageIndex: TWideStringField;
-    FDMemTableAppusername: TWideStringField;
-    FDMemTableAppnote: TWideStringField;
-    FDMemTableAppstatus_name: TWideStringField;
-    FDMemTableAppstatus_color: TWideStringField;
-    FDMemTableAppstatus_progress: TWideStringField;
-    FDMemTableAppapp_status_id: TWideStringField;
-    FDMemTableAppnotification_on_email: TWideStringField;
-    FDMemTableAppnotification_on_device: TWideStringField;
-    FDMemTableAppcreate_date: TWideStringField;
-    FDMemTableAppbidscount: TWideStringField;
-    FDMemTableApplocation_name: TWideStringField;
     TabItemOwner: TTabItem;
     ListView2: TListView;
     PanelDetails: TPanel;
@@ -124,6 +108,23 @@ type
     RESTResponseDataSetAdapterAmzomveli: TRESTResponseDataSetAdapter;
     BindSourceDB4: TBindSourceDB;
     LinkListControlToField4: TLinkListControlToField;
+    FDMemTableAppid: TWideStringField;
+    FDMemTableAppuser_id: TWideStringField;
+    FDMemTableAppdeadlineby_user: TWideStringField;
+    FDMemTableAppexecute_days: TWideStringField;
+    FDMemTableAppimageIndex: TWideStringField;
+    FDMemTableAppusername: TWideStringField;
+    FDMemTableAppnote: TWideStringField;
+    FDMemTableAppstatus_name: TWideStringField;
+    FDMemTableAppstatus_color: TWideStringField;
+    FDMemTableAppstatus_progress: TWideStringField;
+    FDMemTableAppapp_status_id: TWideStringField;
+    FDMemTableAppnotification_on_email: TWideStringField;
+    FDMemTableAppnotification_on_device: TWideStringField;
+    FDMemTableAppcreate_date: TWideStringField;
+    FDMemTableAppbidscount: TWideStringField;
+    FDMemTableApplocation_name: TWideStringField;
+    FDMemTableAppcanbid: TWideStringField;
     procedure RESTRequestAppAfterExecute(Sender: TCustomRESTRequest);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ButtonBackClick(Sender: TObject);
@@ -133,6 +134,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure TabControl1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -211,16 +213,16 @@ begin
   HeaderFrame1.LabelAppName.Text := 'განცხადება N ' + papp_id.ToString;
   self.Show;
   DateEditStartDate.Format := 'dd-mm-yyyy';
-  DateEditStartDate.DateTime := Now()+1;
+  DateEditStartDate.DateTime := Now() + 1;
   RectanglePreloader.Visible := True;
-  if not DModule.sesskey.IsEmpty then
+  if (not DModule.sesskey.IsEmpty) and (showOwner = False) then
     ButtonOffer.Visible := True
   else
     ButtonOffer.Visible := false;
 
-  aTask := TTask.Create(
+  {aTask := TTask.Create(
     procedure()
-    begin
+    begin    }
       RESTRequestApp.Params.Clear;
       RESTRequestApp.AddParameter('app_id', self.app_id.ToString);
       if not DModule.sesskey.IsEmpty then
@@ -240,8 +242,8 @@ begin
         TabItemOffer.Visible := false;
       end;
       RESTRequestApp.Execute;
-    end);
-  aTask.Start;
+   { end);
+  aTask.Start; }
 end;
 
 procedure TAppDetailForm.RESTRequestAppAfterExecute(Sender: TCustomRESTRequest);
@@ -255,6 +257,14 @@ begin
   PanelBids.Visible := false;
   RectanglePreloader.Visible := false;
   ShowMessage(self.RESTResponse1.Content);
+end;
+
+procedure TAppDetailForm.TabControl1Change(Sender: TObject);
+begin
+  if FDMemTableApp.FieldByName('canbid').AsInteger = 1 then
+    ButtonOffer.Visible := True
+  else
+    ButtonOffer.Visible := false;
 end;
 
 end.

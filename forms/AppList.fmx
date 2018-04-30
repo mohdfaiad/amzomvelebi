@@ -3,7 +3,7 @@ object AppListForm: TAppListForm
   Top = 0
   Caption = 'Form1'
   ClientHeight = 579
-  ClientWidth = 935
+  ClientWidth = 435
   Position = MainFormCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -14,7 +14,7 @@ object AppListForm: TAppListForm
   object RectangleHeader: TRectangle
     Align = Top
     Fill.Color = xFF198D60
-    Size.Width = 935.000000000000000000
+    Size.Width = 435.000000000000000000
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
@@ -33,31 +33,32 @@ object AppListForm: TAppListForm
     object Label1: TLabel
       Align = Client
       StyledSettings = [Family, Size, Style]
-      Size.Width = 839.000000000000000000
+      Size.Width = 339.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TextSettings.FontColor = claWhitesmoke
       TextSettings.HorzAlign = Center
-      Text = #4306#4304#4316#4330#4334#4304#4307#4308#4305#4312#4321' '#4321#4312#4304
+      Text = #4306#4304#4316#4330#4334#4304#4307#4308#4305#4308#4305#4312#4321' '#4321#4312#4304
       TabOrder = 1
     end
     object ButtonSorting: TButton
       Align = Right
       IconTintColor = claWhitesmoke
-      Position.X = 887.000000000000000000
+      Position.X = 387.000000000000000000
       Position.Y = 1.000000000000000000
       Size.Width = 48.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
-      StyleLookup = 'drawertoolbutton'
+      StyleLookup = 'detailstoolbutton'
       TabOrder = 2
       Text = 'ButtonSorting'
+      OnClick = ButtonSortingClick
     end
   end
   object RectangleMain: TRectangle
     Align = Client
     Fill.Kind = None
-    Size.Width = 935.000000000000000000
+    Size.Width = 435.000000000000000000
     Size.Height = 529.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
@@ -68,7 +69,7 @@ object AppListForm: TAppListForm
       FooterAppearanceClassName = 'TListHeaderObjects'
       Images = MainForm.ImageList1
       Align = Client
-      Size.Width = 935.000000000000000000
+      Size.Width = 435.000000000000000000
       Size.Height = 482.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
@@ -161,26 +162,27 @@ object AppListForm: TAppListForm
       SearchVisible = True
       PullToRefresh = True
     end
-    object RectangleFiltering: TRectangle
+    object RectangleFilteringSortingButtons: TRectangle
       Align = Top
       Fill.Color = xFF198D60
-      Size.Width = 935.000000000000000000
+      Size.Width = 435.000000000000000000
       Size.Height = 47.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = xFF20B67C
       Stroke.Thickness = 0.200000002980232200
       object SpeedButtonSort: TSpeedButton
-        Align = Client
+        Align = Right
         StyledSettings = [Family, Style]
         Images = MainForm.ImageList1
         ImageIndex = 54
-        Size.Width = 710.000000000000000000
+        Position.X = 259.000000000000000000
+        Size.Width = 176.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Text = #4321#4317#4320#4322#4312#4320#4308#4305#4304
         TextSettings.Font.Size = 13.000000000000000000
         TextSettings.FontColor = claWhite
-        object MultiView1: TMultiView
+        object MultiViewSort: TMultiView
           DrawerOptions.Mode = PushingDetailView
           MasterButton = SpeedButtonSort
           Mode = Popover
@@ -224,7 +226,7 @@ object AppListForm: TAppListForm
               Margins.Right = 5.000000000000000000
               Margins.Bottom = 15.000000000000000000
               Position.X = 5.000000000000000000
-              Position.Y = 64.000000000000000000
+              Position.Y = 113.000000000000000000
               Size.Width = 230.000000000000000000
               Size.Height = 19.000000000000000000
               Size.PlatformDefault = False
@@ -240,7 +242,7 @@ object AppListForm: TAppListForm
               Margins.Right = 5.000000000000000000
               Margins.Bottom = 15.000000000000000000
               Position.X = 5.000000000000000000
-              Position.Y = 113.000000000000000000
+              Position.Y = 162.000000000000000000
               Size.Width = 230.000000000000000000
               Size.Height = 19.000000000000000000
               Size.PlatformDefault = False
@@ -260,21 +262,37 @@ object AppListForm: TAppListForm
               Text = #4307#4304#4314#4304#4306#4308#4305#4304
               OnClick = Button2Click
             end
+            object RadioButtonArea: TRadioButton
+              Align = Top
+              StyledSettings = [Family, Style, FontColor]
+              Margins.Left = 5.000000000000000000
+              Margins.Top = 15.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Margins.Bottom = 15.000000000000000000
+              Position.X = 5.000000000000000000
+              Position.Y = 64.000000000000000000
+              Size.Width = 230.000000000000000000
+              Size.Height = 19.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 4
+              Text = #4324#4304#4320#4311#4317#4305#4312#4321' '#4315#4312#4334#4308#4307#4309#4312#4311
+              TextSettings.Font.Size = 13.000000000000000000
+            end
           end
         end
       end
-      object SpeedButton3: TSpeedButton
+      object SpeedButtonFiltering: TSpeedButton
         Align = Left
         StyledSettings = [Family, Style]
         Images = MainForm.ImageList1
         ImageIndex = 55
-        Size.Width = 225.000000000000000000
+        Size.Width = 185.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Text = #4324#4312#4314#4322#4320#4304#4330#4312#4304
         TextSettings.Font.Size = 13.000000000000000000
         TextSettings.FontColor = claWhite
-        OnClick = SpeedButton3Click
+        OnClick = SpeedButtonFilteringClick
       end
     end
   end
@@ -311,16 +329,16 @@ object AppListForm: TAppListForm
       426082}
     Fill.Bitmap.WrapMode = Tile
     Fill.Kind = Bitmap
-    Size.Width = 554.000000000000000000
-    Size.Height = 474.000000000000000000
+    Size.Width = 520.000000000000000000
+    Size.Height = 529.000000000000000000
     Size.PlatformDefault = False
     Visible = False
     object RectangleSortingContent: TRectangle
       Align = Center
       Anchors = [akLeft, akTop, akRight, akBottom]
       Fill.Color = claWhite
-      Size.Width = 515.000000000000000000
-      Size.Height = 439.000000000000000000
+      Size.Width = 481.000000000000000000
+      Size.Height = 494.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = claDarkgray
       object Label2: TLabel
@@ -328,7 +346,7 @@ object AppListForm: TAppListForm
         StyledSettings = [Family, Style]
         Margins.Top = 10.000000000000000000
         Position.Y = 10.000000000000000000
-        Size.Width = 515.000000000000000000
+        Size.Width = 481.000000000000000000
         Size.Height = 23.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -341,7 +359,7 @@ object AppListForm: TAppListForm
         Align = Top
         LineType = Bottom
         Position.Y = 33.000000000000000000
-        Size.Width = 515.000000000000000000
+        Size.Width = 481.000000000000000000
         Size.Height = 15.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = xFF198D60
@@ -350,7 +368,7 @@ object AppListForm: TAppListForm
         Align = Top
         LineType = Bottom
         Position.Y = 98.000000000000000000
-        Size.Width = 515.000000000000000000
+        Size.Width = 481.000000000000000000
         Size.Height = 15.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = xFF198D60
@@ -360,7 +378,7 @@ object AppListForm: TAppListForm
         Align = Top
         Fill.Kind = None
         Position.Y = 48.000000000000000000
-        Size.Width = 515.000000000000000000
+        Size.Width = 481.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
@@ -378,7 +396,7 @@ object AppListForm: TAppListForm
         Anchors = [akTop, akRight]
         Images = MainForm.ImageList1
         ImageIndex = 22
-        Position.X = 467.000000000000000000
+        Position.X = 433.000000000000000000
         Size.Width = 50.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -389,8 +407,8 @@ object AppListForm: TAppListForm
         StyledSettings = [Style, FontColor]
         Images = MainForm.ImageList1
         ImageIndex = 20
-        Position.Y = 395.000000000000000000
-        Size.Width = 515.000000000000000000
+        Position.Y = 450.000000000000000000
+        Size.Width = 481.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
@@ -405,8 +423,8 @@ object AppListForm: TAppListForm
         StyledSettings = [Style, FontColor]
         Images = MainForm.ImageList1
         ImageIndex = 9
-        Position.Y = 351.000000000000000000
-        Size.Width = 515.000000000000000000
+        Position.Y = 406.000000000000000000
+        Size.Width = 481.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
@@ -427,7 +445,7 @@ object AppListForm: TAppListForm
       426082}
     Fill.Bitmap.WrapMode = Tile
     Fill.Kind = Bitmap
-    Size.Width = 935.000000000000000000
+    Size.Width = 435.000000000000000000
     Size.Height = 529.000000000000000000
     Size.PlatformDefault = False
     Visible = False
@@ -435,7 +453,7 @@ object AppListForm: TAppListForm
       Align = Center
       Anchors = [akLeft, akTop, akRight, akBottom]
       Fill.Color = claWhite
-      Size.Width = 904.000000000000000000
+      Size.Width = 404.000000000000000000
       Size.Height = 494.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = claDarkgray
@@ -444,7 +462,7 @@ object AppListForm: TAppListForm
         StyledSettings = [Family, Style]
         Margins.Top = 10.000000000000000000
         Position.Y = 10.000000000000000000
-        Size.Width = 904.000000000000000000
+        Size.Width = 404.000000000000000000
         Size.Height = 23.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -457,19 +475,73 @@ object AppListForm: TAppListForm
         Align = Top
         LineType = Bottom
         Position.Y = 33.000000000000000000
-        Size.Width = 904.000000000000000000
+        Size.Width = 404.000000000000000000
         Size.Height = 15.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = xFF198D60
       end
-      object Rectangle4: TRectangle
-        Align = Top
+      object RectanglePropTypesSearchParams: TRectangle
+        Align = Client
         Fill.Kind = None
-        Position.Y = 48.000000000000000000
-        Size.Width = 904.000000000000000000
-        Size.Height = 25.000000000000000000
+        Size.Width = 404.000000000000000000
+        Size.Height = 382.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
+        Visible = False
+        object TreeViewLocations: TTreeView
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 394.000000000000000000
+          Size.Height = 329.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Images = MainForm.ImageList1
+          MultiSelect = True
+          ShowCheckboxes = True
+          Viewport.Width = 394.000000000000000000
+          Viewport.Height = 329.000000000000000000
+        end
+        object RectangleHeaderOfPTSP: TRectangle
+          Align = Top
+          Fill.Kind = None
+          Size.Width = 404.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Color = xFF198D60
+          object Label4: TLabel
+            Align = Client
+            StyledSettings = [Family, Style, FontColor]
+            Size.Width = 363.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 11.000000000000000000
+            TextSettings.HorzAlign = Center
+            Text = #4315#4317#4315#4321#4304#4334#4323#4320#4308#4305#4312#4321' '#4322#4312#4318#4308#4305#4312
+            TabOrder = 0
+          end
+          object Button4: TButton
+            Align = Left
+            Size.Width = 41.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            Text = 'X'
+            OnClick = Button4Click
+          end
+        end
+        object FloatAnimation1: TFloatAnimation
+          Duration = 2.000000000000000000
+          OnFinish = FloatAnimation1Finish
+          PropertyName = 'Opacity'
+          StartValue = 1.000000000000000000
+          StartFromCurrent = True
+          StopValue = 0.000000000000000000
+          Trigger = 'IsVisible=false'
+          TriggerInverse = 'IsVisible=true'
+        end
       end
       object SpeedButton1: TSpeedButton
         Images = MainForm.ImageList1
@@ -483,14 +555,14 @@ object AppListForm: TAppListForm
       object SpeedButton2: TSpeedButton
         Anchors = [akTop, akRight]
         Images = MainForm.ImageList1
-        ImageIndex = 22
-        Position.X = 856.000000000000000000
-        Size.Width = 50.000000000000000000
+        ImageIndex = 57
+        Position.X = 360.000000000000000000
+        Size.Width = 42.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         OnClick = SpeedButton2Click
       end
-      object Button4: TButton
+      object ButtonFilteringSubmit: TButton
         Align = Bottom
         StyledSettings = [Family, Style, FontColor]
         Images = MainForm.ImageList1
@@ -501,104 +573,119 @@ object AppListForm: TAppListForm
         Margins.Bottom = 10.000000000000000000
         Position.X = 5.000000000000000000
         Position.Y = 440.000000000000000000
-        Size.Width = 894.000000000000000000
+        Size.Width = 394.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
-        Text = #4331#4308#4305#4316#4304
+        Text = #4306#4304#4316#4330#4334#4304#4307#4308#4305#4308#4305#4312#4321' '#4324#4312#4314#4322#4320#4304#4330#4312#4304
         TextSettings.Font.Size = 14.000000000000000000
-        OnClick = Button4Click
+        TintColor = xFF198D60
+        OnClick = ButtonFilteringSubmitClick
       end
-      object ListBox1: TListBox
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 10.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 10.000000000000000000
-        Position.X = 5.000000000000000000
-        Position.Y = 107.000000000000000000
-        Size.Width = 894.000000000000000000
-        Size.Height = 182.000000000000000000
+      object RectangleParams: TRectangle
+        Align = Client
+        Fill.Color = claNull
+        Size.Width = 404.000000000000000000
+        Size.Height = 382.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 2
-        DisableFocusEffect = True
-        Images = MainForm.ImageList1
-        DefaultItemStyles.ItemStyle = ''
-        DefaultItemStyles.GroupHeaderStyle = ''
-        DefaultItemStyles.GroupFooterStyle = ''
-        Viewport.Width = 894.000000000000000000
-        Viewport.Height = 182.000000000000000000
-        object ListBoxItem1: TListBoxItem
-          ItemData.Accessory = aMore
-          ImageIndex = 23
+        Stroke.Kind = None
+        object ListBox1: TListBox
+          Align = Top
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 394.000000000000000000
+          Size.Height = 182.000000000000000000
+          Size.PlatformDefault = False
           TabOrder = 0
-          Text = #4315#4317#4315#4321#4304#4334#4323#4320#4308#4305#4312#4321' '#4322#4312#4318#4308#4305#4312
-          OnClick = ListBoxItem1Click
-        end
-        object ListBoxItem2: TListBoxItem
-          ItemData.Accessory = aMore
-          ImageIndex = 46
-          Position.Y = 44.000000000000000000
-          TabOrder = 1
-          Text = #4325#4317#4316#4308#4305#4312#4321' '#4322#4312#4318#4308#4305#4312
-        end
-        object ListBoxItem3: TListBoxItem
-          Position.Y = 88.000000000000000000
-          TabOrder = 2
-          Text = #4324#4304#4320#4311#4317#4305#4312
-          object Edit1: TEdit
-            Touch.InteractiveGestures = [LongTap, DoubleTap]
-            Align = Right
+          DisableFocusEffect = True
+          Images = MainForm.ImageList1
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          Viewport.Width = 394.000000000000000000
+          Viewport.Height = 182.000000000000000000
+          object ListBoxItem1: TListBoxItem
+            TextSettings.Font.Size = 15.000000000000000000
+            StyledSettings = [Family, Style, FontColor, Other]
+            ItemData.Accessory = aMore
+            ImageIndex = 23
             TabOrder = 0
-            Position.X = 579.000000000000000000
-            Position.Y = 10.000000000000000000
-            Margins.Left = 5.000000000000000000
-            Margins.Top = 10.000000000000000000
-            Margins.Right = 5.000000000000000000
-            Margins.Bottom = 10.000000000000000000
-            Size.Width = 310.000000000000000000
-            Size.Height = 32.000000000000000000
-            Size.PlatformDefault = False
-            TextPrompt = '750'
+            Text = #4315#4317#4315#4321#4304#4334#4323#4320#4308#4305#4312#4321' '#4322#4312#4318#4308#4305#4312
+            OnClick = ListBoxItem1Click
+          end
+          object ListBoxItem2: TListBoxItem
+            TextSettings.Font.Size = 15.000000000000000000
+            StyledSettings = [Family, Style, FontColor, Other]
+            ItemData.Accessory = aMore
+            ImageIndex = 46
+            Position.Y = 44.000000000000000000
+            TabOrder = 1
+            Text = #4325#4317#4316#4308#4305#4312#4321' '#4322#4312#4318#4308#4305#4312
+          end
+          object ListBoxItem3: TListBoxItem
+            TextSettings.Font.Size = 15.000000000000000000
+            StyledSettings = [Family, Style, FontColor, Other]
+            Position.Y = 88.000000000000000000
+            TabOrder = 2
+            Text = #4324#4304#4320#4311#4317#4305#4312' '#4307#4304#4316': '
+            object EditAreaFrom: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Anchors = [akLeft, akTop, akRight]
+              TabOrder = 0
+              KeyboardType = NumberPad
+              ReturnKeyType = Done
+              Position.X = 144.000000000000000000
+              Position.Y = 12.000000000000000000
+              Margins.Left = 5.000000000000000000
+              Margins.Top = 10.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Margins.Bottom = 10.000000000000000000
+              Size.Width = 1416.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = '750'
+              KillFocusByReturn = True
+            end
+          end
+          object ListBoxItem4: TListBoxItem
+            TextSettings.Font.Size = 15.000000000000000000
+            StyledSettings = [Family, Style, FontColor, Other]
+            Position.Y = 132.000000000000000000
+            TabOrder = 3
+            Text = #4324#4304#4320#4311#4317#4305#4312' '#4315#4307#4308': '
+            object EditAreaTo: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Anchors = [akLeft, akTop, akRight]
+              TabOrder = 0
+              KeyboardType = NumberPad
+              ReturnKeyType = Done
+              Position.X = 145.000000000000000000
+              Position.Y = 12.000000000000000000
+              Margins.Left = 5.000000000000000000
+              Margins.Top = 10.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Margins.Bottom = 10.000000000000000000
+              Size.Width = 1416.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = '750'
+              KillFocusByReturn = True
+            end
+          end
+          object FloatAnimationListBoxPosition: TFloatAnimation
+            Enabled = True
+            Duration = 0.200000002980232200
+            Inverse = True
+            PropertyName = 'Position.X'
+            StartValue = 0.000000000000000000
+            StartFromCurrent = True
+            StopValue = 0.000000000000000000
           end
         end
-        object FloatAnimationListBoxPosition: TFloatAnimation
-          Enabled = True
-          Duration = 0.200000002980232200
-          Inverse = True
-          PropertyName = 'Position.X'
-          StartValue = 0.000000000000000000
-          StartFromCurrent = True
-          StopValue = 0.000000000000000000
-        end
-      end
-      object ComboBoxApp_property_types: TComboBox
-        Align = Client
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 10.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 10.000000000000000000
-        Size.Width = 894.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 3
-      end
-      object TreeViewLocations: TTreeView
-        Align = Client
-        Margins.Left = 5.000000000000000000
-        Margins.Top = 10.000000000000000000
-        Margins.Right = 5.000000000000000000
-        Margins.Bottom = 10.000000000000000000
-        Size.Width = 904.000000000000000000
-        Size.Height = 682.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 4
-        Visible = False
-        Images = MainForm.ImageList1
-        MultiSelect = True
-        ShowCheckboxes = True
-        Viewport.Width = 904.000000000000000000
-        Viewport.Height = 682.000000000000000000
       end
     end
   end
@@ -857,15 +944,6 @@ object AppListForm: TAppListForm
           ControlMemberName = 'area'
           CustomFormat = #39#4317#4305#4312#4308#4325#4322'('#4308#4305')'#4312#4321' '#4324#4304#4320#4311#4317#4305#4312': '#39' + %s'
         end>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
-    object LinkListControlToField2: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB3
-      FieldName = 'title'
-      Control = ComboBoxApp_property_types
-      FillExpressions = <>
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end

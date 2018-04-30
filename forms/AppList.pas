@@ -19,6 +19,12 @@ uses
   FMX.ExtCtrls, FMX.TMSPopup;
 
 type
+  TSearchParams = record
+    AreaFrom: Integer;
+    AreaTo: Integer;
+  end;
+
+type
   TAppListForm = class(TForm)
     ListView1: TListView;
     PreloaderRectangle: TRectangle;
@@ -30,7 +36,7 @@ type
     RectangleHeader: TRectangle;
     ButtonBack: TButton;
     BindingsList1: TBindingsList;
-    MultiView1: TMultiView;
+    MultiViewSort: TMultiView;
     Button1: TButton;
     Button3: TButton;
     Label1: TLabel;
@@ -46,7 +52,7 @@ type
     FDMemTableLocationsmap_title: TWideStringField;
     FDMemTableLocationschildren: TWideStringField;
     BindSourceDB2: TBindSourceDB;
-    Button4: TButton;
+    ButtonFilteringSubmit: TButton;
     FMXLoadingIndicator1: TFMXLoadingIndicator;
     LinkListControlToField1: TLinkListControlToField;
     FDMemTableAppsid: TWideStringField;
@@ -79,31 +85,37 @@ type
     RectangleFilteringDetailsContent: TRectangle;
     Label3: TLabel;
     Line3: TLine;
-    Rectangle4: TRectangle;
+    RectanglePropTypesSearchParams: TRectangle;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
-    RectangleFiltering: TRectangle;
+    RectangleFilteringSortingButtons: TRectangle;
     SpeedButtonSort: TSpeedButton;
-    SpeedButton3: TSpeedButton;
+    SpeedButtonFiltering: TSpeedButton;
     RadioButtonByLocation: TRadioButton;
     RadioButtonByDate: TRadioButton;
     RadioButtonByBids: TRadioButton;
     Rectangle2: TRectangle;
     Button2: TButton;
-    Edit1: TEdit;
+    EditAreaFrom: TEdit;
     TreeViewLocations: TTreeView;
-    ComboBoxApp_property_types: TComboBox;
     FDMemTableAppServiceTypes: TFDMemTable;
     RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter;
     FDMemTableAppServiceTypesid: TWideStringField;
     FDMemTableAppServiceTypestitle: TWideStringField;
     BindSourceDB3: TBindSourceDB;
-    LinkListControlToField2: TLinkListControlToField;
     ListBox1: TListBox;
     ListBoxItem1: TListBoxItem;
     ListBoxItem2: TListBoxItem;
     ListBoxItem3: TListBoxItem;
     FloatAnimationListBoxPosition: TFloatAnimation;
+    ListBoxItem4: TListBoxItem;
+    EditAreaTo: TEdit;
+    RectangleParams: TRectangle;
+    RectangleHeaderOfPTSP: TRectangle;
+    Label4: TLabel;
+    Button4: TButton;
+    FloatAnimation1: TFloatAnimation;
+    RadioButtonArea: TRadioButton;
     procedure ButtonBackClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ListView1PullRefresh(Sender: TObject);
@@ -111,23 +123,26 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure RESTRequestListsAfterExecute(Sender: TCustomRESTRequest);
-    procedure Button4Click(Sender: TObject);
-    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer;
-      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
+    procedure ButtonFilteringSubmitClick(Sender: TObject);
+    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer; const LocalClickPos: TPointF;
+      const ItemObject: TListItemDrawable);
     procedure SpeedButtonCloseClick(Sender: TObject);
     procedure SpeedButtonSortClick(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButtonFilteringClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButtonApplyClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure ButtonSortingClick(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure FloatAnimation1Finish(Sender: TObject);
   private
     v_loadLocationTree: boolean;
     procedure reloadItems(sort_field, sort: String);
     procedure loadLocationTree;
+    procedure filter(p_params: TSearchParams);
     { Private declarations }
   public
     { Public declarations }
@@ -148,7 +163,7 @@ uses DataModule, AppDetails, Main;
 procedure TAppListForm.Button1Click(Sender: TObject);
 begin
   self.reloadItems('id', 'desc');
-  self.MultiView1.HideMaster;
+  self.MultiViewSort.HideMaster;
 end;
 
 procedure TAppListForm.Button2Click(Sender: TObject);
@@ -169,76 +184,83 @@ procedure TAppListForm.Button3Click(Sender: TObject);
 begin
   self.PreloaderRectangle.Visible := True;
   self.reloadItems('id', 'desc');
-  self.MultiView1.HideMaster;
+  self.MultiViewSort.HideMaster;
 end;
 
 procedure TAppListForm.Button4Click(Sender: TObject);
-var
-  aTask: ITask;
-  v_locations: String;
-  i, iChildren: Integer;
 begin
-  v_locations := '';
-  for i := 0 to TreeViewLocations.Count - 1 do
-  begin
+  FloatAnimation1.Start;
+end;
+
+procedure TAppListForm.ButtonFilteringSubmitClick(Sender: TObject);
+var
+//  aTask: ITask;
+//  v_locations: String;
+  // i, iChildren: Integer;
+  params: TSearchParams;
+begin
+  params.AreaFrom := EditAreaFrom.Text.ToInteger;
+  params.AreaTo := EditAreaTo.Text.ToInteger;
+  RectangleFilteringDetails.Visible := False;
+  self.filter(params);
+
+  { v_locations := '';
+    for i := 0 to TreeViewLocations.Count - 1 do
+    begin
 
     if TreeViewLocations.ItemByIndex(i).IsChecked = True then
     begin
-      v_locations := v_locations + ',' + TreeViewLocations.ItemByIndex(i)
-        .Tag.ToString;
-      if TreeViewLocations.ItemByIndex(i).ChildrenCount > 0 then
-      begin
-        for iChildren := 0 to TreeViewLocations.ItemByIndex(i)
-          .ChildrenCount - 1 do
-        begin
-          if TreeViewLocations.ItemByIndex(i).ItemByIndex(iChildren).IsChecked = True
-          then
-          begin
-            v_locations := v_locations + ',' + TreeViewLocations.ItemByIndex(i)
-              .ItemByIndex(iChildren).Tag.ToString;
-          end;
-        end;
-      end;
+    v_locations := v_locations + ',' + TreeViewLocations.ItemByIndex(i).Tag.ToString;
+    if TreeViewLocations.ItemByIndex(i).ChildrenCount > 0 then
+    begin
+    for iChildren := 0 to TreeViewLocations.ItemByIndex(i).ChildrenCount - 1 do
+    begin
+    if TreeViewLocations.ItemByIndex(i).ItemByIndex(iChildren).IsChecked = True then
+    begin
+    v_locations := v_locations + ',' + TreeViewLocations.ItemByIndex(i).ItemByIndex(iChildren).Tag.ToString;
     end;
-  end;
+    end;
+    end;
+    end;
+    end;
 
-  self.PreloaderRectangle.Visible := True;
-  self.RectangleFilteringDetails.Visible := False;
-  aTask := TTask.Create(
+    self.PreloaderRectangle.Visible := True;
+    self.RectangleFilteringDetails.Visible := False;
+    aTask := TTask.Create(
     procedure()
     begin
-      RESTRequestApps.Params.Clear;
-      if not DModule.sesskey.IsEmpty then
-      begin
-        with RESTRequestApps.Params.AddItem do
-        begin
-          name := 'sesskey';
-          Value := DModule.sesskey;
-        end;
-        with RESTRequestApps.Params.AddItem do
-        begin
-          name := 'user_id';
-          Value := DModule.id.ToString;
-        end;
-        with RESTRequestApps.Params.AddItem do
-        begin
-          name := 'locations';
-          Value := v_locations;
-        end;
-        with RESTRequestApps.Params.AddItem do
-        begin
-          name := 'app_service_type_id';
-          Value := FDMemTableAppServiceTypes.FieldByName('id').AsString;
-        end;
-        with RESTRequestApps.Params.AddItem do
-        begin
-          name := 'app_service_type_id';
-          Value := FDMemTableAppServiceTypes.FieldByName('id').AsString;
-        end;
-      end;
-      RESTRequestApps.Execute;
+    RESTRequestApps.Params.Clear;
+    if not DModule.sesskey.IsEmpty then
+    begin
+    with RESTRequestApps.Params.AddItem do
+    begin
+    name := 'sesskey';
+    Value := DModule.sesskey;
+    end;
+    with RESTRequestApps.Params.AddItem do
+    begin
+    name := 'user_id';
+    Value := DModule.id.ToString;
+    end;
+    with RESTRequestApps.Params.AddItem do
+    begin
+    name := 'locations';
+    Value := v_locations;
+    end;
+    with RESTRequestApps.Params.AddItem do
+    begin
+    name := 'app_service_type_id';
+    Value := FDMemTableAppServiceTypes.FieldByName('id').AsString;
+    end;
+    with RESTRequestApps.Params.AddItem do
+    begin
+    name := 'app_service_type_id';
+    Value := FDMemTableAppServiceTypes.FieldByName('id').AsString;
+    end;
+    end;
+    RESTRequestApps.Execute;
     end);
-  aTask.Start;
+    aTask.Start; }
 end;
 
 procedure TAppListForm.loadLocationTree;
@@ -264,12 +286,9 @@ begin
       end
       else
       begin
-        with TTreeViewItem.Create
-          (TreeViewLocations.ItemByIndex(FDMemTableLocations.FieldByName('pid')
-          .AsInteger)) do
+        with TTreeViewItem.Create(TreeViewLocations.ItemByIndex(FDMemTableLocations.FieldByName('pid').AsInteger)) do
         begin
-          Parent := TreeViewLocations.ItemByIndex
-            (FDMemTableLocations.FieldByName('pid').AsInteger);
+          Parent := TreeViewLocations.ItemByIndex(FDMemTableLocations.FieldByName('pid').AsInteger);
           Text := FDMemTableLocations.FieldByName('title').AsString;
           Tag := FDMemTableLocations.FieldByName('id').AsInteger;
         end;
@@ -287,13 +306,25 @@ begin
   self.Close;
 end;
 
+procedure TAppListForm.ButtonSortingClick(Sender: TObject);
+begin
+  if RectangleFilteringSortingButtons.Visible = True then
+    RectangleFilteringSortingButtons.Visible := False
+  else
+    RectangleFilteringSortingButtons.Visible := True;
+end;
+
+procedure TAppListForm.FloatAnimation1Finish(Sender: TObject);
+begin
+  RectangleParams.Visible := True;
+end;
+
 procedure TAppListForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := TCloseAction.caFree;
 end;
 
-procedure TAppListForm.FormKeyUp(Sender: TObject; var Key: Word;
-var KeyChar: Char; Shift: TShiftState);
+procedure TAppListForm.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
   if Key = 137 then
     self.Free;
@@ -322,30 +353,42 @@ begin
   aTask := TTask.Create(
     procedure()
     begin
-      RESTRequestApps.Params.Clear;
+      RESTRequestApps.params.Clear;
       if not DModule.sesskey.IsEmpty then
       begin
-        with RESTRequestApps.Params.AddItem do
-        begin
-          name := 'sesskey';
-          Value := DModule.sesskey;
-        end;
-        with RESTRequestApps.Params.AddItem do
-        begin
-          name := 'user_id';
-          Value := DModule.id.ToString;
-        end;
+        RESTRequestApps.AddParameter('sesskey', DModule.sesskey);
+        RESTRequestApps.AddParameter('user_id', DModule.id.ToString);
       end;
-      with RESTRequestApps.Params.AddItem do
+      RESTRequestApps.AddParameter('sort_field', sort_field);
+      RESTRequestApps.AddParameter('sort', sort);
+      RESTRequestApps.AddParameter('action', 'sort');
+      RESTRequestApps.Execute;
+    end);
+  aTask.Start;
+end;
+
+procedure TAppListForm.filter(p_params: TSearchParams);
+var
+  aTask: ITask;
+begin
+  PreloaderRectangle.Visible := True;
+  aTask := TTask.Create(
+    procedure()
+    begin
+      RESTRequestApps.params.Clear;
+      if not DModule.sesskey.IsEmpty then
       begin
-        name := 'sort_field';
-        Value := sort_field;
+        RESTRequestApps.AddParameter('sesskey', DModule.sesskey);
+        RESTRequestApps.AddParameter('user_id', DModule.id.ToString);
       end;
-      with RESTRequestApps.Params.AddItem do
-      begin
-        name := 'sort';
-        Value := sort;
-      end;
+      if p_params.AreaFrom > 0 then
+        RESTRequestApps.AddParameter('area_from', p_params.AreaFrom.ToString);
+      if p_params.AreaFrom > 0 then
+        RESTRequestApps.AddParameter('area_to', p_params.AreaTo.ToString);
+
+      RESTRequestApps.AddParameter('sort_field', 'id');
+      RESTRequestApps.AddParameter('sort', 'desc');
+      RESTRequestApps.AddParameter('paction', 'filter');
       RESTRequestApps.Execute;
     end);
   aTask.Start;
@@ -353,33 +396,30 @@ end;
 
 procedure TAppListForm.ListBoxItem1Click(Sender: TObject);
 begin
-  FloatAnimationListBoxPosition.StopValue := ListBox1.Width;
-  FloatAnimationListBoxPosition.Enabled := True;
-  TreeViewLocations.Visible := True;
+  { FloatAnimationListBoxPosition.StopValue := ListBox1.Width;
+    FloatAnimationListBoxPosition.Enabled := True;
+    RectanglePropTypesSearchParams.Visible := True; }
+  RectanglePropTypesSearchParams.Visible := True;
 end;
 
-procedure TAppListForm.ListView1ItemClickEx(const Sender: TObject;
-ItemIndex: Integer; const LocalClickPos: TPointF;
+procedure TAppListForm.ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer; const LocalClickPos: TPointF;
 const ItemObject: TListItemDrawable);
 var
   id: Integer;
 begin
   if (ItemObject is TListItemText) or (ItemObject is TListItemImage) then
   begin
-    if (ItemObject.Name = 'app_property_requisites_count') or
-      (ItemObject.Name = 'ArrowImage') then
+    if (ItemObject.name = 'app_property_requisites_count') or (ItemObject.name = 'ArrowImage') then
     begin
       if ListView1.Selected.Height = 90 then
       begin
         ListView1.Selected.Height := 170;
-        TListItem(ListView1.Selected).View.FindDrawable('details')
-          .Visible := True;
+        TListItem(ListView1.Selected).View.FindDrawable('details').Visible := True;
       end
       else
       begin
         ListView1.Selected.Height := 90;
-        TListItem(ListView1.Selected).View.FindDrawable('details')
-          .Visible := False;
+        TListItem(ListView1.Selected).View.FindDrawable('details').Visible := False;
       end;
     end
     else
@@ -396,7 +436,7 @@ end;
 procedure TAppListForm.ListView1PullRefresh(Sender: TObject);
 begin
   self.ListView1.PullRefreshWait := True;
-  self.reloadItems('', '');
+  self.reloadItems('id', 'desc');
 end;
 
 procedure TAppListForm.RESTRequestAppsAfterExecute(Sender: TCustomRESTRequest);
@@ -417,10 +457,10 @@ end;
 
 procedure TAppListForm.SpeedButton2Click(Sender: TObject);
 begin
-  RectangleFilteringDetails.Visible := True;
+  RectangleFilteringDetails.Visible := False;
 end;
 
-procedure TAppListForm.SpeedButton3Click(Sender: TObject);
+procedure TAppListForm.SpeedButtonFilteringClick(Sender: TObject);
 begin
   if self.v_loadLocationTree = False then
     self.loadLocationTree;
@@ -439,7 +479,7 @@ end;
 
 procedure TAppListForm.SpeedButtonSortClick(Sender: TObject);
 begin
-  self.MultiView1.ShowMaster;
+  self.MultiViewSort.ShowMaster;
 end;
 
 end.

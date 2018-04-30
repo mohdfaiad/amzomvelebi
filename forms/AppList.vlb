@@ -38,7 +38,7 @@ Visible=False
 Coordinates=910,622,218,344
 
 []
-Coordinates=1339,1446,46,36
+Coordinates=825,1,193,146
 Visible=True
 
 [BindingsList1]
@@ -59,9 +59,6 @@ Coordinates=799,992,214,168
 [Button3]
 Coordinates=1392,1318,59,58
 
-[MultiView1]
-Coordinates=1236,1446,77,36
-
 [ButtonSorting]
 Coordinates=339,1446,93,58
 
@@ -74,41 +71,9 @@ Coordinates=810,1318,53,58
 [AppDetailForm.BindSourceDB1]
 Coordinates=722,10,195,432
 
-[MainForm.FDMemTablePages]
-Visible=False
-Coordinates=1028,221,190,36
-
-[MainForm.FDMemTableInit]
-Visible=False
-Coordinates=1028,524,171,36
-
 [AppDetailForm.FDMemTableBids]
 Visible=False
 Coordinates=1332,284,206,36
-
-[MainForm.BindSourceDB1]
-Coordinates=203,992,176,278
-
-[MainForm.RESTResponseSignOut]
-Coordinates=1164,10,214,344
-
-[MainForm.RESTRequestSignOut]
-Coordinates=417,1318,204,102
-
-[MainForm.BindSourceDB2]
-Coordinates=10,992,167,300
-
-[MainForm.FDMemTableAuth]
-Coordinates=1404,10,180,344
-
-[MainForm.RESTRequestDeviceToken]
-Coordinates=159,1318,232,102
-
-[MainForm.RESTRequestVersioning]
-Coordinates=1453,992,219,124
-
-[MainForm.RESTResponseVersioning]
-Coordinates=169,622,228,344
 
 [RESTResponseLists]
 Coordinates=10,622,133,344
@@ -124,9 +89,6 @@ Coordinates=405,992,134,190
 
 [FMXLoadingIndicator1]
 Coordinates=1565,1446,144,36
-
-[Button4]
-Coordinates=10,1446,59,58
 
 [FDMemTableLocations]
 Coordinates=1430,380,147,36
@@ -227,9 +189,6 @@ Coordinates=1039,992,237,146
 [Line2]
 Coordinates=966,1446,46,36
 
-[Rectangle4]
-Coordinates=1267,1530,80,36
-
 [SpeedButton2]
 Coordinates=1191,1318,96,58
 
@@ -238,9 +197,6 @@ Coordinates=458,1446,121,58
 
 [Line3]
 Coordinates=872,1530,46,36
-
-[RectangleFiltering]
-Coordinates=1373,1530,119,36
 
 [SpeedButton1]
 Coordinates=217,1446,96,58
@@ -272,9 +228,6 @@ Coordinates=1053,1318,112,58
 [MainForm.BindSourceDB3]
 Coordinates=10,10,200,586
 
-[SpeedButton3]
-Coordinates=95,1446,96,58
-
 [MainForm.RESTResponseBidedApps]
 Coordinates=1154,622,229,344
 
@@ -292,13 +245,6 @@ Coordinates=889,1318,59,58
 
 [RadioButtonByDate]
 Coordinates=813,1446,127,36
-
-[Edit1]
-Coordinates=0,0,44,58
-
-[ComboBoxApp_property_types]
-Coordinates=825,1,193,146
-Visible=True
 
 [FDMemTableAppServiceTypesid]
 Coordinates=358,505,203,36
@@ -319,4 +265,28 @@ Coordinates=1050,40,178,124
 [TreeViewLocations]
 Coordinates=229,428,76,36
 Visible=True
+
+[SpeedButtonFiltering]
+Coordinates=95,1446,96,58
+
+[MultiViewSort]
+Coordinates=1236,1446,77,36
+
+[RectangleFilteringSortingButtons]
+Coordinates=1373,1530,119,36
+
+[MainForm.FDMemTablePages]
+Visible=False
+
+[MainForm.FDMemTableInit]
+Visible=False
+
+[EditAreaFrom]
+Coordinates=0,0,44,58
+
+[ButtonFilteringSubmit]
+Coordinates=10,1446,59,58
+
+[RectanglePropTypesSearchParams]
+Coordinates=1267,1530,80,36
 
