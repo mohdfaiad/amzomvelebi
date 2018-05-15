@@ -3,7 +3,7 @@ object AppListForm: TAppListForm
   Top = 0
   Caption = 'Form1'
   ClientHeight = 579
-  ClientWidth = 435
+  ClientWidth = 402
   Position = MainFormCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -14,7 +14,7 @@ object AppListForm: TAppListForm
   object RectangleHeader: TRectangle
     Align = Top
     Fill.Color = xFF198D60
-    Size.Width = 435.000000000000000000
+    Size.Width = 402.000000000000000000
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
@@ -33,7 +33,7 @@ object AppListForm: TAppListForm
     object Label1: TLabel
       Align = Client
       StyledSettings = [Family, Size, Style]
-      Size.Width = 339.000000000000000000
+      Size.Width = 306.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TextSettings.FontColor = claWhitesmoke
@@ -44,7 +44,7 @@ object AppListForm: TAppListForm
     object ButtonSorting: TButton
       Align = Right
       IconTintColor = claWhitesmoke
-      Position.X = 387.000000000000000000
+      Position.X = 354.000000000000000000
       Position.Y = 1.000000000000000000
       Size.Width = 48.000000000000000000
       Size.Height = 48.000000000000000000
@@ -58,7 +58,7 @@ object AppListForm: TAppListForm
   object RectangleMain: TRectangle
     Align = Client
     Fill.Kind = None
-    Size.Width = 435.000000000000000000
+    Size.Width = 402.000000000000000000
     Size.Height = 529.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
@@ -69,7 +69,7 @@ object AppListForm: TAppListForm
       FooterAppearanceClassName = 'TListHeaderObjects'
       Images = MainForm.ImageList1
       Align = Client
-      Size.Width = 435.000000000000000000
+      Size.Width = 402.000000000000000000
       Size.Height = 482.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
@@ -165,7 +165,7 @@ object AppListForm: TAppListForm
     object RectangleFilteringSortingButtons: TRectangle
       Align = Top
       Fill.Color = xFF198D60
-      Size.Width = 435.000000000000000000
+      Size.Width = 402.000000000000000000
       Size.Height = 47.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = xFF20B67C
@@ -175,7 +175,7 @@ object AppListForm: TAppListForm
         StyledSettings = [Family, Style]
         Images = MainForm.ImageList1
         ImageIndex = 54
-        Position.X = 259.000000000000000000
+        Position.X = 226.000000000000000000
         Size.Width = 176.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -445,15 +445,14 @@ object AppListForm: TAppListForm
       426082}
     Fill.Bitmap.WrapMode = Tile
     Fill.Kind = Bitmap
-    Size.Width = 435.000000000000000000
+    Size.Width = 402.000000000000000000
     Size.Height = 529.000000000000000000
     Size.PlatformDefault = False
-    Visible = False
     object RectangleFilteringDetailsContent: TRectangle
       Align = Center
       Anchors = [akLeft, akTop, akRight, akBottom]
       Fill.Color = claWhite
-      Size.Width = 404.000000000000000000
+      Size.Width = 371.000000000000000000
       Size.Height = 494.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = claDarkgray
@@ -462,7 +461,7 @@ object AppListForm: TAppListForm
         StyledSettings = [Family, Style]
         Margins.Top = 10.000000000000000000
         Position.Y = 10.000000000000000000
-        Size.Width = 404.000000000000000000
+        Size.Width = 371.000000000000000000
         Size.Height = 23.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 11.000000000000000000
@@ -475,7 +474,7 @@ object AppListForm: TAppListForm
         Align = Top
         LineType = Bottom
         Position.Y = 33.000000000000000000
-        Size.Width = 404.000000000000000000
+        Size.Width = 371.000000000000000000
         Size.Height = 15.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = xFF198D60
@@ -483,7 +482,7 @@ object AppListForm: TAppListForm
       object RectanglePropTypesSearchParams: TRectangle
         Align = Client
         Fill.Kind = None
-        Size.Width = 404.000000000000000000
+        Size.Width = 371.000000000000000000
         Size.Height = 382.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
@@ -494,27 +493,27 @@ object AppListForm: TAppListForm
           Margins.Top = 10.000000000000000000
           Margins.Right = 5.000000000000000000
           Margins.Bottom = 10.000000000000000000
-          Size.Width = 394.000000000000000000
+          Size.Width = 361.000000000000000000
           Size.Height = 329.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           Images = MainForm.ImageList1
           MultiSelect = True
           ShowCheckboxes = True
-          Viewport.Width = 394.000000000000000000
+          Viewport.Width = 361.000000000000000000
           Viewport.Height = 329.000000000000000000
         end
         object RectangleHeaderOfPTSP: TRectangle
           Align = Top
           Fill.Kind = None
-          Size.Width = 404.000000000000000000
+          Size.Width = 371.000000000000000000
           Size.Height = 33.000000000000000000
           Size.PlatformDefault = False
           Stroke.Color = xFF198D60
           object Label4: TLabel
             Align = Client
             StyledSettings = [Family, Style, FontColor]
-            Size.Width = 363.000000000000000000
+            Size.Width = 330.000000000000000000
             Size.Height = 33.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 11.000000000000000000
@@ -522,19 +521,19 @@ object AppListForm: TAppListForm
             Text = #4315#4317#4315#4321#4304#4334#4323#4320#4308#4305#4312#4321' '#4322#4312#4318#4308#4305#4312
             TabOrder = 0
           end
-          object Button4: TButton
+          object ButtonPropTypesSearchParamsClose: TButton
             Align = Left
             Size.Width = 41.000000000000000000
             Size.Height = 33.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
             Text = 'X'
-            OnClick = Button4Click
+            OnClick = ButtonPropTypesSearchParamsCloseClick
           end
         end
-        object FloatAnimation1: TFloatAnimation
+        object FloatAnimationListBoxPositionClose: TFloatAnimation
           Duration = 2.000000000000000000
-          OnFinish = FloatAnimation1Finish
+          Inverse = True
           PropertyName = 'Opacity'
           StartValue = 1.000000000000000000
           StartFromCurrent = True
@@ -556,7 +555,7 @@ object AppListForm: TAppListForm
         Anchors = [akTop, akRight]
         Images = MainForm.ImageList1
         ImageIndex = 57
-        Position.X = 360.000000000000000000
+        Position.X = 327.000000000000000000
         Size.Width = 42.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
@@ -573,7 +572,7 @@ object AppListForm: TAppListForm
         Margins.Bottom = 10.000000000000000000
         Position.X = 5.000000000000000000
         Position.Y = 440.000000000000000000
-        Size.Width = 394.000000000000000000
+        Size.Width = 361.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
@@ -585,7 +584,7 @@ object AppListForm: TAppListForm
       object RectangleParams: TRectangle
         Align = Client
         Fill.Color = claNull
-        Size.Width = 404.000000000000000000
+        Size.Width = 371.000000000000000000
         Size.Height = 382.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
@@ -597,7 +596,7 @@ object AppListForm: TAppListForm
           Margins.Bottom = 10.000000000000000000
           Position.X = 5.000000000000000000
           Position.Y = 10.000000000000000000
-          Size.Width = 394.000000000000000000
+          Size.Width = 361.000000000000000000
           Size.Height = 182.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -606,7 +605,7 @@ object AppListForm: TAppListForm
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 394.000000000000000000
+          Viewport.Width = 361.000000000000000000
           Viewport.Height = 182.000000000000000000
           object ListBoxItem1: TListBoxItem
             TextSettings.Font.Size = 15.000000000000000000
@@ -631,49 +630,46 @@ object AppListForm: TAppListForm
             StyledSettings = [Family, Style, FontColor, Other]
             Position.Y = 88.000000000000000000
             TabOrder = 2
-            Text = #4324#4304#4320#4311#4317#4305#4312' '#4307#4304#4316': '
+            Text = #4324#4304#4320#4311#4317#4305#4312' '#4307#4304#4316':'
             object EditAreaFrom: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Anchors = [akLeft, akTop, akRight]
+              Align = Left
               TabOrder = 0
               KeyboardType = NumberPad
               ReturnKeyType = Done
-              Position.X = 144.000000000000000000
-              Position.Y = 12.000000000000000000
-              Margins.Left = 5.000000000000000000
-              Margins.Top = 10.000000000000000000
-              Margins.Right = 5.000000000000000000
-              Margins.Bottom = 10.000000000000000000
-              Size.Width = 1416.000000000000000000
+              Position.X = 120.000000000000000000
+              Position.Y = 6.000000000000000000
+              Margins.Left = 120.000000000000000000
+              Size.Width = 40.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = '750'
               KillFocusByReturn = True
             end
-          end
-          object ListBoxItem4: TListBoxItem
-            TextSettings.Font.Size = 15.000000000000000000
-            StyledSettings = [Family, Style, FontColor, Other]
-            Position.Y = 132.000000000000000000
-            TabOrder = 3
-            Text = #4324#4304#4320#4311#4317#4305#4312' '#4315#4307#4308': '
             object EditAreaTo: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Anchors = [akLeft, akTop, akRight]
-              TabOrder = 0
+              Align = Left
+              TabOrder = 1
               KeyboardType = NumberPad
               ReturnKeyType = Done
-              Position.X = 145.000000000000000000
-              Position.Y = 12.000000000000000000
-              Margins.Left = 5.000000000000000000
-              Margins.Top = 10.000000000000000000
-              Margins.Right = 5.000000000000000000
-              Margins.Bottom = 10.000000000000000000
-              Size.Width = 1416.000000000000000000
+              Position.X = 200.000000000000000000
+              Position.Y = 6.000000000000000000
+              Size.Width = 40.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = '750'
               KillFocusByReturn = True
+            end
+            object Label5: TLabel
+              Align = Left
+              StyledSettings = [Family, Style, FontColor]
+              Position.X = 160.000000000000000000
+              Size.Width = 40.000000000000000000
+              Size.Height = 44.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 15.000000000000000000
+              Text = #4315#4307#4308':'
+              TabOrder = 2
             end
           end
           object FloatAnimationListBoxPosition: TFloatAnimation
@@ -1060,8 +1056,8 @@ object AppListForm: TAppListForm
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 360
-    Top = 328
+    Left = 288
+    Top = 360
     object FDMemTableAppServiceTypesid: TWideStringField
       FieldName = 'id'
       Size = 255
@@ -1077,8 +1073,8 @@ object AppListForm: TAppListForm
     FieldDefs = <>
     ResponseJSON = RESTResponseLists
     RootElement = 'app_service_types'
-    Left = 360
-    Top = 280
+    Left = 288
+    Top = 312
   end
   object BindSourceDB3: TBindSourceDB
     DataSet = FDMemTableAppServiceTypes

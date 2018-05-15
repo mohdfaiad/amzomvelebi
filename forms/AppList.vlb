@@ -290,3 +290,6 @@ Coordinates=10,1446,59,58
 [RectanglePropTypesSearchParams]
 Coordinates=1267,1530,80,36
 
+[AppDetailForm.FDMemTableAmzomveli]
+Visible=False
+

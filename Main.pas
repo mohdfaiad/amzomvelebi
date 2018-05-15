@@ -330,6 +330,7 @@ begin
     MyNotification.Number := 18;
     MyNotification.HasAction := True;
     MyNotification.AlertAction := 'Launch';
+    NotificationCenter1.ApplicationIconBadgeNumber:=15;
     NotificationCenter1.PresentNotification(MyNotification);
   finally
     MyNotification.DisposeOf;

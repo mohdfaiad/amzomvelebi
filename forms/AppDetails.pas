@@ -261,7 +261,7 @@ end;
 
 procedure TAppDetailForm.TabControl1Change(Sender: TObject);
 begin
-  if FDMemTableApp.FieldByName('canbid').AsInteger = 1 then
+  if FDMemTableApp.FieldByName('canbid').AsString = '1' then
     ButtonOffer.Visible := True
   else
     ButtonOffer.Visible := false;
