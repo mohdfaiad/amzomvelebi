@@ -113,3 +113,6 @@ Visible=False
 [AppDetailForm.FDMemTableapp_property_requisites]
 Visible=False
 
+[AppDetailForm.FDMemTableAmzomveli]
+Visible=False
+

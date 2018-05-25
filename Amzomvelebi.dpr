@@ -8,7 +8,6 @@ uses
   UserArea in 'forms\UserArea.pas' {UserAreaForm},
   HelperUnit in 'HelperUnit.pas',
   AppDetails in 'forms\AppDetails.pas' {AppDetailForm},
-  MyAppDetails in 'forms\MyAppDetails.pas' {MyAppDetailsForm},
   BidsByApp in 'forms\BidsByApp.pas' {BidsByAppForm},
   AppList in 'forms\AppList.pas' {AppListForm},
   DataModule in 'DataModule.pas' {DModule: TDataModule},

@@ -116,6 +116,12 @@ type
     FloatAnimationListBoxPositionClose: TFloatAnimation;
     RadioButtonArea: TRadioButton;
     Label5: TLabel;
+    RectangleServiceTypesSearchParams: TRectangle;
+    TreeViewServices: TTreeView;
+    Rectangle4: TRectangle;
+    Label6: TLabel;
+    ButtonServTypesSearchParamsClose: TButton;
+    FloatAnimation1: TFloatAnimation;
     procedure ButtonBackClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ListView1PullRefresh(Sender: TObject);
@@ -124,7 +130,8 @@ type
     procedure Button3Click(Sender: TObject);
     procedure RESTRequestListsAfterExecute(Sender: TCustomRESTRequest);
     procedure ButtonFilteringSubmitClick(Sender: TObject);
-    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer; const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
+    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer; const LocalClickPos: TPointF;
+      const ItemObject: TListItemDrawable);
     procedure SpeedButtonCloseClick(Sender: TObject);
     procedure SpeedButtonSortClick(Sender: TObject);
     procedure SpeedButtonFilteringClick(Sender: TObject);
@@ -136,11 +143,15 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
     procedure ButtonSortingClick(Sender: TObject);
     procedure ButtonPropTypesSearchParamsCloseClick(Sender: TObject);
+    procedure ListBoxItem2Click(Sender: TObject);
+    procedure ButtonServTypesSearchParamsCloseClick(Sender: TObject);
   private
     v_loadLocationTree: boolean;
+    v_loadServiceTree: boolean;
     procedure reloadItems(sort_field, sort: String);
     procedure loadLocationTree;
     procedure filter(p_params: TSearchParams);
+    procedure loadServiceTree;
     { Private declarations }
   public
     { Public declarations }
@@ -188,7 +199,6 @@ end;
 procedure TAppListForm.ButtonPropTypesSearchParamsCloseClick(Sender: TObject);
 begin
   RectanglePropTypesSearchParams.Visible := False;
-  RectangleParams.Visible := True;
 end;
 
 procedure TAppListForm.ButtonFilteringSubmitClick(Sender: TObject);
@@ -286,9 +296,9 @@ begin
       end
       else
       begin
-        with TTreeViewItem.Create(TreeViewLocations.Items[FDMemTableLocations.FieldByName('pid').AsInteger-1]) do
+        with TTreeViewItem.Create(TreeViewLocations.Items[FDMemTableLocations.FieldByName('pid').AsInteger - 1]) do
         begin
-          Parent := TreeViewLocations.Items[FDMemTableLocations.FieldByName('pid').AsInteger-1];
+          Parent := TreeViewLocations.Items[FDMemTableLocations.FieldByName('pid').AsInteger - 1];
           Text := FDMemTableLocations.FieldByName('title').AsString;
           Tag := FDMemTableLocations.FieldByName('id').AsInteger;
         end;
@@ -296,14 +306,40 @@ begin
       FDMemTableLocations.Next;
     end;
     TreeViewLocations.EndUpdate;
-    //TreeViewLocations.ExpandAll;
+    // TreeViewLocations.ExpandAll;
   end;
+end;
 
+procedure TAppListForm.loadServiceTree;
+begin
+  self.v_loadServiceTree := True;
+  FDMemTableAppServiceTypes.First;
+  if TreeViewServices.Count = 0 then
+  begin
+    TreeViewServices.BeginUpdate;
+    while not FDMemTableAppServiceTypes.Eof do
+    begin
+      with TTreeViewItem.Create(TreeViewServices) do
+      begin
+        Parent := TreeViewServices;
+        Text := FDMemTableAppServiceTypes.FieldByName('title').AsString;
+        Tag := FDMemTableAppServiceTypes.FieldByName('id').AsInteger;
+        Index := FDMemTableAppServiceTypes.FieldByName('id').AsInteger;
+      end;
+      FDMemTableAppServiceTypes.Next;
+    end;
+    TreeViewServices.EndUpdate;
+  end;
 end;
 
 procedure TAppListForm.ButtonBackClick(Sender: TObject);
 begin
   self.Close;
+end;
+
+procedure TAppListForm.ButtonServTypesSearchParamsCloseClick(Sender: TObject);
+begin
+  RectangleServiceTypesSearchParams.Visible := False;
 end;
 
 procedure TAppListForm.ButtonSortingClick(Sender: TObject);
@@ -330,6 +366,7 @@ var
   aTask: ITask;
 begin
   self.v_loadLocationTree := False;
+  self.v_loadServiceTree := False;
   self.Show;
   PreloaderRectangle.Visible := True;
   aTask := TTask.Create(
@@ -391,12 +428,14 @@ end;
 
 procedure TAppListForm.ListBoxItem1Click(Sender: TObject);
 begin
-  { FloatAnimationListBoxPosition.StopValue := ListBox1.Width;
-    FloatAnimationListBoxPosition.Enabled := True;
-    RectanglePropTypesSearchParams.Visible := True; }
-  RectanglePropTypesSearchParams.Visible := True;
-  RectangleParams.Visible := False;
+  RectangleServiceTypesSearchParams.Visible := True;
+  if self.v_loadServiceTree = False then
+    self.loadServiceTree;
+end;
 
+procedure TAppListForm.ListBoxItem2Click(Sender: TObject);
+begin
+  RectanglePropTypesSearchParams.Visible := True;
   if self.v_loadLocationTree = False then
     self.loadLocationTree;
 end;

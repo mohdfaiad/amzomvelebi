@@ -34,7 +34,8 @@ uses
   // Androidapi.JNI.PlayServices,
   Androidapi.JNI.Net,
   Androidapi.JNI.Telephony,
-  Androidapi.JNI.Provider
+  Androidapi.JNI.Provider,
+  Androidapi.JNI.Util
 {$ENDIF ANDROID}
 {$IFDEF IOS}
     , FMX.PushNotification.IOS
@@ -366,22 +367,8 @@ begin
 end;
 
 procedure TMainForm.Rectangle1Click(Sender: TObject);
-var
-  MyNotification: TNotification;
 begin
-  // Create an instance of TNotification
-  MyNotification := NotificationCenter1.CreateNotification;
-  try
-    // --- your code goes here ---
-    // Set the icon or notification number
-    MyNotification.Number := 18;
-    // Set the alert message
-    MyNotification.AlertBody := 'Delphi for your mobile device is here!';
-    // Note: You must send the notification to the notification center for the Icon Badge Number to be displayed.
-    NotificationCenter1.PresentNotification(MyNotification);
-  finally
-    MyNotification.DisposeOf;
-  end;
+  TabControl1.ActiveTab := TabItemAmzomvelebi;
 end;
 
 procedure TMainForm.PushClientChangeHandler(Sender: TObject; AChange: TPushService.TChanges);
@@ -701,6 +688,7 @@ begin
   Result := identifier;
 end;
 {$ENDIF ANDROID}
+
 
 procedure TMainForm.ListView1ItemClick(const Sender: TObject; const AItem: TListViewItem);
 var

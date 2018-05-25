@@ -4,6 +4,7 @@ object UserLocationsForm: TUserLocationsForm
   Caption = 'Form2'
   ClientHeight = 563
   ClientWidth = 526
+  SystemStatusBar.Visibility = Invisible
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]

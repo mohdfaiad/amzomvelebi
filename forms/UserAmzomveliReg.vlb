@@ -65,3 +65,9 @@ Coordinates=431,763,61,51
 [MainForm.FDMemTableBidedApps]
 Visible=False
 
+[UserLocationsForm.FDMemTableL]
+Visible=False
+
+[UserLocationsForm.FDMemTableLocationDetails]
+Visible=False
+
