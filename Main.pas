@@ -285,7 +285,7 @@ begin
   self.RectangleNonAuth.Visible := False;
   LabelFullName.Text := DModule.full_name;
   ButtonUserNotifications.Text := '(' + DModule.notifications.ToString + ') შეტყობინებები';
-  //SpeedButtonNotifications.Text := DModule.notifications.ToString;
+  // SpeedButtonNotifications.Text := DModule.notifications.ToString;
   SpeedButtonNotifications.Visible := True;
   self.RectangleProfile.Visible := True;
   FPushClient.Active := True;
@@ -306,7 +306,7 @@ begin
   // 'AAAA-dL2vgs:APA91bHselPykPJp2XxIRxe4mmUhR5G_onOl0a1bPLS_zGaertyAxYuKMXEAPFHnHiwr7GmZEyO7fXux8jka_9sYo1DtCENhk8X7wvPA8CxCl9uJlQuBHukNtjgtMJidSi_xoBeYJZ1W';
   // FPushClient.BundleID := cFCMBundleID;
 
-  FPushClient.UseSandbox := True; // Change this to False for production use!
+  FPushClient.UseSandbox := False; // Change this to False for production use!
   FPushClient.OnChange := PushClientChangeHandler;
   FPushClient.OnReceiveNotification := PushClientReceiveNotificationHandler;
 
@@ -328,10 +328,10 @@ begin
     MyNotification.Title := ANotification.DataObject.Values['title'].ToString.Replace('"', '');
     MyNotification.AlertBody := ANotification.DataObject.Values['message'].ToString.Replace('"', '');
     MyNotification.EnableSound := True;
-    MyNotification.Number := 18;
+    MyNotification.Number := 1;
     MyNotification.HasAction := True;
     MyNotification.AlertAction := 'Launch';
-    NotificationCenter1.ApplicationIconBadgeNumber:=15;
+    NotificationCenter1.ApplicationIconBadgeNumber := 1;
     NotificationCenter1.PresentNotification(MyNotification);
   finally
     MyNotification.DisposeOf;
@@ -633,7 +633,7 @@ begin
     FPushClient.GCMAppID := jsonObject.GetValue('Amzomvelebi_GCMAppID').Value;
     FPushClient.ServerKey := jsonObject.GetValue('Amzomvelebi_GCMServerKey').Value;
 
-    FPushClient.UseSandbox := True; // Change this to False for production use!
+    FPushClient.UseSandbox := False; // Change this to False for production use!
     FPushClient.OnChange := PushClientChangeHandler;
     FPushClient.OnReceiveNotification := PushClientReceiveNotificationHandler;
     self.onReceiveNotificationActionForInit;
@@ -675,7 +675,7 @@ var
   tm: JTelephonyManager;
   identifier: String;
 begin
-  obj := TAndroidHelper.Context.getSystemService(TJContext.JavaClass.TELEPHONY_SERVICE);
+  obj := TANdroidHelper.Context.getSystemService(TJContext.JavaClass.TELEPHONY_SERVICE);
   if obj <> nil then
   begin
     tm := TJTelephonyManager.Wrap((obj as ILocalObject).GetObjectID);
@@ -683,12 +683,11 @@ begin
       identifier := JStringToString(tm.getDeviceID);
   end;
   if identifier = '' then
-    identifier := JStringToString(TJSettings_Secure.JavaClass.getString(TAndroidHelper.Activity.getContentResolver,
+    identifier := JStringToString(TJSettings_Secure.JavaClass.getString(TANdroidHelper.Activity.getContentResolver,
       TJSettings_Secure.JavaClass.ANDROID_ID));
   Result := identifier;
 end;
 {$ENDIF ANDROID}
-
 
 procedure TMainForm.ListView1ItemClick(const Sender: TObject; const AItem: TListViewItem);
 var

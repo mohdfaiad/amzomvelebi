@@ -282,23 +282,25 @@ begin
 end;
 
 function TauthForm.checkEmailPass(EmailAddress, password, op: string): boolean;
-var
-  HelperUnit: THelperUnit;
+// var
+// HelperUnit: THelperUnit;
 begin
-  Result := True;
-  HelperUnit := THelperUnit.Create;
-  if HelperUnit.ValidEmail(EmailAddress) = False then
+  // HelperUnit := THelperUnit.Create;
+  if self.EditAuthEmail.Text.Length < 6 then
   begin
     FloatAnimationEmailAuth.Enabled := True;
-    Result := False;
     Timer1.Enabled := True;
     self.RectanglePreloader.Visible := False;
-  end;
-  if self.EditAuthPassword.Text.Length < 6 then
-  begin
-    FloatAnimationPassAuth.Enabled := True;
     Result := False;
   end;
+  if self.EditAuthPassword.Text.Length < 3 then
+  begin
+    FloatAnimationPassAuth.Enabled := True;
+    self.RectanglePreloader.Visible := False;
+    Result := False;
+  end;
+  if (self.EditAuthEmail.Text.Length > 6) and (self.EditAuthPassword.Text.Length >= 3) then
+    Result := True;
 end;
 
 procedure TauthForm.ButtonPasswordRecoveryClick(Sender: TObject);
@@ -351,8 +353,16 @@ begin
 end;
 
 procedure TauthForm.initForm;
+var
+  HelperUnit: THelperUnit;
 begin
   self.Show;
+  HelperUnit := THelperUnit.Create;
+  try
+    HelperUnit.AndroidCheckAndRequestStoragePermission;
+  finally
+    HelperUnit.Free;
+  end;
 end;
 
 procedure TauthForm.Button2Click(Sender: TObject);
