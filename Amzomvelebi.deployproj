@@ -84,7 +84,7 @@
             <Overwrite>True</Overwrite>
             <Required>True</Required>
         </DeployFile>
-        <DeployFile Include="logo\470x320.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\470x320.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-normal\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage470</DeployClass>
@@ -120,7 +120,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="logo\36x36.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\36x36.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-ldpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon36</DeployClass>
@@ -147,7 +147,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="logo\48x48.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\48x48.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon48</DeployClass>
@@ -219,6 +219,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="..\Design\bpg_nino_mtavruli_bold_3.ttf" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Amzomvelebi\assets\fonts\</RemoteDir>
+            <RemoteName>bpg_nino_mtavruli_bold_3.ttf</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="Android\Release\AndroidManifest.xml" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
@@ -237,7 +246,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="logo\960x720.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\960x720.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-xlarge\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage960</DeployClass>
@@ -273,7 +282,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="logo\72x72.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\72x72.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon72</DeployClass>
@@ -318,7 +327,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="logo\426x320.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\426x320.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-small\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage426</DeployClass>
@@ -337,7 +346,7 @@
             <Overwrite>True</Overwrite>
             <Required>True</Required>
         </DeployFile>
-        <DeployFile Include="logo\96x96.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\96x96.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon96</DeployClass>
@@ -346,7 +355,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="logo\144x144.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\144x144.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-xxhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon144</DeployClass>
@@ -355,7 +364,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="logo\640x480.png" Condition="'$(Config)'=='Release'">
+        <DeployFile Include="..\logo\logos\android\640x480.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Amzomvelebi\res\drawable-large\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage640</DeployClass>

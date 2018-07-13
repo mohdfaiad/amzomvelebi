@@ -1,9 +1,6 @@
 ﻿[PhoneEdit]
 Coordinates=1022,763,65,51
 
-[RectangleMain]
-Coordinates=10,953,87,33
-
 [PasswordEdit]
 Coordinates=125,876,82,51
 
@@ -29,7 +26,7 @@ Coordinates=10,876,89,51
 Coordinates=469,1,136,33
 
 []
-Coordinates=930,763,66,51
+Coordinates=10,953,87,33
 Visible=True
 ExplicitSubNodes=ItemIndex
 

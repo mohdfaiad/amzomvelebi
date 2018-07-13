@@ -13,12 +13,6 @@ Coordinates=1802,276,108,33
 [FDMemTableAuth]
 Coordinates=167,663,101,285
 
-[Rectangle3]
-Coordinates=1342,1164,69,33
-
-[RectangleApps]
-Coordinates=1679,1164,89,33
-
 [ButtonSignOut]
 Coordinates=82,1087,87,51
 
@@ -40,10 +34,6 @@ Coordinates=1011,974,87,51
 [FDMemTableAuthid]
 Coordinates=1030,683,111,33
 
-[LabelTotalAppsCount]
-Coordinates=10,298,121,51
-Visible=True
-
 [User2ListFrame1.FDMemTableAmzomvelebimodify_date]
 Coordinates=1030,738,291,33
 
@@ -55,9 +45,6 @@ Coordinates=1409,1,261,33
 
 [FDMemTablePagesid]
 Coordinates=1030,793,117,33
-
-[Rectangle5]
-Coordinates=1584,1164,69,33
 
 [User2ListFrame1.FDMemTableAmzomvelebiuser_type_id]
 Coordinates=1409,56,294,33
@@ -82,13 +69,6 @@ Coordinates=105,1223,125,33
 
 [User2ListFrame1.FDMemTableAmzomvelebiphone]
 Coordinates=1409,166,262,33
-
-[LabelWeekApps]
-Coordinates=460,298,93,51
-Visible=True
-
-[LabelApps]
-Coordinates=323,974,66,51
 
 [FDMemTablePagesgroup_id]
 Coordinates=1030,1123,152,33
@@ -135,9 +115,6 @@ Coordinates=1409,331,278,33
 [ChangeTabActionLeft]
 Coordinates=186,1245,121,33
 
-[TabItem4]
-Coordinates=95,1164,59,33
-
 [PreloaderRectangle]
 Coordinates=1414,1087,111,33
 
@@ -164,9 +141,6 @@ Coordinates=1437,1164,121,33
 
 [FDMemTablePagesmeta_keywords]
 Coordinates=1409,771,186,33
-
-[Rectangle1]
-Coordinates=599,1164,69,33
 
 [RESTResponseDataSetAdapterAuth]
 Coordinates=1409,826,191,33
@@ -198,13 +172,6 @@ Coordinates=1409,1204,120,33
 [ActionUserNotifications]
 Coordinates=1409,1259,131,33
 
-[Label1]
-Coordinates=483,187,46,51
-Visible=True
-
-[Text1]
-Coordinates=844,753,41,51
-
 [NotificationCenter1]
 Coordinates=1409,1314,109,33
 
@@ -231,9 +198,6 @@ Coordinates=1199,10,212,303
 
 [ButtonUserNotifications]
 Coordinates=1124,974,132,51
-
-[Circle2]
-Coordinates=525,1164,48,33
 
 [User2ListFrame1.FDMemTableAmzomvelebicreate_date]
 Coordinates=1802,1,288,33
@@ -322,12 +286,6 @@ Coordinates=1396,974,70,51
 [User2ListFrame1.LabelAppName]
 Coordinates=1492,974,175,51
 
-[Rectangle4]
-Coordinates=917,1164,69,33
-
-[Circle1]
-Coordinates=326,1164,48,33
-
 [FDMemTableAuthisSetLocations]
 Coordinates=1802,1156,175,33
 
@@ -336,9 +294,6 @@ Coordinates=1282,974,88,51
 
 [RESTResponseVersioning]
 Coordinates=294,663,144,285
-
-[Label2]
-Coordinates=10,1087,46,51
 
 [User2ListFrame1.ListView2]
 Coordinates=971,73,148,177
@@ -352,9 +307,6 @@ Coordinates=1802,1266,162,33
 [User2ListFrame1.RectanglePreloader]
 Coordinates=694,1164,197,33
 
-[FloatAnimation1]
-Coordinates=1802,1376,95,33
-
 [ActionRegGanmcxadebeli]
 Coordinates=1494,1393,141,33
 
@@ -367,23 +319,14 @@ Coordinates=767,974,139,51
 [FDMemTableAuthuser_status_id]
 Coordinates=1593,1333,174,33
 
-[TabItem5]
-Coordinates=10,1164,59,33
-
 [User2ListFrame1.RESTRequestAmzomvelebi]
 Coordinates=1574,663,235,87
 
 [RESTResponseSignOut]
 Coordinates=10,663,131,285
 
-[Rectangle9]
-Coordinates=10,1223,69,33
-
 [ActionSignOut]
 Coordinates=750,1393,86,33
-
-[TabControl2]
-Coordinates=714,1223,74,33
 
 [RESTResponseDataSetAdapterInit]
 Coordinates=2181,56,183,33
@@ -541,7 +484,8 @@ Visible=False
 Visible=False
 
 []
-Coordinates=643,1245,144,36
+Coordinates=483,187,46,51
+Visible=True
 
 [SpeedButtonNotifications]
 Coordinates=436,409,140,51

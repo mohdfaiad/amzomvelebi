@@ -1,30 +1,36 @@
-{*******************************************************}
-{                                                       }
-{            CodeGear Delphi Runtime Library            }
-{                                                       }
-{     Implementation Notification Center for Android    }
-{                                                       }
-{ Copyright(c) 2013-2017 Embarcadero Technologies, Inc. }
-{              All rights reserved                      }
-{                                                       }
-{*******************************************************}
+{ ******************************************************* }
+{ }
+{ CodeGear Delphi Runtime Library }
+{ }
+{ Implementation Notification Center for Android }
+{ }
+{ Copyright(c) 2016 Embarcadero Technologies, Inc. }
+{ All rights reserved }
+{ }
+{ ******************************************************* }
 
 unit System.Android.Notification;
 
 interface
 
 {$SCOPEDENUMS ON}
+{$IFDEF ANDROID}
 
 uses
   System.Notification;
 
-  /// <summary>Common ancestor used to instantiate platform implementation</summary>
-  type TPlatformNotificationCenter = class(TBaseNotificationCenter)
+/// <summary>Common ancestor used to instantiate platform implementation</summary>
+type
+  TPlatformNotificationCenter = class(TBaseNotificationCenter)
   protected
     class function GetInstance: TBaseNotificationCenter; override;
   end;
 
+{$ENDIF}
+
 implementation
+
+{$IFDEF ANDROID}
 
 uses
   System.SysUtils, System.DateUtils, System.Classes, System.Messaging, System.TimeSpan,
@@ -39,7 +45,6 @@ uses
   Androidapi.Helpers;
 
 type
-
   { TNotificationCenterAndroid }
 
   TAndroidPreferenceAdapter = class
@@ -68,7 +73,8 @@ type
     FExternalStore: TAndroidPreferenceAdapter;
     FNotificationManager: JNotificationManager;
     function CreateNativeNotification(const ANotification: TNotification): JNotification;
-    procedure SaveNotificationIntoIntent(var AIntent: JIntent; const ANotification: TNotification; const AID: Integer = -1);
+    procedure SaveNotificationIntoIntent(var AIntent: JIntent; const ANotification: TNotification;
+      const AID: Integer = -1);
     function LoadNotificationFromIntent(const AIntent: JIntent): TNotification;
     procedure CancelScheduledNotification(const AName: string);
     { Global FMX event }
@@ -123,8 +129,7 @@ begin
 end;
 
 function TNotificationCenterAndroid.CreateNativeNotification(const ANotification: TNotification): JNotification;
-  var
-  BigTextStyle: JNotificationCompat_BigTextStyle;
+
   function GetDefaultNotificationSound: Jnet_Uri;
   begin
     Result := TJRingtoneManager.JavaClass.getDefaultUri(TJRingtoneManager.JavaClass.TYPE_NOTIFICATION);
@@ -157,21 +162,28 @@ function TNotificationCenterAndroid.CreateNativeNotification(const ANotification
   var
     Intent: JIntent;
   begin
-    Intent := TAndroidHelper.Context.getPackageManager().getLaunchIntentForPackage(TAndroidHelper.Context.getPackageName());
+    Intent := TAndroidHelper.Context.getPackageManager().getLaunchIntentForPackage
+      (TAndroidHelper.Context.getPackageName());
     Intent.setFlags(TJIntent.JavaClass.FLAG_ACTIVITY_SINGLE_TOP or TJIntent.JavaClass.FLAG_ACTIVITY_CLEAR_TOP);
     SaveNotificationIntoIntent(Intent, ANotification);
-    Result := TJPendingIntent.JavaClass.getActivity(TAndroidHelper.Context, TGeneratorUniqueID.GenerateID, Intent, TJPendingIntent.JavaClass.FLAG_UPDATE_CURRENT);
+    Result := TJPendingIntent.JavaClass.getActivity(TAndroidHelper.Context, TGeneratorUniqueID.GenerateID, Intent,
+      TJPendingIntent.JavaClass.FLAG_UPDATE_CURRENT);
   end;
 
 var
   NotificationBuilder: JNotificationCompat_Builder;
+  BigTextStyle: JNotificationCompat_BigTextStyle; // ZuBy
 begin
   NotificationBuilder := TJNotificationCompat_Builder.JavaClass.init(TAndroidHelper.Context);
   NotificationBuilder := NotificationBuilder.setDefaults(TJNotification.JavaClass.DEFAULT_LIGHTS);
   NotificationBuilder := NotificationBuilder.setSmallIcon(GetDefaultIconID);
+
+  // ZuBy ***
   BigTextStyle := TJNotificationCompat_BigTextStyle.JavaClass.init();
   BigTextStyle.bigText(GetContentText);
   NotificationBuilder := NotificationBuilder.setStyle(BigTextStyle);
+  // *** ZuBy
+
   NotificationBuilder := NotificationBuilder.setContentTitle(GetContentTitle);
   NotificationBuilder := NotificationBuilder.setContentText(GetContentText);
   NotificationBuilder := NotificationBuilder.setTicker(GetContentText);
@@ -190,8 +202,8 @@ begin
   Result := NotificationBuilder.Build;
 end;
 
-procedure TNotificationCenterAndroid.SaveNotificationIntoIntent(var AIntent: JIntent; const ANotification: TNotification;
-  const AID: Integer);
+procedure TNotificationCenterAndroid.SaveNotificationIntoIntent(var AIntent: JIntent;
+  const ANotification: TNotification; const AID: Integer);
 var
   LaunchIntent: JIntent;
 begin
@@ -206,12 +218,14 @@ begin
   AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_ALERT_ACTION, StringToJString(ANotification.AlertAction));
   AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_NUMBER, ANotification.Number);
   AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_FIRE_DATE, ANotification.FireDate);
-  AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_FIRE_GMT_DATE, DateTimeLocalToUnixMSecGMT(ANotification.FireDate));
+  AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_FIRE_GMT_DATE,
+    DateTimeLocalToUnixMSecGMT(ANotification.FireDate));
   AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_REPEAT_INTERVAL, Integer(ANotification.RepeatInterval));
   AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_ENABLE_SOUND, ANotification.EnableSound);
   AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_SOUND_NAME, StringToJString(ANotification.SoundName));
   AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_HAS_ACTION, ANotification.HasAction);
-  LaunchIntent := TAndroidHelper.Context.getPackageManager().getLaunchIntentForPackage(TAndroidHelper.Context.getPackageName());
+  LaunchIntent := TAndroidHelper.Context.getPackageManager().getLaunchIntentForPackage
+    (TAndroidHelper.Context.getPackageName());
   AIntent.putExtra(TJNotificationInfo.JavaClass.EXTRA_ACTIVITY_CLASS_NAME, LaunchIntent.getComponent().getClassName());
 end;
 
@@ -224,7 +238,8 @@ begin
   Result.AlertAction := JStringToString(AIntent.getStringExtra(TJNotificationInfo.JavaClass.EXTRA_ALERT_ACTION));
   Result.Number := AIntent.getIntExtra(TJNotificationInfo.JavaClass.EXTRA_NUMBER, 0);
   Result.FireDate := AIntent.getDoubleExtra(TJNotificationInfo.JavaClass.EXTRA_FIRE_DATE, Now);
-  Result.RepeatInterval := TRepeatInterval(AIntent.getIntExtra(TJNotificationInfo.JavaClass.EXTRA_REPEAT_INTERVAL, Integer(TRepeatInterval.None)));
+  Result.RepeatInterval := TRepeatInterval(AIntent.getIntExtra(TJNotificationInfo.JavaClass.EXTRA_REPEAT_INTERVAL,
+    Integer(TRepeatInterval.None)));
   Result.EnableSound := AIntent.getBooleanExtra(TJNotificationInfo.JavaClass.EXTRA_ENABLE_SOUND, True);
   Result.SoundName := JStringToString(AIntent.getStringExtra(TJNotificationInfo.JavaClass.EXTRA_SOUND_NAME));
   Result.HasAction := AIntent.getBooleanExtra(TJNotificationInfo.JavaClass.EXTRA_HAS_ACTION, True);
@@ -249,14 +264,14 @@ var
 begin
   if System.DelphiActivity <> nil then // This code will be executed if we have an activity
   begin
-    InputIntent :=  TAndroidHelper.Activity.getIntent;
+    InputIntent := TAndroidHelper.Activity.getIntent;
     if IsIntentWithNotification(InputIntent) then
     begin
       Notification := LoadNotificationFromIntent(InputIntent);
       try
         TMessageManager.DefaultManager.SendMessage(Self, TMessage<TNotification>.Create(Notification));
       finally
-         Notification.DisposeOf;
+        Notification.DisposeOf;
       end;
     end;
   end;
@@ -283,7 +298,7 @@ begin
       try
         TMessageManager.DefaultManager.SendMessage(Self, TMessage<TNotification>.Create(Notification));
       finally
-         Notification.DisposeOf;
+        Notification.DisposeOf;
       end;
     end;
   end;
@@ -345,8 +360,8 @@ begin
   PendingIntent := CreateNotificationAlarmIntent(ID);
   FExternalStore.SaveNotification(ANotification, ID);
 
-  TAndroidHelper.AlarmManager.&set(TJAlarmManager.JavaClass.RTC_WAKEUP, DateTimeLocalToUnixMSecGMT(ANotification.FireDate),
-    PendingIntent);
+  TAndroidHelper.AlarmManager.&set(TJAlarmManager.JavaClass.RTC_WAKEUP,
+    DateTimeLocalToUnixMSecGMT(ANotification.FireDate), PendingIntent);
 end;
 
 procedure TNotificationCenterAndroid.DoCancelAllNotifications;
@@ -435,12 +450,12 @@ begin
 end;
 
 {$ENDREGION}
-
 { TGeneratorUniqueID }
 
 class constructor TGeneratorUniqueID.Create;
 begin
-  FPreference := TAndroidHelper.Context.getSharedPreferences(TJNotificationAlarm.JavaClass.NOTIFICATION_CENTER, TJContext.JavaClass.MODE_PRIVATE);
+  FPreference := TAndroidHelper.Context.getSharedPreferences(TJNotificationAlarm.JavaClass.NOTIFICATION_CENTER,
+    TJContext.JavaClass.MODE_PRIVATE);
   FNextUniqueID := FPreference.getInt(StringToJString(SettingsNotificationUniquiID), 0);
 end;
 
@@ -512,7 +527,8 @@ end;
 
 constructor TAndroidPreferenceAdapter.Create;
 begin
-  FPreference := TAndroidHelper.Context.getSharedPreferences(TJNotificationAlarm.JavaClass.NOTIFICATION_CENTER, TJContext.JavaClass.MODE_PRIVATE);
+  FPreference := TAndroidHelper.Context.getSharedPreferences(TJNotificationAlarm.JavaClass.NOTIFICATION_CENTER,
+    TJContext.JavaClass.MODE_PRIVATE);
 end;
 
 destructor TAndroidPreferenceAdapter.Destroy;
@@ -539,7 +555,8 @@ begin
       NotificationsList.Add(ANotification.Name + '=' + AID.ToString);
       PreferenceEditor := FPreference.edit;
       try
-        PreferenceEditor.putString(TJNotificationAlarm.JavaClass.SETTINGS_NOTIFICATION_IDS, StringToJString(NotificationsList.Text));
+        PreferenceEditor.putString(TJNotificationAlarm.JavaClass.SETTINGS_NOTIFICATION_IDS,
+          StringToJString(NotificationsList.Text));
       finally
         PreferenceEditor.commit;
       end;
@@ -574,7 +591,8 @@ begin
       PreferenceEditor := FPreference.edit;
       try
         NotificationsList.Delete(I);
-        PreferenceEditor.putString(TJNotificationAlarm.JavaClass.SETTINGS_NOTIFICATION_IDS, StringToJString(NotificationsList.Text));
+        PreferenceEditor.putString(TJNotificationAlarm.JavaClass.SETTINGS_NOTIFICATION_IDS,
+          StringToJString(NotificationsList.Text));
       finally
         PreferenceEditor.commit;
       end;
@@ -649,5 +667,6 @@ class function TPlatformNotificationCenter.GetInstance: TBaseNotificationCenter;
 begin
   Result := TBaseNotificationCenter(TNotificationCenterAndroid.NotificationCenter)
 end;
+{$ENDIF}
 
 end.

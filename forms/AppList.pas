@@ -16,7 +16,7 @@ uses
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Threading,
   FMX.MultiView, FMX.Layouts, FMX.ListBox, FMX.Ani, FMX.LoadingIndicator,
   FMX.TMSBaseControl, FMX.TreeView, FMX.Edit, FMX.BezierPanel, FMX.TMSPanel,
-  FMX.ExtCtrls, FMX.TMSPopup;
+  FMX.ExtCtrls, FMX.TMSPopup, Header;
 
 type
   TSearchParams = record
@@ -33,14 +33,10 @@ type
     RESTResponseDataSetAdapterApps: TRESTResponseDataSetAdapter;
     RESTResponseApps: TRESTResponse;
     RESTRequestApps: TRESTRequest;
-    RectangleHeader: TRectangle;
-    ButtonBack: TButton;
     BindingsList1: TBindingsList;
     MultiViewSort: TMultiView;
     Button1: TButton;
     Button3: TButton;
-    Label1: TLabel;
-    ButtonSorting: TButton;
     RectangleMain: TRectangle;
     RESTRequestLists: TRESTRequest;
     RESTResponseLists: TRESTResponse;
@@ -122,7 +118,8 @@ type
     Label6: TLabel;
     ButtonServTypesSearchParamsClose: TButton;
     FloatAnimation1: TFloatAnimation;
-    procedure ButtonBackClick(Sender: TObject);
+    HeaderFrame1: THeaderFrame;
+    StyleBook1: TStyleBook;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ListView1PullRefresh(Sender: TObject);
     procedure RESTRequestAppsAfterExecute(Sender: TCustomRESTRequest);
@@ -130,8 +127,8 @@ type
     procedure Button3Click(Sender: TObject);
     procedure RESTRequestListsAfterExecute(Sender: TCustomRESTRequest);
     procedure ButtonFilteringSubmitClick(Sender: TObject);
-    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer; const LocalClickPos: TPointF;
-      const ItemObject: TListItemDrawable);
+    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer;
+      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
     procedure SpeedButtonCloseClick(Sender: TObject);
     procedure SpeedButtonSortClick(Sender: TObject);
     procedure SpeedButtonFilteringClick(Sender: TObject);
@@ -140,11 +137,12 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
-    procedure ButtonSortingClick(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
     procedure ButtonPropTypesSearchParamsCloseClick(Sender: TObject);
     procedure ListBoxItem2Click(Sender: TObject);
     procedure ButtonServTypesSearchParamsCloseClick(Sender: TObject);
+    procedure HeaderFrame1ButtonBackClick(Sender: TObject);
   private
     v_loadLocationTree: boolean;
     v_loadServiceTree: boolean;
@@ -296,9 +294,11 @@ begin
       end
       else
       begin
-        with TTreeViewItem.Create(TreeViewLocations.Items[FDMemTableLocations.FieldByName('pid').AsInteger - 1]) do
+        with TTreeViewItem.Create(TreeViewLocations.Items
+          [FDMemTableLocations.FieldByName('pid').AsInteger - 1]) do
         begin
-          Parent := TreeViewLocations.Items[FDMemTableLocations.FieldByName('pid').AsInteger - 1];
+          Parent := TreeViewLocations.Items
+            [FDMemTableLocations.FieldByName('pid').AsInteger - 1];
           Text := FDMemTableLocations.FieldByName('title').AsString;
           Tag := FDMemTableLocations.FieldByName('id').AsInteger;
         end;
@@ -332,22 +332,9 @@ begin
   end;
 end;
 
-procedure TAppListForm.ButtonBackClick(Sender: TObject);
-begin
-  self.Close;
-end;
-
 procedure TAppListForm.ButtonServTypesSearchParamsCloseClick(Sender: TObject);
 begin
   RectangleServiceTypesSearchParams.Visible := False;
-end;
-
-procedure TAppListForm.ButtonSortingClick(Sender: TObject);
-begin
-  if RectangleFilteringSortingButtons.Visible = True then
-    RectangleFilteringSortingButtons.Visible := False
-  else
-    RectangleFilteringSortingButtons.Visible := True;
 end;
 
 procedure TAppListForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -355,10 +342,16 @@ begin
   Action := TCloseAction.caFree;
 end;
 
-procedure TAppListForm.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+procedure TAppListForm.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
 begin
   if Key = 137 then
     self.Free;
+end;
+
+procedure TAppListForm.HeaderFrame1ButtonBackClick(Sender: TObject);
+begin
+  self.Close;
 end;
 
 procedure TAppListForm.initForm;
@@ -440,24 +433,28 @@ begin
     self.loadLocationTree;
 end;
 
-procedure TAppListForm.ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer; const LocalClickPos: TPointF;
+procedure TAppListForm.ListView1ItemClickEx(const Sender: TObject;
+ItemIndex: Integer; const LocalClickPos: TPointF;
 const ItemObject: TListItemDrawable);
 var
   id: Integer;
 begin
   if (ItemObject is TListItemText) or (ItemObject is TListItemImage) then
   begin
-    if (ItemObject.name = 'app_property_requisites_count') or (ItemObject.name = 'ArrowImage') then
+    if (ItemObject.name = 'app_property_requisites_count') or
+      (ItemObject.name = 'ArrowImage') then
     begin
-      if ListView1.Selected.Height = 90 then
+      if ListView1.Selected.Height = 120 then
       begin
-        ListView1.Selected.Height := 170;
-        TListItem(ListView1.Selected).View.FindDrawable('details').Visible := True;
+        ListView1.Selected.Height := 200;
+        TListItem(ListView1.Selected).View.FindDrawable('details')
+          .Visible := True;
       end
       else
       begin
-        ListView1.Selected.Height := 90;
-        TListItem(ListView1.Selected).View.FindDrawable('details').Visible := False;
+        ListView1.Selected.Height := 120;
+        TListItem(ListView1.Selected).View.FindDrawable('details')
+          .Visible := False;
       end;
     end
     else

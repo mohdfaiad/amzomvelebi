@@ -9,17 +9,11 @@ Visible=True
 [BindSourceDB1]
 Coordinates=141,1602,147,393
 
-[ButtonBack]
-Coordinates=605,1446,72,51
-
 [RESTResponseApps]
 Coordinates=423,622,116,285
 
 [DModule.RESTClient]
 Coordinates=647,1318,116,69
-
-[RectangleHeader]
-Coordinates=732,1530,98,33
 
 [RESTRequestApps]
 Coordinates=1302,992,108,123
@@ -38,7 +32,7 @@ Visible=False
 Coordinates=910,622,218,344
 
 []
-Coordinates=825,1,193,146
+Coordinates=732,1530,98,33
 Visible=True
 
 [BindingsList1]
@@ -59,14 +53,8 @@ Coordinates=799,992,214,168
 [Button3]
 Coordinates=1392,1318,53,51
 
-[ButtonSorting]
-Coordinates=339,1446,83,51
-
 [RectangleMain]
 Coordinates=1038,1446,87,33
-
-[Label1]
-Coordinates=810,1318,46,51
 
 [AppDetailForm.BindSourceDB1]
 Coordinates=722,10,195,432

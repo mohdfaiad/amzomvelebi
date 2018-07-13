@@ -1,32 +1,47 @@
 object HeaderFrame: THeaderFrame
   Size.Width = 545.000000000000000000
-  Size.Height = 50.000000000000000000
+  Size.Height = 60.000000000000000000
   Size.PlatformDefault = False
+  object Line1: TLine
+    Align = Bottom
+    LineType = Bottom
+    Position.Y = 58.000000000000000000
+    Size.Width = 545.000000000000000000
+    Size.Height = 2.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFFF3434
+    Stroke.Thickness = 1.500000000000000000
+  end
   object RectangleHeader: TRectangle
     Align = Client
-    Fill.Color = xFF198D60
+    Fill.Color = claWhite
     Size.Width = 545.000000000000000000
-    Size.Height = 50.000000000000000000
+    Size.Height = 58.000000000000000000
     Size.PlatformDefault = False
+    Stroke.Kind = None
     object ButtonBack: TButton
       Align = Left
       IconTintColor = claWhitesmoke
-      Size.Width = 48.000000000000000000
-      Size.Height = 50.000000000000000000
+      Images = MainForm.ImageListRed
+      ImageIndex = 15
+      Size.Width = 57.000000000000000000
+      Size.Height = 58.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'priortoolbutton'
       TabOrder = 0
       Text = 'ButtonBack'
+      OnClick = ButtonBackClick
     end
     object LabelAppName: TLabel
       Anchors = [akLeft, akTop, akRight, akBottom]
-      StyledSettings = [Family]
+      StyledSettings = []
       Position.X = 48.000000000000000000
       Size.Width = 457.000000000000000000
-      Size.Height = 50.000000000000000000
+      Size.Height = 58.500000000000000000
       Size.PlatformDefault = False
+      TextSettings.Font.Family = 'BPG Nino Mtavruli'
       TextSettings.Font.Size = 14.000000000000000000
-      TextSettings.FontColor = claWhitesmoke
+      TextSettings.FontColor = xFF373737
       TextSettings.HorzAlign = Center
       TextSettings.Trimming = Word
       TabOrder = 1

@@ -1,4 +1,4 @@
-unit auth;
+﻿unit auth;
 
 interface
 
@@ -22,40 +22,24 @@ type
     EditAuthEmail: TEdit;
     EditAuthPassword: TEdit;
     ButtonAuth: TButton;
-    Rectangle2: TRectangle;
-    TabControl1: TTabControl;
-    TabItemAuth: TTabItem;
-    TabItemReg: TTabItem;
-    FullNameEdit: TEdit;
-    CPasswordEdit: TEdit;
-    PasswordEdit: TEdit;
-    EmailEdit: TEdit;
-    RegButton: TButton;
+    RectangleMain: TRectangle;
     RESTRequestReg: TRESTRequest;
     RESTResponseReg: TRESTResponse;
-    PhoneEdit: TEdit;
     RESTRequestAuth: TRESTRequest;
     RESTResponseAuth: TRESTResponse;
     RESTResponseDataSetAdapterAuth: TRESTResponseDataSetAdapter;
     FDMemTableAuth: TFDMemTable;
-    PanelPasswordRecovery: TPanel;
     EditPhoneNumberForActivation: TEdit;
-    Button1: TButton;
+    ButtonGetActivationCode: TButton;
     EditActivationCode: TEdit;
-    Button2: TButton;
     FloatAnimation1: TFloatAnimation;
-    ButtonPasswordRecovery: TButton;
-    Button3: TButton;
+    ButtonSetActivationCode: TButton;
     FloatAnimationEmailAuth: TFloatAnimation;
     Timer1: TTimer;
-    FloatAnimationEmailReg: TFloatAnimation;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     Timer2: TTimer;
     RectanglePreloader: TRectangle;
-    RectangleHeder: TRectangle;
-    Button4: TButton;
-    Label2: TLabel;
     FDMemTableAuthid: TWideStringField;
     FDMemTableAuthuser_type_id: TWideStringField;
     FDMemTableAuthuser_status_id: TWideStringField;
@@ -70,24 +54,29 @@ type
     FDMemTableAuthisSetLocations: TWideStringField;
     FDMemTableAuthnotifications: TWideStringField;
     FMXLoadingIndicator1: TFMXLoadingIndicator;
-    Image1: TImage;
     HeaderFrame1: THeaderFrame;
     FloatAnimationPassAuth: TFloatAnimation;
-    procedure RegButtonClick(Sender: TObject);
+    StyleBookLoginForm: TStyleBook;
+    RectLostPassword: TRectangle;
+    LabelLosPassword: TLabel;
+    Image1: TImage;
+    RectanglePRecovery: TRectangle;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
     procedure RESTRequestRegAfterExecute(Sender: TCustomRESTRequest);
     procedure ButtonAuthClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Button2Click(Sender: TObject);
-    procedure ButtonPasswordRecoveryClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure RESTRequestAuthAfterExecute(Sender: TCustomRESTRequest);
     procedure Timer2Timer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
     procedure FloatAnimationEmailAuthFinish(Sender: TObject);
     procedure FloatAnimationPassAuthFinish(Sender: TObject);
+    procedure LabelLosPasswordClick(Sender: TObject);
   private
     function equalPassword(pass1, pass2: string): boolean;
     function checkEmailPass(EmailAddress, password, op: string): boolean;
@@ -108,56 +97,6 @@ implementation
 {$R *.fmx}
 
 uses DataModule, HelperUnit, Main, UserLocations;
-
-procedure TauthForm.RegButtonClick(Sender: TObject);
-var
-  password: string;
-  aTask: ITask;
-begin
-  aTask := TTask.Create(
-    procedure()
-    begin
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          { if self.checkEmailPass(EmailEdit.Text, password, 'signup') = False then
-            exit;
-
-            if self.equalPassword(PasswordEdit.Text, CPasswordEdit.Text) = True then
-            password := PasswordEdit.Text
-            else
-            exit; }
-          RESTRequestReg.Params.Clear;
-          with RESTRequestReg.Params.AddItem do
-          begin
-            name := 'user_type_id';
-            Value := '1';
-          end;
-          with RESTRequestReg.Params.AddItem do
-          begin
-            name := 'full_name';
-            Value := TIdURI.ParamsEncode(FullNameEdit.Text);
-          end;
-          with RESTRequestReg.Params.AddItem do
-          begin
-            name := 'email';
-            Value := TIdURI.ParamsEncode(EmailEdit.Text);
-          end;
-          with RESTRequestReg.Params.AddItem do
-          begin
-            name := 'phone';
-            Value := PhoneEdit.Text;
-          end;
-          with RESTRequestReg.Params.AddItem do
-          begin
-            name := 'password';
-            Value := password;
-          end;
-          RESTRequestReg.Execute;
-        end);
-    end);
-  aTask.Start;
-end;
 
 procedure TauthForm.RESTRequestAuthAfterExecute(Sender: TCustomRESTRequest);
 begin
@@ -185,15 +124,18 @@ begin
   if FDMemTableAuth.FieldByName('loginstatus').AsInteger = 1 then
   begin
     DModule.id := FDMemTableAuth.FieldByName('id').AsInteger;
-    DModule.user_type_id := FDMemTableAuth.FieldByName('user_type_id').AsInteger;
+    DModule.user_type_id := FDMemTableAuth.FieldByName('user_type_id')
+      .AsInteger;
     DModule.full_name := FDMemTableAuth.FieldByName('full_name').AsString;
     DModule.phone := FDMemTableAuth.FieldByName('phone').AsString;
     DModule.email := FDMemTableAuth.FieldByName('email').AsString;
     DModule.sesskey := FDMemTableAuth.FieldByName('sesskey').AsString;
-    DModule.notifications := FDMemTableAuth.FieldByName('notifications').AsInteger;
+    DModule.notifications := FDMemTableAuth.FieldByName('notifications')
+      .AsInteger;
 
     // ---------------
-    Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath, DModule.settingsIniFile));
+    Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath,
+      DModule.settingsIniFile));
     try
       Ini.AutoSave := True;
       Ini.WriteInteger('auth', 'id', DModule.id);
@@ -210,7 +152,8 @@ begin
     MainForm.DoAuthenticate;
     // ----------------
 
-    if (FDMemTableAuth.FieldByName('isSetLocations').AsInteger = 0) and (DModule.user_type_id = 2) then
+    if (FDMemTableAuth.FieldByName('isSetLocations').AsInteger = 0) and
+      (DModule.user_type_id = 2) then
     begin
       with TUserLocationsForm.Create(Application) do
       begin
@@ -219,11 +162,6 @@ begin
     end;
     self.Close;
   end;
-end;
-
-procedure TauthForm.Button4Click(Sender: TObject);
-begin
-  self.PanelPasswordRecovery.Visible := False;
 end;
 
 function TauthForm.consoleAuth(AuthEmail, AuthPassword: string): TFDMemTable;
@@ -255,9 +193,21 @@ begin
   RectanglePreloader.Visible := True;
   aTask := TTask.Create(
     procedure()
+    var
+      HelperUnit: THelperUnit;
     begin
+      if TOSVersion.Check(6) then
+      begin
+        HelperUnit := THelperUnit.Create;
+        try
+          HelperUnit.AndroidCheckAndRequestStatePermission;
+        finally
+          HelperUnit.Free;
+        end;
+      end;
 
-      if self.checkEmailPass(EditAuthEmail.Text, EditAuthPassword.Text, 'signin') = False then
+      if self.checkEmailPass(EditAuthEmail.Text, EditAuthPassword.Text,
+        'signin') = False then
         exit;
 
       RESTRequestAuth.Params.Clear;
@@ -299,13 +249,9 @@ begin
     self.RectanglePreloader.Visible := False;
     Result := False;
   end;
-  if (self.EditAuthEmail.Text.Length > 6) and (self.EditAuthPassword.Text.Length >= 3) then
+  if (self.EditAuthEmail.Text.Length > 6) and
+    (self.EditAuthPassword.Text.Length >= 3) then
     Result := True;
-end;
-
-procedure TauthForm.ButtonPasswordRecoveryClick(Sender: TObject);
-begin
-  PanelPasswordRecovery.Visible := True;
 end;
 
 function TauthForm.equalPassword(pass1, pass2: string): boolean;
@@ -316,7 +262,7 @@ begin
   end
   else
   begin
-    PasswordEdit.FontColor := TAlphaColors.Red;
+    EditAuthPassword.FontColor := TAlphaColors.Red;
     Result := False;
   end;
 end;
@@ -341,7 +287,8 @@ begin
   self.closeAfterReg := False;
 end;
 
-procedure TauthForm.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+procedure TauthForm.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+Shift: TShiftState);
 begin
   if Key = 137 then
     self.Free;
@@ -349,7 +296,13 @@ end;
 
 procedure TauthForm.HeaderFrame1ButtonBackClick(Sender: TObject);
 begin
-  self.Close;
+  if RectanglePRecovery.Visible = True then
+  begin
+    RectanglePRecovery.Visible := False;
+    self.HeaderFrame1.LabelAppName.Text := 'მომხმარებლის ავტორიზაცია';
+  end
+  else
+    self.Close;
 end;
 
 procedure TauthForm.initForm;
@@ -357,17 +310,21 @@ var
   HelperUnit: THelperUnit;
 begin
   self.Show;
-  HelperUnit := THelperUnit.Create;
-  try
-    HelperUnit.AndroidCheckAndRequestStoragePermission;
-  finally
-    HelperUnit.Free;
+  if TOSVersion.Check(6) then
+  begin
+    HelperUnit := THelperUnit.Create;
+    try
+      HelperUnit.AndroidCheckAndRequestStoragePermission;
+    finally
+      HelperUnit.Free;
+    end;
   end;
 end;
 
-procedure TauthForm.Button2Click(Sender: TObject);
+procedure TauthForm.LabelLosPasswordClick(Sender: TObject);
 begin
-  PanelPasswordRecovery.Visible := False;
+  RectanglePRecovery.Visible := True;
+  self.HeaderFrame1.LabelAppName.Text := 'პაროლის აღდგენა';
 end;
 
 function TauthForm.setUserFields: boolean;
@@ -376,7 +333,8 @@ var
   JSONValue, jv: TJsonValue;
   v_result: string;
 begin
-  jsonObject := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(self.RESTResponseAuth.Content), 0) as TJSONObject;
+  jsonObject := TJSONObject.ParseJSONValue
+    (TEncoding.UTF8.GetBytes(self.RESTResponseAuth.Content), 0) as TJSONObject;
   v_result := jsonObject.GetValue('result').ToString;
   JSONValue := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(v_result), 0);
   try
@@ -384,9 +342,12 @@ begin
     begin
       for jv in TJSONArray(JSONValue) do
       begin
-        DModule.id := (jv as TJSONObject).Get('id').JSONValue.ToString.ToInteger;
-        DModule.user_type_id := (jv as TJSONObject).Get('user_type_id').JSONValue.ToString.ToInteger;
-        DModule.full_name := (jv as TJSONObject).Get('full_name').JSONValue.ToString;
+        DModule.id := (jv as TJSONObject).Get('id')
+          .JSONValue.ToString.ToInteger;
+        DModule.user_type_id := (jv as TJSONObject).Get('user_type_id')
+          .JSONValue.ToString.ToInteger;
+        DModule.full_name := (jv as TJSONObject).Get('full_name')
+          .JSONValue.ToString;
         DModule.phone := (jv as TJSONObject).Get('phone').JSONValue.ToString;
         DModule.email := (jv as TJSONObject).Get('email').JSONValue.ToString;
       end;

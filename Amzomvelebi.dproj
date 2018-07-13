@@ -138,7 +138,7 @@
         <Android_SplashImage470>$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png</Android_SplashImage470>
         <Android_SplashImage640>$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png</Android_SplashImage640>
         <Android_SplashImage960>$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png</Android_SplashImage960>
-        <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services-ads-7.0.0.dex.jar;google-play-services-analytics-7.0.0.dex.jar;google-play-services-base-7.0.0.dex.jar;google-play-services-identity-7.0.0.dex.jar;google-play-services-maps-7.0.0.dex.jar;google-play-services-panorama-7.0.0.dex.jar;google-play-services-plus-7.0.0.dex.jar;google-play-services-wallet-7.0.0.dex.jar;fmx.dex.jar</EnabledSysJars>
+        <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services.dex.jar</EnabledSysJars>
         <VerInfo_Build>1</VerInfo_Build>
         <AUP_CAMERA>false</AUP_CAMERA>
         <AUP_READ_CALENDAR>false</AUP_READ_CALENDAR>
@@ -153,42 +153,42 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_BundleId>$(MSBuildProjectName)</VerInfo_BundleId>
-        <iPhone_AppIcon57>$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_57x57.png</iPhone_AppIcon57>
-        <iPhone_AppIcon60>$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_60x60.png</iPhone_AppIcon60>
-        <iPhone_AppIcon87>$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_87x87.png</iPhone_AppIcon87>
-        <iPhone_AppIcon114>$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_114x114.png</iPhone_AppIcon114>
-        <iPhone_AppIcon120>$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_120x120.png</iPhone_AppIcon120>
-        <iPhone_AppIcon180>$(BDS)\bin\Artwork\iOS\iPhone\FM_ApplicationIcon_180x180.png</iPhone_AppIcon180>
-        <iPhone_Launch320>$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_320x480.png</iPhone_Launch320>
-        <iPhone_Launch640>$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_640x960.png</iPhone_Launch640>
-        <iPhone_Launch640x1136>$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_640x1136.png</iPhone_Launch640x1136>
-        <iPhone_Launch750>$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_750x1334.png</iPhone_Launch750>
-        <iPhone_Launch1242>$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_1242x2208.png</iPhone_Launch1242>
-        <iPhone_Launch2208>$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_2208x1242.png</iPhone_Launch2208>
-        <iPhone_Spotlight29>$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_29x29.png</iPhone_Spotlight29>
-        <iPhone_Spotlight40>$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_40x40.png</iPhone_Spotlight40>
-        <iPhone_Spotlight58>$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_58x58.png</iPhone_Spotlight58>
-        <iPhone_Spotlight80>$(BDS)\bin\Artwork\iOS\iPhone\FM_SpotlightSearchIcon_80x80.png</iPhone_Spotlight80>
-        <iPad_AppIcon72>$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_72x72.png</iPad_AppIcon72>
-        <iPad_AppIcon76>$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_76x76.png</iPad_AppIcon76>
-        <iPad_AppIcon144>$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_144x144.png</iPad_AppIcon144>
+        <iPhone_AppIcon57>..\logo\logos\iphone\57x57.png</iPhone_AppIcon57>
+        <iPhone_AppIcon60>..\logo\logos\iphone\60x60.png</iPhone_AppIcon60>
+        <iPhone_AppIcon87>..\logo\logos\iphone\87x87.png</iPhone_AppIcon87>
+        <iPhone_AppIcon114>..\logo\logos\iphone\114x114.png</iPhone_AppIcon114>
+        <iPhone_AppIcon120>..\logo\logos\iphone\120x120.png</iPhone_AppIcon120>
+        <iPhone_AppIcon180>..\logo\logos\iphone\180x180.png</iPhone_AppIcon180>
+        <iPhone_Launch320>..\logo\logos\iphone\320x480.png</iPhone_Launch320>
+        <iPhone_Launch640>..\logo\logos\iphone\640x960.png</iPhone_Launch640>
+        <iPhone_Launch640x1136>..\logo\logos\iphone\640x1136.png</iPhone_Launch640x1136>
+        <iPhone_Launch750>..\logo\logos\iphone\750x1334.png</iPhone_Launch750>
+        <iPhone_Launch1242>..\logo\logos\iphone\1242x2208.png</iPhone_Launch1242>
+        <iPhone_Launch2208>..\logo\logos\iphone\2208x1242.png</iPhone_Launch2208>
+        <iPhone_Spotlight29>..\logo\logos\ipad2\29x29.png</iPhone_Spotlight29>
+        <iPhone_Spotlight40>..\logo\logos\ipad\40x40.png</iPhone_Spotlight40>
+        <iPhone_Spotlight58>..\logo\logos\ipad2\58x58.png</iPhone_Spotlight58>
+        <iPhone_Spotlight80>..\logo\logos\ipad2\80x80.png</iPhone_Spotlight80>
+        <iPad_AppIcon72>..\logo\logos\ipad\72x72.png</iPad_AppIcon72>
+        <iPad_AppIcon76>..\logo\logos\ipad\76x76.png</iPad_AppIcon76>
+        <iPad_AppIcon144>..\logo\logos\ipad\144x144.png</iPad_AppIcon144>
         <iPad_AppIcon152>$(BDS)\bin\Artwork\iOS\iPad\FM_ApplicationIcon_152x152.png</iPad_AppIcon152>
-        <iPad_Launch768>$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_768x1004.png</iPad_Launch768>
-        <iPad_Launch768x1024>$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_768x1024.png</iPad_Launch768x1024>
-        <iPad_Launch1024>$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x748.png</iPad_Launch1024>
+        <iPad_Launch768>..\logo\logos\ipad\768x1004.png</iPad_Launch768>
+        <iPad_Launch768x1024>..\logo\logos\ipad\768x1024.png</iPad_Launch768x1024>
+        <iPad_Launch1024>..\logo\logos\ipad\1024x748.png</iPad_Launch1024>
         <iPad_Launch1024x768>$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x768.png</iPad_Launch1024x768>
-        <iPad_Launch1536>$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_1536x2008.png</iPad_Launch1536>
-        <iPad_Launch1536x2048>$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImagePortrait_1536x2048.png</iPad_Launch1536x2048>
-        <iPad_Launch2048>$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1496.png</iPad_Launch2048>
-        <iPad_Launch2048x1536>$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_2048x1536.png</iPad_Launch2048x1536>
-        <iPad_SpotLight40>$(BDS)\bin\Artwork\iOS\iPad\FM_SpotlightSearchIcon_40x40.png</iPad_SpotLight40>
-        <iPad_SpotLight50>$(BDS)\bin\Artwork\iOS\iPad\FM_SpotlightSearchIcon_50x50.png</iPad_SpotLight50>
-        <iPad_SpotLight80>$(BDS)\bin\Artwork\iOS\iPad\FM_SpotlightSearchIcon_80x80.png</iPad_SpotLight80>
-        <iPad_SpotLight100>$(BDS)\bin\Artwork\iOS\iPad\FM_SpotlightSearchIcon_100x100.png</iPad_SpotLight100>
-        <iPad_Setting29>$(BDS)\bin\Artwork\iOS\iPad\FM_SettingIcon_29x29.png</iPad_Setting29>
-        <iPad_Setting58>$(BDS)\bin\Artwork\iOS\iPad\FM_SettingIcon_58x58.png</iPad_Setting58>
-        <iPhone_Launch1125>$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_1125x2436.png</iPhone_Launch1125>
-        <iPhone_Launch2436>$(BDS)\bin\Artwork\iOS\iPhone\FM_LaunchImage_2436x1125.png</iPhone_Launch2436>
+        <iPad_Launch1536>..\logo\logos\ipad\1536x2008.png</iPad_Launch1536>
+        <iPad_Launch1536x2048>..\logo\logos\ipad\1536x2048.png</iPad_Launch1536x2048>
+        <iPad_Launch2048>..\logo\logos\ipad\2048x1496.png</iPad_Launch2048>
+        <iPad_Launch2048x1536>..\logo\logos\ipad\2048x1536.png</iPad_Launch2048x1536>
+        <iPad_SpotLight40>..\logo\logos\ipad\40x40.png</iPad_SpotLight40>
+        <iPad_SpotLight50>..\logo\logos\ipad\50x50.png</iPad_SpotLight50>
+        <iPad_SpotLight80>..\logo\logos\ipad2\80x80.png</iPad_SpotLight80>
+        <iPad_SpotLight100>..\logo\logos\ipad2\100x100.png</iPad_SpotLight100>
+        <iPad_Setting29>..\logo\logos\ipad2\29x29.png</iPad_Setting29>
+        <iPad_Setting58>..\logo\logos\ipad2\58x58.png</iPad_Setting58>
+        <iPhone_Launch1125>..\logo\logos\iphone\1125x2436.png</iPhone_Launch1125>
+        <iPhone_Launch2436>..\logo\logos\iphone\2436x1125.png</iPhone_Launch2436>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_iOSDevice64)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;tethering;FireDACDBXDriver;bindengine;DataSnapClient;bindcompdbx;IndyIPServer;IndySystem;fmxFireDAC;FMXTee;DbxCommonDriver;xmlrtl;DataSnapNativeClient;rtl;DbxClientDriver;IndyIPClient;DataSnapProviderClient;DBXInterBaseDriver;bindcompfmx;FmxTeeUI;fmx;dbexpress;IndyCore;dsnap;DataSnapCommon;IndyIPCommon;ibmonitor;ibxpress;ibxbindings;FireDACDSDriver;CustomIPTransport;bindcomp;dbxcds;dsnapxml;dbrtl;IndyProtocols;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -318,23 +318,23 @@
         <VerInfo_Build>3</VerInfo_Build>
         <EL_ApsEnvironment>true</EL_ApsEnvironment>
         <PF_KeyStore>keystore\amzomvelebi.keystore</PF_KeyStore>
-        <PF_KeyStorePass>852E47C45F8D0785CF7CE523A4547BAFE4430843A007979E97FF0FD68E643CD0DB48A3D6E35F1C31C1B0572FFA95C375BABB3651043C2288165745F0E5F4228DC949F31ED506FADDBFCAAF0D071E1D0F92013E44C3407260EB0F6E6B1210</PF_KeyStorePass>
+        <PF_KeyStorePass>852E47C45F8D0785CF7CE523A4547BAFE44308437EBCEC9897E40FA78E273CF6DB5EA3DEE3551C63C1A4572EFACFC36ABAB3361C046522D316204584E58822A2C958F35CD507FA8FBFBAAF0007301D44921D3E131DF90939EB0F6E6B1210</PF_KeyStorePass>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <PF_AliasKey>amzomvelebi</PF_AliasKey>
-        <PF_AliasKeyPass>852E47C45F8D0785CF7CE523A4547BAFE44308437EBCEC9897E40FA78E273CF6DB5EA3DEE3551C63C1A4572EFACFC36ABAB3361C046522D316204584E58822A2C958F35CD507FA8FBFBAAF0007301D44921D3E131DF90939EB0F6E6B1210</PF_AliasKeyPass>
+        <PF_AliasKeyPass>54E50DFE644355A9A301713BD13FE36081DA0549A057979297EE0FB48E3E3CD9DB5DA38CE3371C4DC1B0577DFADEC37ABAF93641045722CE16654589E5A6228C18C3B938EE93A8CED3DF3B0172258597F7DE331CC3407260EB0F6E6B1210</PF_AliasKeyPass>
         <Debugger_RunParams>-autolaunch</Debugger_RunParams>
-        <Android_LauncherIcon36>logo\36x36.png</Android_LauncherIcon36>
-        <Android_LauncherIcon48>logo\48x48.png</Android_LauncherIcon48>
-        <Android_LauncherIcon72>logo\72x72.png</Android_LauncherIcon72>
-        <Android_LauncherIcon96>logo\96x96.png</Android_LauncherIcon96>
+        <Android_LauncherIcon36>..\logo\logos\android\36x36.png</Android_LauncherIcon36>
+        <Android_LauncherIcon48>..\logo\logos\android\48x48.png</Android_LauncherIcon48>
+        <Android_LauncherIcon72>..\logo\logos\android\72x72.png</Android_LauncherIcon72>
+        <Android_LauncherIcon96>..\logo\logos\android\96x96.png</Android_LauncherIcon96>
         <BT_BuildType>AppStore</BT_BuildType>
-        <Android_LauncherIcon144>logo\144x144.png</Android_LauncherIcon144>
+        <Android_LauncherIcon144>..\logo\logos\android\144x144.png</Android_LauncherIcon144>
         <AUP_ACCESS_FINE_LOCATION>false</AUP_ACCESS_FINE_LOCATION>
-        <Android_SplashImage426>logo\426x320.png</Android_SplashImage426>
+        <Android_SplashImage426>..\logo\logos\android\426x320.png</Android_SplashImage426>
         <AUP_ACCESS_COARSE_LOCATION>false</AUP_ACCESS_COARSE_LOCATION>
-        <Android_SplashImage470>logo\470x320.png</Android_SplashImage470>
-        <Android_SplashImage640>logo\640x480.png</Android_SplashImage640>
-        <Android_SplashImage960>logo\960x720.png</Android_SplashImage960>
+        <Android_SplashImage470>..\logo\logos\android\470x320.png</Android_SplashImage470>
+        <Android_SplashImage640>..\logo\logos\android\640x480.png</Android_SplashImage640>
+        <Android_SplashImage960>..\logo\logos\android\960x720.png</Android_SplashImage960>
         <VerInfo_Keys>package=com.azomva.com.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=3;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=TitleBar;hardwareAccelerated=true;apiKey=</VerInfo_Keys>
         <AUP_READ_PHONE_STATE>false</AUP_READ_PHONE_STATE>
     </PropertyGroup>
@@ -366,24 +366,24 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
-        <VerInfo_Build>33</VerInfo_Build>
+        <VerInfo_Build>42</VerInfo_Build>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <EL_Maps>true</EL_Maps>
-        <VerInfo_Keys>package=com.azomva.com.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=33;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=No TitleBar;hardwareAccelerated=true;apiKey=AIzaSyBEXqFdpYNyWacE9K5dia6LemR-h7bDtqE</VerInfo_Keys>
+        <VerInfo_Keys>package=com.azomva.com.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=42;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=No TitleBar;hardwareAccelerated=true;apiKey=AIzaSyBEXqFdpYNyWacE9K5dia6LemR-h7bDtqE</VerInfo_Keys>
         <EL_ApsEnvironment>true</EL_ApsEnvironment>
         <PF_KeyStore>keystore\amzomvelebi.keystore</PF_KeyStore>
-        <PF_KeyStorePass>852E47C45F8D0785CF7CE523A4547BAFE4430519A05A97D897C80FA28E363C94DB04A390E34B1C31C1B15774FAD1C339BABA3609043F22FC1657458CE5A722CFC949F31FD555FAFEBFE4AF0D07551D589201331CC3407260EB0F6E6B1210</PF_KeyStorePass>
+        <PF_KeyStorePass>852E47C45F8D5585A304712AD15DE33A81940557A005978797B40FAA8E6D3CD0DB48A3D6E3181C3AC1B85752FAB3C36BBABA361304262290166845ECE5BA2290C95DF35DD544A8CED3DF3B0172258597F7DE331CC3407260EB0F6E6B1210</PF_KeyStorePass>
         <PF_AliasKey>amzomvelebi</PF_AliasKey>
-        <PF_AliasKeyPass>852E47C45F8D0785CF7CE523A4547BAFE44308437EBCEC989F0577708E3C3C87DB1DA3F8E3431C6BC1AE577CFADBC36BBAE93603046D229E167945DFE5FF22D6C924F373D516FACDBFBBAF5207401D4992333E581DE5096EE3EC16E31210</PF_AliasKeyPass>
-        <Android_LauncherIcon36>logo\36x36.png</Android_LauncherIcon36>
-        <Android_LauncherIcon48>logo\48x48.png</Android_LauncherIcon48>
-        <Android_LauncherIcon72>logo\72x72.png</Android_LauncherIcon72>
-        <Android_LauncherIcon96>logo\96x96.png</Android_LauncherIcon96>
-        <Android_LauncherIcon144>logo\144x144.png</Android_LauncherIcon144>
-        <Android_SplashImage426>logo\426x320.png</Android_SplashImage426>
-        <Android_SplashImage470>logo\470x320.png</Android_SplashImage470>
-        <Android_SplashImage640>logo\640x480.png</Android_SplashImage640>
-        <Android_SplashImage960>logo\960x720.png</Android_SplashImage960>
+        <PF_AliasKeyPass>852E47C45F8D0785A359716CD16AE34E81C60513A04997C197A00FAA8E6C3C8BDB0CA39AE3191C62C1BB5726FAB3C317BAE9365104262291163B45CFE5942290C916F30AD544FACCD3DF3B0172258597F7DE331CC3407260EB0F6E6B1210</PF_AliasKeyPass>
+        <Android_LauncherIcon36>..\logo\logos\android\36x36.png</Android_LauncherIcon36>
+        <Android_LauncherIcon48>..\logo\logos\android\48x48.png</Android_LauncherIcon48>
+        <Android_LauncherIcon72>..\logo\logos\android\72x72.png</Android_LauncherIcon72>
+        <Android_LauncherIcon96>..\logo\logos\android\96x96.png</Android_LauncherIcon96>
+        <Android_LauncherIcon144>..\logo\logos\android\144x144.png</Android_LauncherIcon144>
+        <Android_SplashImage426>..\logo\logos\android\426x320.png</Android_SplashImage426>
+        <Android_SplashImage470>..\logo\logos\android\470x320.png</Android_SplashImage470>
+        <Android_SplashImage640>..\logo\logos\android\640x480.png</Android_SplashImage640>
+        <Android_SplashImage960>..\logo\logos\android\960x720.png</Android_SplashImage960>
         <AUP_ACCESS_FINE_LOCATION>false</AUP_ACCESS_FINE_LOCATION>
         <AUP_ACCESS_COARSE_LOCATION>false</AUP_ACCESS_COARSE_LOCATION>
         <AUP_READ_PHONE_STATE>false</AUP_READ_PHONE_STATE>
@@ -485,10 +485,6 @@
                     <Source Name="MainSource">Amzomvelebi.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclbcbsmp250.bpl">C++Builder Sample Components Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbie250.bpl">Embarcadero C++Builder Internet Explorer Components Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k250.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
@@ -528,7 +524,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="logo\470x320.png" Configuration="Release" Class="Android_SplashImage470">
+                <DeployFile LocalName="..\logo\logos\android\470x320.png" Configuration="Release" Class="Android_SplashImage470">
                     <Platform Name="Android">
                         <RemoteName>splash_image.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -612,7 +608,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="logo\36x36.png" Configuration="Release" Class="Android_LauncherIcon36">
+                <DeployFile LocalName="..\logo\logos\android\36x36.png" Configuration="Release" Class="Android_LauncherIcon36">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -641,7 +637,7 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile"/>
-                <DeployFile LocalName="logo\48x48.png" Configuration="Release" Class="Android_LauncherIcon48">
+                <DeployFile LocalName="..\logo\logos\android\48x48.png" Configuration="Release" Class="Android_LauncherIcon48">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -742,6 +738,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\Design\bpg_nino_mtavruli_bold_3.ttf" Configuration="Release" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\fonts\</RemoteDir>
+                        <RemoteName>bpg_nino_mtavruli_bold_3.ttf</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\release\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile"/>
                 <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
                     <Platform Name="Android">
@@ -762,7 +765,7 @@
                 </DeployFile>
                 <DeployFile LocalName="logo\960x720.png" Configuration="Debug" Class="Android_SplashImage960"/>
                 <DeployFile LocalName="Android\Debug\splash_image_def.xml" Configuration="Debug" Class="AndroidSplashImageDef"/>
-                <DeployFile LocalName="logo\960x720.png" Configuration="Release" Class="Android_SplashImage960">
+                <DeployFile LocalName="..\logo\logos\android\960x720.png" Configuration="Release" Class="Android_SplashImage960">
                     <Platform Name="Android">
                         <RemoteName>splash_image.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -815,7 +818,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="logo\72x72.png" Configuration="Release" Class="Android_LauncherIcon72">
+                <DeployFile LocalName="..\logo\logos\android\72x72.png" Configuration="Release" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -865,7 +868,7 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="logo\36x36.png" Configuration="Debug" Class="Android_LauncherIcon36"/>
-                <DeployFile LocalName="logo\426x320.png" Configuration="Release" Class="Android_SplashImage426">
+                <DeployFile LocalName="..\logo\logos\android\426x320.png" Configuration="Release" Class="Android_SplashImage426">
                     <Platform Name="Android">
                         <RemoteName>splash_image.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -894,7 +897,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="logo\96x96.png" Configuration="Release" Class="Android_LauncherIcon96">
+                <DeployFile LocalName="..\logo\logos\android\96x96.png" Configuration="Release" Class="Android_LauncherIcon96">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -911,7 +914,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="logo\144x144.png" Configuration="Release" Class="Android_LauncherIcon144">
+                <DeployFile LocalName="..\logo\logos\android\144x144.png" Configuration="Release" Class="Android_LauncherIcon144">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -927,14 +930,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_SettingIcon_29x29.png" Configuration="Debug" Class="iPad_Setting29">
-                    <Platform Name="iOSSimulator">
+                <DeployFile LocalName="..\logo\logos\android\640x480.png" Configuration="Release" Class="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="logo\640x480.png" Configuration="Release" Class="Android_SplashImage640">
-                    <Platform Name="Android">
-                        <RemoteName>splash_image.png</RemoteName>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_SettingIcon_29x29.png" Configuration="Debug" Class="iPad_Setting29">
+                    <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

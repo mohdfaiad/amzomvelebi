@@ -22,7 +22,6 @@ uses
 
 type
   TUserAmzomveliRegForm = class(TForm)
-    RectangleMain: TRectangle;
     FullNameEdit: TEdit;
     EmailEdit: TEdit;
     FloatAnimationEmailReg: TFloatAnimation;
@@ -36,19 +35,21 @@ type
     RESTResponseDataSetAdapterReg: TRESTResponseDataSetAdapter;
     FDMemTableAuth: TFDMemTable;
     FMXLoadingIndicator1: TFMXLoadingIndicator;
-    HeaderFrame1: THeaderFrame;
     Timer1: TTimer;
     RectangleConfirmation: TRectangle;
     ButtonConfirmation: TButton;
     EditConfirmation: TEdit;
     LabelConfirmation: TLabel;
+    HeaderFrame1: THeaderFrame;
+    StyleBook1: TStyleBook;
+    ImageSignUp: TImage;
+    VertScrollBox1: TVertScrollBox;
     procedure RegButtonClick(Sender: TObject);
     procedure RESTRequestLocationDetailsAfterExecute
       (Sender: TCustomRESTRequest);
     procedure RESTRequestRegAfterExecute(Sender: TCustomRESTRequest);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ButtonBackClick(Sender: TObject);
-    procedure HeaderFrame1ButtonBackClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
   private
@@ -86,11 +87,6 @@ procedure TUserAmzomveliRegForm.FormKeyUp(Sender: TObject; var Key: Word;
 begin
   if Key = 137 then
     self.Free;
-end;
-
-procedure TUserAmzomveliRegForm.HeaderFrame1ButtonBackClick(Sender: TObject);
-begin
-  self.Close;
 end;
 
 procedure TUserAmzomveliRegForm.initForm;
