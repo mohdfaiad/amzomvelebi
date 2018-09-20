@@ -1,4 +1,4 @@
-unit UserNotifications;
+﻿unit UserNotifications;
 
 interface
 
@@ -15,14 +15,11 @@ uses
   Data.Bind.Components, Data.Bind.ObjectScope, System.Threading,
   Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.DBScope, FMX.Ani, FMX.Layouts,
-  FMX.LoadingIndicator;
+  FMX.LoadingIndicator, Header;
 
 type
   TUserNotificationsForm = class(TForm)
     ListView1: TListView;
-    RectangleHeader: TRectangle;
-    ButtonBack: TButton;
-    LabelAppName: TLabel;
     RESTRequestNotifications: TRESTRequest;
     RESTResponseNotifications: TRESTResponse;
     RESTResponseDataSetAdapterNotifications: TRESTResponseDataSetAdapter;
@@ -49,13 +46,15 @@ type
     FDMemTableNotificationsformAction: TWideStringField;
     FDMemTableNotificationsdeviceToken: TWideStringField;
     FDMemTableNotificationsdeviceID: TWideStringField;
-    procedure ButtonBackClick(Sender: TObject);
+    HeaderFrame1: THeaderFrame;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure RESTRequestNotificationsAfterExecute(Sender: TCustomRESTRequest);
     procedure ListView1ItemClick(const Sender: TObject;
       const AItem: TListViewItem);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure HeaderFrame1ButtonBackClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -70,13 +69,8 @@ implementation
 
 {$R *.fmx}
 
-uses DataModule, User2Review, AppDetails;
+uses DataModule, AppDetails;
 { TUserNotificationsForm }
-
-procedure TUserNotificationsForm.ButtonBackClick(Sender: TObject);
-begin
-  self.Close;
-end;
 
 procedure TUserNotificationsForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
@@ -91,33 +85,34 @@ begin
     self.Free;
 end;
 
-procedure TUserNotificationsForm.initForm;
-var
-  aTask: ITask;
+procedure TUserNotificationsForm.HeaderFrame1ButtonBackClick(Sender: TObject);
 begin
+  HeaderFrame1.ButtonBackClick(Sender);
+end;
+
+procedure TUserNotificationsForm.initForm;
+begin
+  HeaderFrame1.LabelAppName.Text := 'სისტემური შეტყობინებები';
   self.Show;
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
   RectanglePreloader.Visible := True;
-  aTask := TTask.Create(
-    procedure()
+  RESTRequestNotifications.Params.Clear;
+  with RESTRequestNotifications.Params.AddItem do
+  begin
+    name := 'sesskey';
+    Value := DModule.sesskey;
+  end;
+  with RESTRequestNotifications.Params.AddItem do
+  begin
+    name := 'user_id';
+    Value := DModule.id.ToString;
+  end;
+  self.RESTRequestNotifications.ExecuteAsync(
+    procedure
     begin
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          RESTRequestNotifications.Params.Clear;
-          with RESTRequestNotifications.Params.AddItem do
-          begin
-            name := 'sesskey';
-            Value := DModule.sesskey;
-          end;
-          with RESTRequestNotifications.Params.AddItem do
-          begin
-            name := 'user_id';
-            Value := DModule.id.ToString;
-          end;
-          self.RESTRequestNotifications.Execute;
-        end);
-    end);
-  aTask.Start;
+      RectanglePreloader.Visible := False;
+    end, True, True);
+
 end;
 
 procedure TUserNotificationsForm.ListView1ItemClick(const Sender: TObject;
@@ -140,12 +135,6 @@ begin
       end;
     end;
   end;
-end;
-
-procedure TUserNotificationsForm.RESTRequestNotificationsAfterExecute
-  (Sender: TCustomRESTRequest);
-begin
-  RectanglePreloader.Visible := False;
 end;
 
 end.

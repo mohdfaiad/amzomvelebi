@@ -16,10 +16,17 @@ uses
   UserNotifications in 'forms\UserNotifications.pas' {UserNotificationsForm},
   UserServiceTypes in 'forms\UserServiceTypes.pas' {UserServiceTypesForm},
   User1Review in 'forms\User1Review.pas' {User1ReviewForm},
-  User2Review in 'forms\User2Review.pas' {User2ReviewForm: TFrame},
   Header in 'Frames\Header.pas' {HeaderFrame: TFrame},
   User2ListFR in 'Frames\User2ListFR.pas' {User2ListFrame: TFrame},
-  MyContracts in 'forms\MyContracts.pas' {MyContractsForm};
+  MyContracts in 'forms\MyContracts.pas' {MyContractsForm},
+  MyContractsUnit in 'Frames\MyContractsUnit.pas' {MyContractsFrame: TFrame},
+  AppOfferedUnit in 'Frames\AppOfferedUnit.pas' {AppOfferedFrame: TFrame},
+  SetNewPassword in 'forms\SetNewPassword.pas' {setNewPasswordForm},
+  DW.PushClient in 'Lib\PushNotifications-master\DW.PushClient.pas',
+  DW.iOSapi.UserNotifications in 'Lib\PushNotifications-master\DW.iOSapi.UserNotifications.pas',
+  DW.RegisterFCM in 'Lib\PushNotifications-master\DW.RegisterFCM.pas',
+  DW.RemoteNotificationsPatch.iOS in 'Lib\PushNotifications-master\DW.RemoteNotificationsPatch.iOS.pas',
+  SharedVariables in 'Lib\PushNotifications-master\SharedVariables.pas';
 
 {$R *.res}
 

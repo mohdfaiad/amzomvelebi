@@ -18,7 +18,6 @@
         android:icon="%icon%"
         android:theme="%theme%"
         android:hardwareAccelerated="%hardwareAccelerated%">
-
 <%application-meta-data%>
 		<%services%>
         <!-- Our activity is a subclass of the built-in NativeActivity framework class.

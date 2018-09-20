@@ -44,6 +44,8 @@ type
     StyleBook1: TStyleBook;
     ImageSignUp: TImage;
     VertScrollBox1: TVertScrollBox;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
     procedure RegButtonClick(Sender: TObject);
     procedure RESTRequestLocationDetailsAfterExecute
       (Sender: TCustomRESTRequest);
@@ -91,6 +93,7 @@ end;
 
 procedure TUserAmzomveliRegForm.initForm;
 begin
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
   self.Show;
   self.HeaderFrame1.LabelAppName.Text := 'ამზომველის რეგისტრაცია';
   // self.RectanglePreloader.Visible := True;

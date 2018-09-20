@@ -38,8 +38,7 @@ type
     Timer1: TTimer;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
-    Timer2: TTimer;
-    RectanglePreloader: TRectangle;
+    TimerAuthProccess: TTimer;
     FDMemTableAuthid: TWideStringField;
     FDMemTableAuthuser_type_id: TWideStringField;
     FDMemTableAuthuser_status_id: TWideStringField;
@@ -53,30 +52,56 @@ type
     FDMemTableAuthloginstatus: TWideStringField;
     FDMemTableAuthisSetLocations: TWideStringField;
     FDMemTableAuthnotifications: TWideStringField;
-    FMXLoadingIndicator1: TFMXLoadingIndicator;
     HeaderFrame1: THeaderFrame;
     FloatAnimationPassAuth: TFloatAnimation;
     StyleBookLoginForm: TStyleBook;
-    RectLostPassword: TRectangle;
-    LabelLosPassword: TLabel;
     Image1: TImage;
     RectanglePRecovery: TRectangle;
     Image2: TImage;
     Image3: TImage;
     Image4: TImage;
-    procedure RESTRequestRegAfterExecute(Sender: TCustomRESTRequest);
+    FMXLoadingIndicatorLogin: TFMXLoadingIndicator;
+    Button1: TButton;
+    FMXLoadingIndicatorActivationCode: TFMXLoadingIndicator;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
+    RESTRequestPRecovery: TRESTRequest;
+    RESTResponsePRecovery: TRESTResponse;
+    RESTRequestLoginPRecovery: TRESTRequest;
+    FMXLoadingIndicatorSetActCode: TFMXLoadingIndicator;
+    RESTResponseLoginPRecovery: TRESTResponse;
+    RESTAdapterLoginPRecovery: TRESTResponseDataSetAdapter;
+    FDMemTableLoginPRecovery: TFDMemTable;
+    FDMemTableLoginPRecoveryid: TWideStringField;
+    FDMemTableLoginPRecoveryuser_type_id: TWideStringField;
+    FDMemTableLoginPRecoveryuser_status_id: TWideStringField;
+    FDMemTableLoginPRecoveryfull_name: TWideStringField;
+    FDMemTableLoginPRecoveryphone: TWideStringField;
+    FDMemTableLoginPRecoveryemail: TWideStringField;
+    FDMemTableLoginPRecoverycreate_date: TWideStringField;
+    FDMemTableLoginPRecoverymodify_date: TWideStringField;
+    FDMemTableLoginPRecoveryregipaddr: TWideStringField;
+    FDMemTableLoginPRecoverysesskey: TWideStringField;
+    FDMemTableLoginPRecoveryloginstatus: TWideStringField;
+    FDMemTableLoginPRecoveryisSetLocations: TWideStringField;
+    FDMemTableLoginPRecoverynotifications: TWideStringField;
+    ButtonGetActCode: TButton;
+    FMXLoadingIndicator1: TFMXLoadingIndicator;
     procedure ButtonAuthClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Timer1Timer(Sender: TObject);
     procedure RESTRequestAuthAfterExecute(Sender: TCustomRESTRequest);
-    procedure Timer2Timer(Sender: TObject);
+    procedure TimerAuthProccessTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FloatAnimationEmailAuthFinish(Sender: TObject);
     procedure FloatAnimationPassAuthFinish(Sender: TObject);
-    procedure LabelLosPasswordClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure ButtonGetActivationCodeClick(Sender: TObject);
+    procedure ButtonSetActivationCodeClick(Sender: TObject);
+    procedure ButtonGetActCodeClick(Sender: TObject);
   private
     function equalPassword(pass1, pass2: string): boolean;
     function checkEmailPass(EmailAddress, password, op: string): boolean;
@@ -85,6 +110,7 @@ type
   public
     { Public declarations }
     closeAfterReg: boolean;
+    isConsole: boolean;
     procedure initForm;
     function consoleAuth(AuthEmail, AuthPassword: string): TFDMemTable;
   end;
@@ -96,18 +122,7 @@ implementation
 
 {$R *.fmx}
 
-uses DataModule, HelperUnit, Main, UserLocations;
-
-procedure TauthForm.RESTRequestAuthAfterExecute(Sender: TCustomRESTRequest);
-begin
-  Timer2.Enabled := True;
-  // self.setUserFields;
-end;
-
-procedure TauthForm.RESTRequestRegAfterExecute(Sender: TCustomRESTRequest);
-begin
-  ShowMessage(RESTResponseReg.Content);
-end;
+uses DataModule, HelperUnit, Main, UserLocations, SetNewPassword;
 
 procedure TauthForm.Timer1Timer(Sender: TObject);
 begin
@@ -116,22 +131,57 @@ begin
   EditAuthEmail.FontColor := TAlphaColors.Grey;
 end;
 
-procedure TauthForm.Timer2Timer(Sender: TObject);
+procedure TauthForm.RESTRequestAuthAfterExecute(Sender: TCustomRESTRequest);
+begin
+  self.isConsole := False;
+  TimerAuthProccess.Enabled := True;
+end;
+
+procedure TauthForm.TimerAuthProccessTimer(Sender: TObject);
 var
   Ini: TIniFile;
+  id, user_type_id, loginstatus, notifications, isSetLocations: integer;
+  full_name, phone, email, sesskey: string;
 begin
-  Timer2.Enabled := False;
-  if FDMemTableAuth.FieldByName('loginstatus').AsInteger = 1 then
+  TTimer(Sender).Enabled := False;
+  FMXLoadingIndicatorLogin.Visible := False;
+  if self.isConsole = False then
   begin
-    DModule.id := FDMemTableAuth.FieldByName('id').AsInteger;
-    DModule.user_type_id := FDMemTableAuth.FieldByName('user_type_id')
+    id := FDMemTableAuth.FieldByName('id').AsInteger;
+    user_type_id := FDMemTableAuth.FieldByName('user_type_id').AsInteger;
+    loginstatus := FDMemTableAuth.FieldByName('loginstatus').AsInteger;
+    full_name := FDMemTableAuth.FieldByName('full_name').AsString;
+    phone := FDMemTableAuth.FieldByName('phone').AsString;
+    email := FDMemTableAuth.FieldByName('email').AsString;
+    sesskey := FDMemTableAuth.FieldByName('sesskey').AsString;
+    notifications := FDMemTableAuth.FieldByName('notifications').AsInteger;
+    isSetLocations := FDMemTableAuth.FieldByName('isSetLocations').AsInteger;
+  end
+  else if self.isConsole = True then
+  begin
+    id := FDMemTableLoginPRecovery.FieldByName('id').AsInteger;
+    user_type_id := FDMemTableLoginPRecovery.FieldByName('user_type_id')
       .AsInteger;
-    DModule.full_name := FDMemTableAuth.FieldByName('full_name').AsString;
-    DModule.phone := FDMemTableAuth.FieldByName('phone').AsString;
-    DModule.email := FDMemTableAuth.FieldByName('email').AsString;
-    DModule.sesskey := FDMemTableAuth.FieldByName('sesskey').AsString;
-    DModule.notifications := FDMemTableAuth.FieldByName('notifications')
+    loginstatus := FDMemTableLoginPRecovery.FieldByName('loginstatus')
       .AsInteger;
+    full_name := FDMemTableLoginPRecovery.FieldByName('full_name').AsString;
+    phone := FDMemTableLoginPRecovery.FieldByName('phone').AsString;
+    email := FDMemTableLoginPRecovery.FieldByName('email').AsString;
+    sesskey := FDMemTableLoginPRecovery.FieldByName('sesskey').AsString;
+    notifications := FDMemTableLoginPRecovery.FieldByName('notifications')
+      .AsInteger;
+    isSetLocations := FDMemTableLoginPRecovery.FieldByName('isSetLocations')
+      .AsInteger;
+  end;
+  if loginstatus = 1 then
+  begin
+    DModule.id := id;
+    DModule.user_type_id := user_type_id;
+    DModule.full_name := full_name;
+    DModule.phone := phone;
+    DModule.email := email;
+    DModule.sesskey := sesskey;
+    DModule.notifications := notifications;
 
     // ---------------
     Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath,
@@ -148,12 +198,17 @@ begin
     finally
       Ini.Free;
     end;
-
+    if self.isConsole = True then
+    begin
+      with TsetNewPasswordForm.Create(Application) do
+      begin
+        initForm(id);
+      end
+    end;
     MainForm.DoAuthenticate;
     // ----------------
 
-    if (FDMemTableAuth.FieldByName('isSetLocations').AsInteger = 0) and
-      (DModule.user_type_id = 2) then
+    if (isSetLocations = 0) and (DModule.user_type_id = 2) then
     begin
       with TUserLocationsForm.Create(Application) do
       begin
@@ -186,11 +241,20 @@ begin
   Result := FDMemTableAuth;
 end;
 
+procedure TauthForm.Button1Click(Sender: TObject);
+begin
+  RectanglePRecovery.Visible := True;
+  self.HeaderFrame1.LabelAppName.Text := 'პაროლის აღდგენა';
+end;
+
 procedure TauthForm.ButtonAuthClick(Sender: TObject);
 var
   aTask: ITask;
 begin
-  RectanglePreloader.Visible := True;
+  if self.checkEmailPass(EditAuthEmail.Text, EditAuthPassword.Text, 'signin') = False
+  then
+    exit;
+  FMXLoadingIndicatorLogin.Visible := True;
   aTask := TTask.Create(
     procedure()
     var
@@ -205,11 +269,6 @@ begin
           HelperUnit.Free;
         end;
       end;
-
-      if self.checkEmailPass(EditAuthEmail.Text, EditAuthPassword.Text,
-        'signin') = False then
-        exit;
-
       RESTRequestAuth.Params.Clear;
       with RESTRequestAuth.Params.AddItem do
       begin
@@ -231,6 +290,63 @@ begin
   aTask.Start;
 end;
 
+procedure TauthForm.ButtonGetActCodeClick(Sender: TObject);
+begin
+  if EditPhoneNumberForActivation.Text.Length < 9 then
+  begin
+    FMXLoadingIndicatorActivationCode.Visible := True;
+    RESTRequestPRecovery.Params.Clear;
+    RESTRequestPRecovery.AddParameter('code',
+      EditPhoneNumberForActivation.Text);
+    RESTRequestPRecovery.ExecuteAsync(
+      procedure
+      begin
+        FMXLoadingIndicatorActivationCode.Visible := False;
+        if RESTResponsePRecovery.Status.Success then
+        begin
+          ShowMessage(RESTResponsePRecovery.Content);
+        end
+        else
+        begin
+          ShowMessage('მოთხოვნის შესრულების დროს დაფიქსირდა შეცდომა!');
+        end;
+      end, True, True);
+  end
+  else
+  begin
+    ShowMessage('გთხოვთ მიუთითოთ 9 ნიშნა მობილური ტელეფონის ნომერი.');
+  end;
+end;
+
+procedure TauthForm.ButtonGetActivationCodeClick(Sender: TObject);
+begin
+  FMXLoadingIndicatorActivationCode.Visible := True;
+  RESTRequestPRecovery.Params.Clear;
+  RESTRequestPRecovery.AddParameter('code', EditPhoneNumberForActivation.Text);
+  RESTRequestPRecovery.ExecuteAsync(
+    procedure
+    begin
+      FMXLoadingIndicatorSetActCode.Visible := False;
+      self.isConsole := True;
+      self.TimerAuthProccess.Enabled := True;
+    end, True, True);
+end;
+
+procedure TauthForm.ButtonSetActivationCodeClick(Sender: TObject);
+var
+  aTask: ITask;
+begin
+  FMXLoadingIndicatorSetActCode.Visible := True;
+  aTask := TTask.Create(
+    procedure()
+    begin
+      RESTRequestLoginPRecovery.Params.Clear;
+      RESTRequestLoginPRecovery.AddParameter('code', EditActivationCode.Text);
+      RESTRequestLoginPRecovery.Execute;
+    end);
+  aTask.Start;
+end;
+
 function TauthForm.checkEmailPass(EmailAddress, password, op: string): boolean;
 // var
 // HelperUnit: THelperUnit;
@@ -240,13 +356,13 @@ begin
   begin
     FloatAnimationEmailAuth.Enabled := True;
     Timer1.Enabled := True;
-    self.RectanglePreloader.Visible := False;
+    self.FMXLoadingIndicatorLogin.Visible := False;
     Result := False;
   end;
   if self.EditAuthPassword.Text.Length < 3 then
   begin
     FloatAnimationPassAuth.Enabled := True;
-    self.RectanglePreloader.Visible := False;
+    self.FMXLoadingIndicatorLogin.Visible := False;
     Result := False;
   end;
   if (self.EditAuthEmail.Text.Length > 6) and
@@ -310,7 +426,8 @@ var
   HelperUnit: THelperUnit;
 begin
   self.Show;
-  if TOSVersion.Check(6) then
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
+  if TOSVersion.Major >= 6 then
   begin
     HelperUnit := THelperUnit.Create;
     try
@@ -319,12 +436,6 @@ begin
       HelperUnit.Free;
     end;
   end;
-end;
-
-procedure TauthForm.LabelLosPasswordClick(Sender: TObject);
-begin
-  RectanglePRecovery.Visible := True;
-  self.HeaderFrame1.LabelAppName.Text := 'პაროლის აღდგენა';
 end;
 
 function TauthForm.setUserFields: boolean;

@@ -18,13 +18,6 @@ Coordinates=169,10,195,344
 [RectangleDetail]
 Coordinates=372,673,106,36
 
-[RectangleHeader]
-Coordinates=10,673,114,36
-
-[LabelAppName]
-Coordinates=404,560,103,58
-Visible=True
-
 [Button1]
 Coordinates=325,560,59,58
 
@@ -52,9 +45,6 @@ Coordinates=704,1,286,36
 [BindSourceDB2]
 Coordinates=206,339,166,212
 
-[ButtonBack]
-Coordinates=519,560,80,58
-
 [BindSourceDB1]
 Coordinates=740,37,106,212
 
@@ -62,7 +52,8 @@ Coordinates=740,37,106,212
 Coordinates=240,673,121,36
 
 []
-Coordinates=184,373,92,58
+Coordinates=10,673,114,36
+Visible=True
 
 [DModule.RESTClient]
 Coordinates=183,560,137,80

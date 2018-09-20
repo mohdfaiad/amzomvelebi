@@ -4,25 +4,52 @@ object User1ReviewForm: TUser1ReviewForm
   Caption = 'Form1'
   ClientHeight = 480
   ClientWidth = 640
-  SystemStatusBar.Visibility = Invisible
+  SystemStatusBar.BackgroundColor = claBlack
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   DesignerMasterStyle = 3
   inline HeaderFrame1: THeaderFrame
     Align = Top
+    Position.Y = 25.000000000000000000
     Size.Width = 640.000000000000000000
-    Size.Height = 50.000000000000000000
+    Size.Height = 60.000000000000000000
     Size.PlatformDefault = False
+    inherited Line1: TLine
+      Size.Width = 640.000000000000000000
+    end
     inherited RectangleHeader: TRectangle
       Size.Width = 640.000000000000000000
       inherited ButtonBack: TButton
-        Position.Y = 1.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 48.000000000000000000
         Size.Height = 48.000000000000000000
       end
       inherited LabelAppName: TLabel
         Size.Width = 592.000000000000000000
+        Size.Height = 60.000000000000000000
       end
+    end
+  end
+  object RectangleStatusBar: TRectangle
+    Align = MostTop
+    Fill.Color = xFFFF3434
+    Size.Width = 640.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    Stroke.Dash = Dot
+    object LabelStatusBar: TLabel
+      Align = Client
+      StyledSettings = [Family]
+      Size.Width = 640.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      Text = 'Amzomveli'
+      TabOrder = 0
     end
   end
 end

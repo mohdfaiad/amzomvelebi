@@ -68,8 +68,10 @@ type
     FloatAnimation4: TFloatAnimation;
     RESTRequestApproveRequest: TRESTRequest;
     RESTResponseApproveRequest: TRESTResponse;
-    HeaderFrame1: THeaderFrame;
     FMXLoadingIndicator1: TFMXLoadingIndicator;
+    HeaderFrame1: THeaderFrame;
+    RectangleStatusBar: TRectangle;
+    Label5: TLabel;
     procedure RESTRequestBidsAfterExecute(Sender: TCustomRESTRequest);
     procedure ButtonBackClick(Sender: TObject);
     procedure ListView1PullRefresh(Sender: TObject);

@@ -1,4 +1,4 @@
-unit AppList;
+﻿unit AppList;
 
 interface
 
@@ -16,17 +16,20 @@ uses
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Threading,
   FMX.MultiView, FMX.Layouts, FMX.ListBox, FMX.Ani, FMX.LoadingIndicator,
   FMX.TMSBaseControl, FMX.TreeView, FMX.Edit, FMX.BezierPanel, FMX.TMSPanel,
-  FMX.ExtCtrls, FMX.TMSPopup, Header;
+  FMX.ExtCtrls, FMX.TMSPopup, Header, System.ImageList, FMX.ImgList,
+  System.Generics.Collections;
 
 type
   TSearchParams = record
     AreaFrom: Integer;
     AreaTo: Integer;
+    ServiceTypes: TList<Integer>; // TArray<String>
+    PropertyTypes: TList<Integer>;
   end;
 
 type
   TAppListForm = class(TForm)
-    ListView1: TListView;
+    ListViewAppsList: TListView;
     PreloaderRectangle: TRectangle;
     BindSourceDB1: TBindSourceDB;
     FDMemTableApps: TFDMemTable;
@@ -83,7 +86,6 @@ type
     Line3: TLine;
     RectanglePropTypesSearchParams: TRectangle;
     SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     RectangleFilteringSortingButtons: TRectangle;
     SpeedButtonSort: TSpeedButton;
     SpeedButtonFiltering: TSpeedButton;
@@ -106,50 +108,52 @@ type
     FloatAnimationListBoxPosition: TFloatAnimation;
     EditAreaTo: TEdit;
     RectangleParams: TRectangle;
-    RectangleHeaderOfPTSP: TRectangle;
-    Label4: TLabel;
-    ButtonPropTypesSearchParamsClose: TButton;
     FloatAnimationListBoxPositionClose: TFloatAnimation;
     RadioButtonArea: TRadioButton;
-    Label5: TLabel;
+    LabelArrow: TLabel;
     RectangleServiceTypesSearchParams: TRectangle;
     TreeViewServices: TTreeView;
-    Rectangle4: TRectangle;
-    Label6: TLabel;
-    ButtonServTypesSearchParamsClose: TButton;
     FloatAnimation1: TFloatAnimation;
     HeaderFrame1: THeaderFrame;
-    StyleBook1: TStyleBook;
+    StyleBookAppList: TStyleBook;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
+    ImageListAppList: TImageList;
+    TreeViewPropTypes: TTreeView;
+    FDMemTablePropTypes: TFDMemTable;
+    RESTResponseDataSetAdapter2: TRESTResponseDataSetAdapter;
+    FDMemTablePropTypesid: TWideStringField;
+    FDMemTablePropTypestitle: TWideStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure ListView1PullRefresh(Sender: TObject);
-    procedure RESTRequestAppsAfterExecute(Sender: TCustomRESTRequest);
+    procedure ListViewAppsListPullRefresh(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure RESTRequestListsAfterExecute(Sender: TCustomRESTRequest);
     procedure ButtonFilteringSubmitClick(Sender: TObject);
-    procedure ListView1ItemClickEx(const Sender: TObject; ItemIndex: Integer;
-      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
+    procedure ListViewAppsListItemClickEx(const Sender: TObject;
+      ItemIndex: Integer; const LocalClickPos: TPointF;
+      const ItemObject: TListItemDrawable);
     procedure SpeedButtonCloseClick(Sender: TObject);
     procedure SpeedButtonSortClick(Sender: TObject);
     procedure SpeedButtonFilteringClick(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButtonApplyClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
-    procedure ButtonPropTypesSearchParamsCloseClick(Sender: TObject);
     procedure ListBoxItem2Click(Sender: TObject);
-    procedure ButtonServTypesSearchParamsCloseClick(Sender: TObject);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
+    procedure ListViewAppsListUpdateObjects(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     v_loadLocationTree: boolean;
     v_loadServiceTree: boolean;
+    v_loadPropTypes: boolean;
     procedure reloadItems(sort_field, sort: String);
     procedure loadLocationTree;
     procedure filter(p_params: TSearchParams);
-    procedure loadServiceTree;
+    procedure loadServiceTypes;
+    procedure loadPropertyTypes;
     { Private declarations }
   public
     { Public declarations }
@@ -194,80 +198,38 @@ begin
   self.MultiViewSort.HideMaster;
 end;
 
-procedure TAppListForm.ButtonPropTypesSearchParamsCloseClick(Sender: TObject);
-begin
-  RectanglePropTypesSearchParams.Visible := False;
-end;
-
 procedure TAppListForm.ButtonFilteringSubmitClick(Sender: TObject);
 var
   // aTask: ITask;
   // v_locations: String;
   // i, iChildren: Integer;
   params: TSearchParams;
+  i: Integer;
 begin
-  params.AreaFrom := EditAreaFrom.Text.ToInteger;
-  params.AreaTo := EditAreaTo.Text.ToInteger;
+  if not EditAreaFrom.Text.IsEmpty then
+    params.AreaFrom := EditAreaFrom.Text.ToInteger
+  else
+    params.AreaFrom := 0;
+  if not EditAreaTo.Text.IsEmpty then
+    params.AreaTo := EditAreaTo.Text.ToInteger
+  else
+    params.AreaTo := 0;
+
+  // მომსახურების ტიპების ჩადება პარამეტრების ლისტში
+  for i := 0 to TreeViewServices.Count - 1 do
+  begin
+    if TreeViewServices.Items[i].IsChecked then
+      params.ServiceTypes.Add(TreeViewServices.Items[i].Tag);
+  end;
+  // ქონების ტიპების ჩადება პარამეტრების ლისტში
+  for i := 0 to TreeViewServices.Count - 1 do
+  begin
+    if TreeViewServices.Items[i].IsChecked then
+      params.ServiceTypes.Add(TreeViewServices.Items[i].Tag);
+  end;
+
   RectangleFilteringDetails.Visible := False;
   self.filter(params);
-
-  { v_locations := '';
-    for i := 0 to TreeViewLocations.Count - 1 do
-    begin
-
-    if TreeViewLocations.ItemByIndex(i).IsChecked = True then
-    begin
-    v_locations := v_locations + ',' + TreeViewLocations.ItemByIndex(i).Tag.ToString;
-    if TreeViewLocations.ItemByIndex(i).ChildrenCount > 0 then
-    begin
-    for iChildren := 0 to TreeViewLocations.ItemByIndex(i).ChildrenCount - 1 do
-    begin
-    if TreeViewLocations.ItemByIndex(i).ItemByIndex(iChildren).IsChecked = True then
-    begin
-    v_locations := v_locations + ',' + TreeViewLocations.ItemByIndex(i).ItemByIndex(iChildren).Tag.ToString;
-    end;
-    end;
-    end;
-    end;
-    end;
-
-    self.PreloaderRectangle.Visible := True;
-    self.RectangleFilteringDetails.Visible := False;
-    aTask := TTask.Create(
-    procedure()
-    begin
-    RESTRequestApps.Params.Clear;
-    if not DModule.sesskey.IsEmpty then
-    begin
-    with RESTRequestApps.Params.AddItem do
-    begin
-    name := 'sesskey';
-    Value := DModule.sesskey;
-    end;
-    with RESTRequestApps.Params.AddItem do
-    begin
-    name := 'user_id';
-    Value := DModule.id.ToString;
-    end;
-    with RESTRequestApps.Params.AddItem do
-    begin
-    name := 'locations';
-    Value := v_locations;
-    end;
-    with RESTRequestApps.Params.AddItem do
-    begin
-    name := 'app_service_type_id';
-    Value := FDMemTableAppServiceTypes.FieldByName('id').AsString;
-    end;
-    with RESTRequestApps.Params.AddItem do
-    begin
-    name := 'app_service_type_id';
-    Value := FDMemTableAppServiceTypes.FieldByName('id').AsString;
-    end;
-    end;
-    RESTRequestApps.Execute;
-    end);
-    aTask.Start; }
 end;
 
 procedure TAppListForm.loadLocationTree;
@@ -310,7 +272,7 @@ begin
   end;
 end;
 
-procedure TAppListForm.loadServiceTree;
+procedure TAppListForm.loadServiceTypes;
 begin
   self.v_loadServiceTree := True;
   FDMemTableAppServiceTypes.First;
@@ -332,9 +294,26 @@ begin
   end;
 end;
 
-procedure TAppListForm.ButtonServTypesSearchParamsCloseClick(Sender: TObject);
+procedure TAppListForm.loadPropertyTypes;
 begin
-  RectangleServiceTypesSearchParams.Visible := False;
+  self.v_loadPropTypes := True;
+  FDMemTablePropTypes.First;
+  if TreeViewPropTypes.Count = 0 then
+  begin
+    TreeViewPropTypes.BeginUpdate;
+    while not FDMemTablePropTypes.Eof do
+    begin
+      with TTreeViewItem.Create(TreeViewPropTypes) do
+      begin
+        Parent := TreeViewServices;
+        Text := FDMemTablePropTypes.FieldByName('title').AsString;
+        Tag := FDMemTablePropTypes.FieldByName('id').AsInteger;
+        Index := FDMemTablePropTypes.FieldByName('id').AsInteger;
+      end;
+      FDMemTablePropTypes.Next;
+    end;
+    TreeViewPropTypes.EndUpdate;
+  end;
 end;
 
 procedure TAppListForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -355,106 +334,172 @@ begin
 end;
 
 procedure TAppListForm.initForm;
-var
-  aTask: ITask;
 begin
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
   self.v_loadLocationTree := False;
   self.v_loadServiceTree := False;
+  self.v_loadPropTypes := False;
   self.Show;
   PreloaderRectangle.Visible := True;
-  aTask := TTask.Create(
-    procedure()
+  self.RESTRequestLists.ExecuteAsync(
+    procedure
     begin
-      self.RESTRequestLists.Execute;
-    end);
-  aTask.Start;
+      self.reloadItems('id', 'desc');
+      self.loadPropertyTypes;
+      self.loadServiceTypes;
+    end, True, True);
+  SpeedButtonFiltering.Width := self.Width / 2;
+  SpeedButtonSort.Width := self.Width / 2;
 end;
 
 procedure TAppListForm.reloadItems(sort_field, sort: String);
-var
-  aTask: ITask;
 begin
   PreloaderRectangle.Visible := True;
-  aTask := TTask.Create(
-    procedure()
+  RESTRequestApps.params.Clear;
+  if not DModule.sesskey.IsEmpty then
+  begin
+    RESTRequestApps.AddParameter('sesskey', DModule.sesskey);
+    RESTRequestApps.AddParameter('user_id', DModule.id.ToString);
+  end;
+  RESTRequestApps.AddParameter('sort_field', sort_field); // სორტირების ველები
+  RESTRequestApps.AddParameter('sort', sort); // სორტირების მნიშვნელობები
+  RESTRequestApps.AddParameter('action', 'sort'); // ქმედება
+  RESTRequestApps.ExecuteAsync(
+    procedure
     begin
-      RESTRequestApps.params.Clear;
-      if not DModule.sesskey.IsEmpty then
-      begin
-        RESTRequestApps.AddParameter('sesskey', DModule.sesskey);
-        RESTRequestApps.AddParameter('user_id', DModule.id.ToString);
-      end;
-      RESTRequestApps.AddParameter('sort_field', sort_field);
-      RESTRequestApps.AddParameter('sort', sort);
-      RESTRequestApps.AddParameter('action', 'sort');
-      RESTRequestApps.Execute;
-    end);
-  aTask.Start;
+      self.ListViewAppsList.PullRefreshWait := False;
+      PreloaderRectangle.Visible := False;
+    end, True, True);
 end;
 
 procedure TAppListForm.filter(p_params: TSearchParams);
 var
-  aTask: ITask;
+  v_ServiceType, v_PropertyType: String;
+  listItem: Integer;
 begin
   PreloaderRectangle.Visible := True;
-  aTask := TTask.Create(
-    procedure()
-    begin
-      RESTRequestApps.params.Clear;
-      if not DModule.sesskey.IsEmpty then
-      begin
-        RESTRequestApps.AddParameter('sesskey', DModule.sesskey);
-        RESTRequestApps.AddParameter('user_id', DModule.id.ToString);
-      end;
-      if p_params.AreaFrom > 0 then
-        RESTRequestApps.AddParameter('area_from', p_params.AreaFrom.ToString);
-      if p_params.AreaFrom > 0 then
-        RESTRequestApps.AddParameter('area_to', p_params.AreaTo.ToString);
+  RESTRequestApps.params.Clear;
+  if not DModule.sesskey.IsEmpty then
+  begin
+    RESTRequestApps.AddParameter('sesskey', DModule.sesskey);
+    RESTRequestApps.AddParameter('user_id', DModule.id.ToString);
+  end;
+  // ფართობი დან
+  if p_params.AreaFrom > 0 then
+    RESTRequestApps.AddParameter('area_from', p_params.AreaFrom.ToString);
+  // ფართობი მდე
+  if p_params.AreaFrom > 0 then
+    RESTRequestApps.AddParameter('area_to', p_params.AreaTo.ToString);
+  v_ServiceType := '';
+  // მომსახურების ტიპების ამოღება ლისტიდან
+  for listItem in p_params.ServiceTypes do
+  begin
+    v_ServiceType := v_ServiceType + listItem.ToString + ',';
+  end;
+  // ქონების ტიპების ამოღება ლისტიდან
+  for listItem in p_params.PropertyTypes do
+  begin
+    v_PropertyType := v_PropertyType + listItem.ToString + ',';
+  end;
+  // მომსახურების ტიპების სერიალიზაცია
+  if not v_ServiceType.IsEmpty then
+    RESTRequestApps.AddParameter('service_types',
+      v_ServiceType.Remove(v_ServiceType.Length - 1));
+  // ქონების ტიპების სერიალიზაცია
+  if not v_PropertyType.IsEmpty then
+    RESTRequestApps.AddParameter('property_types',
+      v_PropertyType.Remove(v_PropertyType.Length - 1));
 
-      RESTRequestApps.AddParameter('sort_field', 'id');
-      RESTRequestApps.AddParameter('sort', 'desc');
-      RESTRequestApps.AddParameter('paction', 'filter');
-      RESTRequestApps.Execute;
-    end);
-  aTask.Start;
+  RESTRequestApps.AddParameter('sort_field', 'id'); // სორტირების ველი
+  RESTRequestApps.AddParameter('sort', 'desc'); // სორტირების მეთოდი
+  RESTRequestApps.AddParameter('paction', 'filter'); // ქმედება
+  RESTRequestApps.ExecuteAsync(
+    procedure
+    begin
+      self.ListViewAppsList.PullRefreshWait := False;
+      PreloaderRectangle.Visible := False;
+    end, True, True);
 end;
 
 procedure TAppListForm.ListBoxItem1Click(Sender: TObject);
 begin
-  RectangleServiceTypesSearchParams.Visible := True;
-  if self.v_loadServiceTree = False then
-    self.loadServiceTree;
+  if RectangleServiceTypesSearchParams.Visible = False then
+  begin
+    RectangleServiceTypesSearchParams.Visible := True;
+    RectanglePropTypesSearchParams.Visible := False; // ქონების ტიპების აკეცვა
+    if self.v_loadServiceTree = False then
+      self.loadServiceTypes;
+    if self.v_loadPropTypes = False then
+      self.loadPropertyTypes;
+  end
+  else
+    RectangleServiceTypesSearchParams.Visible := False;
 end;
 
 procedure TAppListForm.ListBoxItem2Click(Sender: TObject);
 begin
-  RectanglePropTypesSearchParams.Visible := True;
-  if self.v_loadLocationTree = False then
-    self.loadLocationTree;
+  if RectanglePropTypesSearchParams.Visible = False then
+  begin
+    RectanglePropTypesSearchParams.Visible := True;
+    if self.v_loadLocationTree = False then
+      self.loadLocationTree;
+  end
+  else
+  begin
+    RectanglePropTypesSearchParams.Visible := False;
+  end;
 end;
 
-procedure TAppListForm.ListView1ItemClickEx(const Sender: TObject;
+procedure TAppListForm.ListViewAppsListItemClickEx(const Sender: TObject;
 ItemIndex: Integer; const LocalClickPos: TPointF;
 const ItemObject: TListItemDrawable);
 var
-  id: Integer;
+  id, v_height: Integer;
 begin
   if (ItemObject is TListItemText) or (ItemObject is TListItemImage) then
   begin
-    if (ItemObject.name = 'app_property_requisites_count') or
-      (ItemObject.name = 'ArrowImage') then
+    if (ItemObject.Name = 'app_property_requisites_count') or
+      (ItemObject.Name = 'ArrowIcon') or (ItemObject.Name = 'SelectedLineRedBG')
+    then
     begin
-      if ListView1.Selected.Height = 120 then
+      v_height := TListItemText(ListViewAppsList.Selected.View.FindDrawable
+        ('v_app_property_requisites_count')).Text.ToInteger * 35;
+      if ListViewAppsList.Selected.Height = 150 then
       begin
-        ListView1.Selected.Height := 200;
-        TListItem(ListView1.Selected).View.FindDrawable('details')
+        ListViewAppsList.Selected.Height := v_height + 150;
+        TListItem(ListViewAppsList.Selected).View.FindDrawable('details')
           .Visible := True;
+        TListItem(ListViewAppsList.Selected).View.FindDrawable('details').Height
+          := v_height;
+        TListItemImage(ListViewAppsList.Selected.View.FindDrawable('ArrowIcon'))
+          .ImageIndex := 3;
+        TListItemImage(ListViewAppsList.Selected.View.FindDrawable
+          ('IconCalendar')).ImageIndex := 5;
+        TListItemImage(ListViewAppsList.Selected.View.FindDrawable
+          ('SelectedLineRedBG')).Visible := True;
+
+        TListItemText(ListViewAppsList.Selected.View.FindDrawable('create_date')
+          ).TextColor := TAlphaColorRec.White;
+
+        TListItemText(ListViewAppsList.Items[ItemIndex].View.FindDrawable
+          ('create_date')).TextColor := TAlphaColor($FFFFFF);
       end
       else
       begin
-        ListView1.Selected.Height := 120;
-        TListItem(ListView1.Selected).View.FindDrawable('details')
+        ListViewAppsList.Selected.Height := 150;
+        TListItem(ListViewAppsList.Selected).View.FindDrawable('details')
           .Visible := False;
+        TListItemImage(ListViewAppsList.Selected.View.FindDrawable('ArrowIcon'))
+          .ImageIndex := 2;
+        TListItemImage(ListViewAppsList.Selected.View.FindDrawable
+          ('IconCalendar')).ImageIndex := 1;
+        TListItemImage(ListViewAppsList.Selected.View.FindDrawable
+          ('SelectedLineRedBG')).Visible := False;
+
+        TListItemText(ListViewAppsList.Selected.View.FindDrawable('create_date')
+          ).TextColor := TAlphaColorRec.Black;
+        TListItemText(ListViewAppsList.Selected.View.FindDrawable
+          ('app_property_requisites_count')).TextColor := TAlphaColorRec.Black;
       end;
     end
     else
@@ -468,29 +513,23 @@ begin
   end;
 end;
 
-procedure TAppListForm.ListView1PullRefresh(Sender: TObject);
+procedure TAppListForm.ListViewAppsListPullRefresh(Sender: TObject);
 begin
-  self.ListView1.PullRefreshWait := True;
+  self.ListViewAppsList.PullRefreshWait := True;
   self.reloadItems('id', 'desc');
 end;
 
-procedure TAppListForm.RESTRequestAppsAfterExecute(Sender: TCustomRESTRequest);
+procedure TAppListForm.ListViewAppsListUpdateObjects(const Sender: TObject;
+const AItem: TListViewItem);
 begin
-  self.ListView1.PullRefreshWait := False;
-  PreloaderRectangle.Visible := False;
-end;
-
-procedure TAppListForm.RESTRequestListsAfterExecute(Sender: TCustomRESTRequest);
-begin
-  self.reloadItems('id', 'desc');
+  TListItemImage(AItem.Objects.FindDrawable('IconCreateDate')).ImageIndex := 0;
+  TListItemImage(AItem.Objects.FindDrawable('IconCalendar')).ImageIndex := 1;
+  TListItemImage(AItem.Objects.FindDrawable('ArrowImage')).ImageIndex := 2;
+  TListItemText(AItem.Objects.FindDrawable('location')).Width :=
+    ListViewAppsList.Width - 100;
 end;
 
 procedure TAppListForm.SpeedButton1Click(Sender: TObject);
-begin
-  RectangleFilteringDetails.Visible := False;
-end;
-
-procedure TAppListForm.SpeedButton2Click(Sender: TObject);
 begin
   RectangleFilteringDetails.Visible := False;
 end;

@@ -2,10 +2,9 @@ object UserNotificationsForm: TUserNotificationsForm
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 480
-  ClientWidth = 369
-  SystemStatusBar.BackgroundColor = xFF198D60
-  SystemStatusBar.Visibility = Invisible
+  ClientHeight = 534
+  ClientWidth = 507
+  SystemStatusBar.BackgroundColor = claBlack
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -18,8 +17,8 @@ object UserNotificationsForm: TUserNotificationsForm
     HeaderAppearanceClassName = 'TListHeaderObjects'
     FooterAppearanceClassName = 'TListHeaderObjects'
     Align = Client
-    Size.Width = 369.000000000000000000
-    Size.Height = 430.000000000000000000
+    Size.Width = 507.000000000000000000
+    Size.Height = 449.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     ItemAppearance.ItemHeight = 100
@@ -73,8 +72,8 @@ object UserNotificationsForm: TUserNotificationsForm
         426082}
       Fill.Bitmap.WrapMode = Tile
       Fill.Kind = Bitmap
-      Size.Width = 523.000000000000000000
-      Size.Height = 430.000000000000000000
+      Size.Width = 507.000000000000000000
+      Size.Height = 474.000000000000000000
       Size.PlatformDefault = False
       Visible = False
       object FMXLoadingIndicator1: TFMXLoadingIndicator
@@ -84,42 +83,52 @@ object UserNotificationsForm: TUserNotificationsForm
         Size.Height = 100.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Color = xFF198D60
+        Color = xFFFF3434
         Kind = BallClipRotatePulse
       end
     end
   end
-  object RectangleHeader: TRectangle
+  inline HeaderFrame1: THeaderFrame
     Align = Top
-    Fill.Color = xFF198D60
-    Size.Width = 369.000000000000000000
-    Size.Height = 50.000000000000000000
+    Position.Y = 25.000000000000000000
+    Size.Width = 507.000000000000000000
+    Size.Height = 60.000000000000000000
     Size.PlatformDefault = False
-    object ButtonBack: TButton
-      Align = Left
-      IconTintColor = claWhitesmoke
-      Position.Y = 1.000000000000000000
-      Size.Width = 48.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'priortoolbutton'
-      TabOrder = 0
-      Text = 'ButtonBack'
-      OnClick = ButtonBackClick
+    inherited Line1: TLine
+      Size.Width = 507.000000000000000000
     end
-    object LabelAppName: TLabel
-      Anchors = [akLeft, akTop, akRight]
+    inherited RectangleHeader: TRectangle
+      Size.Width = 507.000000000000000000
+      inherited ButtonBack: TButton
+        Position.Y = 5.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        OnClick = HeaderFrame1ButtonBackClick
+      end
+      inherited LabelAppName: TLabel
+        Size.Width = 419.000000000000000000
+      end
+    end
+  end
+  object RectangleStatusBar: TRectangle
+    Align = MostTop
+    Fill.Color = xFFFF3434
+    Size.Width = 507.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    Stroke.Dash = Dot
+    object LabelStatusBar: TLabel
+      Align = Client
       StyledSettings = [Family]
-      Position.X = 48.000000000000000000
-      Size.Width = 278.000000000000000000
-      Size.Height = 50.000000000000000000
+      Size.Width = 507.000000000000000000
+      Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 14.000000000000000000
-      TextSettings.FontColor = claWhitesmoke
-      TextSettings.HorzAlign = Center
-      TextSettings.Trimming = Word
-      Text = #4321#4312#4321#4322#4308#4315#4323#4320#4312' '#4328#4308#4322#4327#4317#4305#4312#4316#4308#4305#4308#4305#4312
-      TabOrder = 1
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      Text = 'Amzomveli'
+      TabOrder = 0
     end
   end
   object RESTRequestNotifications: TRESTRequest
@@ -135,7 +144,6 @@ object UserNotificationsForm: TUserNotificationsForm
       end>
     Resource = 'user/notifications'
     Response = RESTResponseNotifications
-    OnAfterExecute = RESTRequestNotificationsAfterExecute
     SynchronizedEvents = False
     Left = 272
     Top = 72
@@ -162,12 +170,17 @@ object UserNotificationsForm: TUserNotificationsForm
         Size = 255
       end
       item
+        Name = 'user_id'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
         Name = 'app_id'
         DataType = ftWideString
         Size = 255
       end
       item
-        Name = 'user_id'
+        Name = 'notification_type_id'
         DataType = ftWideString
         Size = 255
       end
@@ -177,7 +190,7 @@ object UserNotificationsForm: TUserNotificationsForm
         Size = 255
       end
       item
-        Name = 'notification_type_id'
+        Name = 'app_offer_id'
         DataType = ftWideString
         Size = 255
       end
@@ -188,6 +201,11 @@ object UserNotificationsForm: TUserNotificationsForm
       end
       item
         Name = 'description'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'response'
         DataType = ftWideString
         Size = 255
       end
@@ -217,7 +235,12 @@ object UserNotificationsForm: TUserNotificationsForm
         Size = 255
       end
       item
-        Name = 'response'
+        Name = 'deviceToken'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'deviceID'
         DataType = ftWideString
         Size = 255
       end
@@ -232,12 +255,7 @@ object UserNotificationsForm: TUserNotificationsForm
         Size = 255
       end
       item
-        Name = 'deviceToken'
-        DataType = ftWideString
-        Size = 255
-      end
-      item
-        Name = 'deviceID'
+        Name = 'offer_full_name'
         DataType = ftWideString
         Size = 255
       end>

@@ -14,7 +14,7 @@ uses
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.EngExt,
   FMX.Bind.DBEngExt,
   Data.Bind.DBScope, System.UIConsts, IdURI, FMX.Ani, FMX.Layouts,
-  FMX.LoadingIndicator, FMX.Toast;
+  FMX.LoadingIndicator, FMX.Toast, Header;
 
 type
   TUserAreaForm = class(TForm)
@@ -28,9 +28,6 @@ type
     FDMemTableUserDetails: TFDMemTable;
     RectanglePreloader: TRectangle;
     RectangleMain: TRectangle;
-    RectangleHeader: TRectangle;
-    ButtonBack: TButton;
-    Label1: TLabel;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkControlToField3: TLinkControlToField;
@@ -58,6 +55,10 @@ type
     EditNewPass: TEdit;
     EditNewPassC: TEdit;
     LabelOldPass: TLabel;
+    HeaderFrame1: THeaderFrame;
+    StyleBookUserArea: TStyleBook;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
     procedure RESTRequestUserDetailsAfterExecute(Sender: TCustomRESTRequest);
     procedure Button1Click(Sender: TObject);
     procedure RESTRequestSetAfterExecute(Sender: TCustomRESTRequest);
@@ -65,6 +66,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure HeaderFrame1ButtonBackClick(Sender: TObject);
   private
     procedure loadUserDetails;
     { Private declarations }
@@ -149,9 +151,16 @@ begin
     self.Free;
 end;
 
+procedure TUserAreaForm.HeaderFrame1ButtonBackClick(Sender: TObject);
+begin
+  HeaderFrame1.ButtonBackClick(Sender);
+
+end;
+
 procedure TUserAreaForm.initForm;
 begin
   self.Show;
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
   RectanglePreloader.Visible := True;
   self.loadUserDetails;
 end;

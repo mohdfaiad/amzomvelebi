@@ -18,20 +18,11 @@ Coordinates=314,10,167,146
 [DModule.RESTClient]
 Coordinates=491,10,137,80
 
-[LabelAppName]
-Coordinates=638,10,103,58
-
 [RectanglePreloader]
 Coordinates=397,364,128,36
 
-[ButtonBack]
-Coordinates=183,364,80,58
-
-[RectangleHeader]
-Coordinates=273,364,114,36
-
 []
-Coordinates=656,87,173,36
+Coordinates=273,364,114,36
 
 [BindSourceDB1]
 Coordinates=610,150,149,336
@@ -49,5 +40,8 @@ Visible=False
 Visible=False
 
 [AppDetailForm.FDMemTableapp_property_requisites]
+Visible=False
+
+[AppDetailForm.FDMemTableAmzomveli]
 Visible=False
 

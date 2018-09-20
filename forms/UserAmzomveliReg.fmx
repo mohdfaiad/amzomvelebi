@@ -2,11 +2,11 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
   Left = 0
   Top = 0
   Caption = 'UserAmzomveliRegForm'
-  ClientHeight = 579
+  ClientHeight = 629
   ClientWidth = 432
   Fill.Color = xFFF3F3F3
   Fill.Kind = Solid
-  SystemStatusBar.Visibility = Invisible
+  SystemStatusBar.BackgroundColor = claBlack
   StyleBook = StyleBook1
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -21,6 +21,7 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
   end
   inline HeaderFrame1: THeaderFrame
     Align = Top
+    Position.Y = 25.000000000000000000
     Size.Width = 432.000000000000000000
     Size.Height = 60.000000000000000000
     Size.PlatformDefault = False
@@ -38377,11 +38378,11 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
   object VertScrollBox1: TVertScrollBox
     Align = Client
     Size.Width = 432.000000000000000000
-    Size.Height = 519.000000000000000000
+    Size.Height = 544.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 6
     Viewport.Width = 432.000000000000000000
-    Viewport.Height = 519.000000000000000000
+    Viewport.Height = 544.000000000000000000
     object CPasswordEdit: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
@@ -38921,24 +38922,6 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
       StyledSettings = [Family, Size, Style]
       KillFocusByReturn = True
     end
-    object RegButton: TButton
-      Align = Bottom
-      StyledSettings = [Size, Style, FontColor]
-      Margins.Left = 10.000000000000000000
-      Margins.Top = 7.000000000000000000
-      Margins.Right = 10.000000000000000000
-      Margins.Bottom = 7.000000000000000000
-      Position.X = 10.000000000000000000
-      Position.Y = 452.000000000000000000
-      Size.Width = 412.000000000000000000
-      Size.Height = 60.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'buttonRed'
-      TabOrder = 5
-      Text = #4315#4317#4315#4334#4315#4304#4320#4308#4305#4314#4312#4321' '#4320#4308#4306#4312#4321#4322#4320#4304#4330#4312#4304
-      TextSettings.Font.Family = 'Lucida Fax'
-      OnClick = RegButtonClick
-    end
     object PhoneEdit: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
@@ -38957,6 +38940,25 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
       TextPrompt = #4322#4308#4314#4308#4324#4317#4316#4312#4321' '#4316#4317#4315#4308#4320#4312
       KillFocusByReturn = True
     end
+    object RegButton: TButton
+      Align = Bottom
+      StyledSettings = [Style, FontColor]
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 7.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 7.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 477.000000000000000000
+      Size.Width = 412.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'buttonRed'
+      TabOrder = 5
+      Text = #4315#4317#4315#4334#4315#4304#4320#4308#4305#4314#4312#4321' '#4320#4308#4306#4312#4321#4322#4320#4304#4330#4312#4304
+      TextSettings.Font.Family = 'BPG Nino Mtavruli'
+      TextSettings.Font.Size = 16.000000000000000000
+      OnClick = RegButtonClick
+    end
   end
   object RectanglePreloader: TRectangle
     Align = Client
@@ -38968,7 +38970,7 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
     Fill.Bitmap.WrapMode = Tile
     Fill.Kind = Bitmap
     Size.Width = 432.000000000000000000
-    Size.Height = 548.000000000000000000
+    Size.Height = 495.000000000000000000
     Size.PlatformDefault = False
     Visible = False
     object FMXLoadingIndicator1: TFMXLoadingIndicator
@@ -39034,6 +39036,27 @@ object UserAmzomveliRegForm: TUserAmzomveliRegForm
           TabOrder = 1
         end
       end
+    end
+  end
+  object RectangleStatusBar: TRectangle
+    Align = MostTop
+    Fill.Color = xFFFF3434
+    Size.Width = 432.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    Stroke.Dash = Dot
+    object LabelStatusBar: TLabel
+      Align = Client
+      StyledSettings = [Family]
+      Size.Width = 432.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      Text = 'Amzomveli'
+      TabOrder = 0
     end
   end
   object RESTRequestReg: TRESTRequest

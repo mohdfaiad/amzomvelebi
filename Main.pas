@@ -19,7 +19,8 @@ uses
   System.PushNotification,
   System.Notification,
   FMX.ScrollBox, FMX.Memo,
-  DW.PushClient, IdURI, System.IOUtils,
+  DW.PushClient,
+  IdURI, System.IOUtils,
   Inifiles, FMX.Header, User2ListFR,
   FMX.LoadingIndicator
 {$IFDEF ANDROID}
@@ -37,7 +38,7 @@ uses
   Androidapi.JNI.Provider,
   Androidapi.JNI.Util,
   Androidapi.JNI.Support,
-  System.Android.Notification
+  System.Android.Notification, MyContractsUnit, AppOfferedUnit
 {$ENDIF ANDROID}
 {$IFDEF IOS}
     , FMX.PushNotification.IOS
@@ -48,7 +49,6 @@ type
     ActionList1: TActionList;
     AuthAction: TAction;
     RectangleNonAuth: TRectangle;
-    ButtonAuthReg: TButton;
     RectangleProfile: TRectangle;
     ButtonUserNotifications: TButton;
     ActionAppAdding: TAction;
@@ -65,7 +65,7 @@ type
     ActiontabSliderLeft: TAction;
     ChangeTabActionRight: TChangeTabAction;
     ChangeTabActionLeft: TChangeTabAction;
-    StyleBook1: TStyleBook;
+    StyleBookMain: TStyleBook;
     ButtonSettings: TButton;
     ButtonSignOut: TButton;
     ActionSignOut: TAction;
@@ -74,20 +74,8 @@ type
     RESTResponseDataSetAdapterInit: TRESTResponseDataSetAdapter;
     FDMemTableInit: TFDMemTable;
     PreloaderRectangle: TRectangle;
-    RESTResponseDataSetAdapterPages: TRESTResponseDataSetAdapter;
-    FDMemTablePages: TFDMemTable;
-    FDMemTablePagesid: TWideStringField;
-    FDMemTablePagesgroup_id: TWideStringField;
-    FDMemTablePageslang_id: TWideStringField;
-    FDMemTablePagestitle: TWideStringField;
-    FDMemTablePagescontent: TWideStringField;
-    FDMemTablePagesmeta_keywords: TWideStringField;
-    FDMemTablePagesmeta_description: TWideStringField;
-    FDMemTablePagescreate_date: TWideStringField;
-    FDMemTablePagesmodify_date: TWideStringField;
     BindSourceDB1: TBindSourceDB;
     ImageList1: TImageList;
-    ButtonRegAmzomveli: TButton;
     RectangleMainHeader: TRectangle;
     ButtonMasterView: TButton;
     ActionRegAmzomveli: TAction;
@@ -99,22 +87,6 @@ type
     ActionLocationsConfig: TAction;
     MultiView1: TMultiView;
     RESTRequestDeviceToken: TRESTRequest;
-    NotificationCenter1: TNotificationCenter;
-    RESTResponseDataSetAdapterAuth: TRESTResponseDataSetAdapter;
-    FDMemTableAuth: TFDMemTable;
-    FDMemTableAuthid: TWideStringField;
-    FDMemTableAuthuser_type_id: TWideStringField;
-    FDMemTableAuthuser_status_id: TWideStringField;
-    FDMemTableAuthfname: TWideStringField;
-    FDMemTableAuthlname: TWideStringField;
-    FDMemTableAuthphone: TWideStringField;
-    FDMemTableAuthemail: TWideStringField;
-    FDMemTableAuthcreate_date: TWideStringField;
-    FDMemTableAuthmodify_date: TWideStringField;
-    FDMemTableAuthregipaddr: TWideStringField;
-    FDMemTableAuthsesskey: TWideStringField;
-    FDMemTableAuthloginstatus: TWideStringField;
-    FDMemTableAuthisSetLocations: TWideStringField;
     ActionRegGanmcxadebeli: TAction;
     LabelFullName: TLabel;
     FMXLoadingIndicator1: TFMXLoadingIndicator;
@@ -124,74 +96,12 @@ type
     Button4: TButton;
     ButtonAmzReg: TButton;
     ButtonAuth: TButton;
-    Image1: TImage;
-    User2ListFrame1: TUser2ListFrame;
     ButtonContracts: TButton;
     ActionMyContracts: TAction;
     ImageLogo: TImage;
     TabItemBidedApps: TTabItem;
-    ListView1: TListView;
-    RESTRequestMyBidedApps: TRESTRequest;
-    RESTResponseBidedApps: TRESTResponse;
-    RESTResponseDataSetAdapterBidedApps: TRESTResponseDataSetAdapter;
-    FDMemTableBidedApps: TFDMemTable;
-    FDMemTableBidedAppsid: TWideStringField;
-    FDMemTableBidedAppsuser_id: TWideStringField;
-    FDMemTableBidedAppsdeadlineby_user: TWideStringField;
-    FDMemTableBidedAppsexecute_days: TWideStringField;
-    FDMemTableBidedAppsimageIndex: TWideStringField;
-    FDMemTableBidedAppsusername: TWideStringField;
-    FDMemTableBidedAppsnote: TWideStringField;
-    FDMemTableBidedAppsapp_status_id: TWideStringField;
-    FDMemTableBidedAppsnotification_on_email: TWideStringField;
-    FDMemTableBidedAppsnotification_on_device: TWideStringField;
-    FDMemTableBidedAppscreate_date: TWideStringField;
-    FDMemTableBidedAppsoffered_price: TWideStringField;
-    FDMemTableBidedAppsstart_date: TWideStringField;
-    FDMemTableBidedAppsoffered_description: TWideStringField;
-    FDMemTableBidedAppsapproved_on_time: TWideStringField;
-    FDMemTableBidedAppsapproved_note: TWideStringField;
-    FDMemTableBidedAppsapproved: TWideStringField;
-    FDMemTableBidedAppsapproved_id: TWideStringField;
-    FDMemTableBidedAppsapp_property_requisites: TWideStringField;
-    FDMemTableBidedAppslocation: TWideStringField;
-    FDMemTableBidedAppsarea: TWideStringField;
-    FDMemTableBidedAppsapp_property_requisites_count: TWideStringField;
-    FDMemTableBidedAppsdropdownarrow_imageindex: TWideStringField;
     BindSourceDB3: TBindSourceDB;
-    LinkListControlToField1: TLinkListControlToField;
     SpeedButtonNotifications: TSpeedButton;
-    FDMemTableInittotal_apps_count: TWideStringField;
-    FDMemTableInitweek_apps_count: TWideStringField;
-    FDMemTableInitusers2count: TWideStringField;
-    FDMemTableInitpages: TWideStringField;
-    FDMemTableInitpagesid: TWideStringField;
-    FDMemTableInitpagestitle: TWideStringField;
-    FDMemTableInitpagescontent: TWideStringField;
-    FDMemTableInitpagesmeta_keywords: TWideStringField;
-    FDMemTableInitpagesmeta_description: TWideStringField;
-    FDMemTableInitpagescreate_date: TWideStringField;
-    FDMemTableInitpagesmodify_date: TWideStringField;
-    FDMemTableInitapp_name: TWideStringField;
-    FDMemTableInitAmzomvelebi_GCMAppID: TWideStringField;
-    FDMemTableInitAmzomvelebi_GCMServerKey: TWideStringField;
-    FDMemTableInituserAgent: TWideStringField;
-    FDMemTableInitaction: TWideStringField;
-    FDMemTableInitmsg: TWideStringField;
-    FDMemTableInituser: TWideStringField;
-    FDMemTableInituserid: TWideStringField;
-    FDMemTableInituseruser_type_id: TWideStringField;
-    FDMemTableInituseruser_status_id: TWideStringField;
-    FDMemTableInituserfull_name: TWideStringField;
-    FDMemTableInituserphone: TWideStringField;
-    FDMemTableInituseremail: TWideStringField;
-    FDMemTableInitusercreate_date: TWideStringField;
-    FDMemTableInitusermodify_date: TWideStringField;
-    FDMemTableInituserregipaddr: TWideStringField;
-    FDMemTableInitusersesskey: TWideStringField;
-    FDMemTableInituserloginstatus: TWideStringField;
-    FDMemTableInituserisSetLocations: TWideStringField;
-    FDMemTableInitusernotifications: TWideStringField;
     LinkPropertyToFieldText5: TLinkPropertyToField;
     ImageListRed: TImageList;
     RectangleConnectionStatus: TRectangle;
@@ -220,35 +130,123 @@ type
     TextMainPageText: TText;
     ImageAzomva: TImage;
     ActionAppsList: TAction;
-    procedure AuthActionExecute(Sender: TObject);
+    RectangleAuthReg: TRectangle;
+    Label1: TLabel;
+    Image2: TImage;
+    RectangleReg: TRectangle;
+    Image3: TImage;
+    Label3: TLabel;
+    NotificationCenter1: TNotificationCenter;
+    LinkPropertyToFieldText: TLinkPropertyToField;
+    TimerInitActivation: TTimer;
+    FDMemTableInitmainFields: TWideStringField;
+    FDMemTableInitmainFieldstotal_apps_count: TWideStringField;
+    FDMemTableInitmainFieldsweek_apps_count: TWideStringField;
+    FDMemTableInitmainFieldsusers2count: TWideStringField;
+    FDMemTableInitmainFieldsapp_name: TWideStringField;
+    FDMemTableInitmainFieldsAmzomvelebi_GCMAppID: TWideStringField;
+    FDMemTableInitmainFieldsAmzomvelebi_GCMServerKey: TWideStringField;
+    FDMemTableInitmainFieldsuserAgent: TWideStringField;
+    FDMemTableInitmainFieldsaction: TWideStringField;
+    FDMemTableInitmainFieldsmsg: TWideStringField;
+    FDMemTableInitpages: TWideStringField;
+    FDMemTableInitpagesid: TWideStringField;
+    FDMemTableInitpagestitle: TWideStringField;
+    FDMemTableInitpagescontent: TWideStringField;
+    FDMemTableInitpagesmeta_keywords: TWideStringField;
+    FDMemTableInitpagesmeta_description: TWideStringField;
+    FDMemTableInitpagescreate_date: TWideStringField;
+    FDMemTableInitpagesmodify_date: TWideStringField;
+    FDMemTableInituser: TWideStringField;
+    FDMemTableInituserid: TWideStringField;
+    FDMemTableInituseruser_type_id: TWideStringField;
+    FDMemTableInituseruser_status_id: TWideStringField;
+    FDMemTableInituserrating: TWideStringField;
+    FDMemTableInituserfull_name: TWideStringField;
+    FDMemTableInituserphone: TWideStringField;
+    FDMemTableInituseremail: TWideStringField;
+    FDMemTableInitusercreate_date: TWideStringField;
+    FDMemTableInitusermodify_date: TWideStringField;
+    FDMemTableInituserregipaddr: TWideStringField;
+    FDMemTableInitusersesskey: TWideStringField;
+    FDMemTableInituserloginstatus: TWideStringField;
+    FDMemTableInituserisSetLocations: TWideStringField;
+    FDMemTableInitusernotifications: TWideStringField;
+    AppOfferedFrame1: TAppOfferedFrame;
+    RectangleStatusBar: TRectangle;
+    RectangleMain: TRectangle;
+    LabelStatusBar: TLabel;
+    MyContractsFrame1: TMyContractsFrame;
+    LinkPropertyToFieldText2: TLinkPropertyToField;
+    RectangleHowItWork: TRectangle;
+    RectangleInfo: TRectangle;
+    LabelInfoTitle: TLabel;
+    VertScrollBox2: TVertScrollBox;
+    TextInfo: TText;
+    InfoButtonAddApp: TButton;
+    FloatAnimationInfoDialog: TFloatAnimation;
+    ActionService1: TAction;
+    ActionService2: TAction;
+    ActionService3: TAction;
+    FDMemTableServices: TFDMemTable;
+    RESTResponseDataSetAdapterServices: TRESTResponseDataSetAdapter;
+    FDMemTableServicesid: TWideStringField;
+    FDMemTableServicestitle: TWideStringField;
+    FDMemTableServicescontent: TWideStringField;
+    FDMemTableServicesmeta_keywords: TWideStringField;
+    FDMemTableServicesmeta_description: TWideStringField;
+    FDMemTableServicescreate_date: TWideStringField;
+    FDMemTableServicesmodify_date: TWideStringField;
+    ActionHowItWorks: TAction;
     procedure ActionUserAreaExecute(Sender: TObject);
     procedure TimerVersioningTimer(Sender: TObject);
     procedure RESTRequestVersioningAfterExecute(Sender: TCustomRESTRequest);
     procedure ActionSignOutExecute(Sender: TObject);
-    procedure RESTRequestSignOutAfterExecute(Sender: TCustomRESTRequest);
     procedure FormCreate(Sender: TObject);
     procedure ActionUserNotificationsExecute(Sender: TObject);
     procedure ActionServiceTypesExecute(Sender: TObject);
     procedure ActionLocationsConfigExecute(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure NotificationCenter1ReceiveLocalNotification(Sender: TObject;
-      ANotification: TNotification);
-    procedure ActionRegAmzomveliExecute(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Rectangle1Click(Sender: TObject);
-    procedure User2ListFrame1Button1Click(Sender: TObject);
     procedure ActionMyContractsExecute(Sender: TObject);
-    procedure RESTRequestMyBidedAppsAfterExecute(Sender: TCustomRESTRequest);
     procedure TabControl1Change(Sender: TObject);
-    procedure ListView1ItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
     procedure ActionAppsListExecute(Sender: TObject);
     procedure RectangleAppsClick(Sender: TObject);
     procedure RectangleBannerAppsClick(Sender: TObject);
     procedure LabelAppsClick(Sender: TObject);
     procedure LabelTotalAppsCountClick(Sender: TObject);
+    procedure AuthActionExecute(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+    procedure Label1Click(Sender: TObject);
+    procedure RectangleAuthRegClick(Sender: TObject);
+    procedure ActionRegAmzomveliExecute(Sender: TObject);
+    procedure Label3Click(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
+    procedure RectangleRegClick(Sender: TObject);
+    procedure NotificationCenter1ReceiveLocalNotification(Sender: TObject;
+      ANotification: TNotification);
+    procedure TimerInitActivationTimer(Sender: TObject);
+    procedure AppOfferedFrame1RESTRequestOffersAfterExecute
+      (Sender: TCustomRESTRequest);
+    procedure ColorPanel1Change(Sender: TObject);
+    procedure ActionService1Execute(Sender: TObject);
+    procedure ActionService2Execute(Sender: TObject);
+    procedure ActionService3Execute(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+    procedure Image6Click(Sender: TObject);
+    procedure Image8Click(Sender: TObject);
+    procedure Label7Click(Sender: TObject);
+    procedure Label5Click(Sender: TObject);
+    procedure Label4Click(Sender: TObject);
+    procedure TextInfoClick(Sender: TObject);
+    procedure LabelInfoTitleClick(Sender: TObject);
+    procedure InfoButtonAddAppClick(Sender: TObject);
+    procedure RectangleHowItWorkClick(Sender: TObject);
+    procedure ActionHowItWorksExecute(Sender: TObject);
+    procedure TextMainPageTextClick(Sender: TObject);
   private
     procedure PushClientChangeHandler(Sender: TObject;
       AChange: TPushService.TChanges);
@@ -261,8 +259,6 @@ type
     procedure checkVersion;
     procedure clearINIParams;
     function getDeviceID: string;
-    procedure loadMyBidedApps;
-    procedure onReceiveNotificationActionForInit;
     // procedure OnServiceConnectionChange(Sender: TObject; AChange: TPushService.TChanges);
     // function isServiceStarted: Boolean;
 
@@ -270,8 +266,10 @@ type
   public
     { Public declarations }
     FPushClient: TPushClient;
+    v_Ini: TIniFile;
     v_app_id, v_user_id, v_action: string;
     v_notification_received: Boolean;
+    PushServiceConnection: TPushServiceConnection;
     procedure DoAuthenticate;
   end;
 
@@ -284,7 +282,7 @@ implementation
 
 uses auth, DataModule, UserArea, AppList,
   UserLocations, UserNotifications, UserServiceTypes, AppDetails,
-  UserAmzomveliReg, MyContracts, User2Review;
+  UserAmzomveliReg, MyContracts, User1Review, FMX.StatusBar;
 
 procedure TMainForm.DoAuthenticate;
 begin
@@ -298,89 +296,103 @@ begin
   LabelFullName.Text := DModule.full_name;
   ButtonUserNotifications.Text := '(' + DModule.notifications.ToString +
     ') შეტყობინებები';
-  // SpeedButtonNotifications.Text := DModule.notifications.ToString;
+  SpeedButtonNotifications.Text := DModule.notifications.ToString;
   SpeedButtonNotifications.Visible := True;
   self.RectangleProfile.Visible := True;
   FPushClient.Active := True;
+  // LabelApps.Text:=FPushClient.Active.ToString(true);
   ButtonAmzReg.Visible := False;
   ButtonAuth.Visible := False;
-  self.loadMyBidedApps;
+  self.AppOfferedFrame1.initFrame;
+  self.MyContractsFrame1.initFrame;
+  TabItemAmzomvelebi.Visible := True;
+  TabItemBidedApps.Visible := True;
+  TabItemAmzomvelebi.Text := self.AppOfferedFrame1.FDMemTableOffers.
+    RecordCount.ToString;
+  TabItemBidedApps.Text := self.MyContractsFrame1.FDMemTableContracts.
+    RecordCount.ToString;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
+  TabItemAmzomvelebi.Visible := False;
   self.v_notification_received := False;
   self.SpeedButtonNotifications.Visible := False;
   self.PreloaderRectangle.Visible := True;
   TabItemBidedApps.Visible := False;
+  TabItemAmzomvelebi.Visible := False;
   FPushClient := TPushClient.Create;
   FPushClient.GCMAppID := '33239165112';
   // FPushClient.ServerKey :=
   // 'AAAA-dL2vgs:APA91bHselPykPJp2XxIRxe4mmUhR5G_onOl0a1bPLS_zGaertyAxYuKMXEAPFHnHiwr7GmZEyO7fXux8jka_9sYo1DtCENhk8X7wvPA8CxCl9uJlQuBHukNtjgtMJidSi_xoBeYJZ1W';
   // FPushClient.BundleID := cFCMBundleID;
 
-  FPushClient.UseSandbox := False; // Change this to False for production use!
+  FPushClient.UseSandbox := True; // Change this to False for production use!
   FPushClient.OnChange := PushClientChangeHandler;
   FPushClient.OnReceiveNotification := PushClientReceiveNotificationHandler;
-
-  User2ListFrame1.initFrame;
+  self.v_Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath,
+    DModule.settingsIniFile));
+  self.v_Ini.AutoSave := True;
+  // User2ListFrame1.initFrame;
 end;
 
 procedure TMainForm.PushClientReceiveNotificationHandler(Sender: TObject;
   const ANotification: TPushServiceNotification);
 var
   MyNotification: TNotification;
+  NotificationCenter: TNotificationCenter;
 begin
-  MyNotification := NotificationCenter1.CreateNotification;
+  NotificationCenter := TNotificationCenter.Create(nil);
+  MyNotification := NotificationCenter.CreateNotification;
   try
     MyNotification.Name := ANotification.JSON.GetValue('formAction')
       .Value.Replace('"', '') + '_' + ANotification.JSON.GetValue
       ('notification_id').Value.Replace('"', '') + '_' +
       ANotification.JSON.GetValue('app_id').Value.Replace('"', '');
-    // ANotification.DataObject.Values['action'].ToString.Replace('"'/, '');
-    // + '^' + ANotification.DataObject.Values['app_id'].ToString.Replace('"', '') + '^' + ANotification.DataObject.Values['user_id'].ToString.Replace('"', '');
     MyNotification.Title := ANotification.JSON.GetValue('title')
       .Value.Replace('"', '');
     MyNotification.AlertBody := ANotification.JSON.GetValue('description')
-      .Value.Replace('"', ''); // + v_action;
+      .Value.Replace('"', '');
     MyNotification.EnableSound := True;
     MyNotification.Number := 2;
     MyNotification.HasAction := True;
     MyNotification.AlertAction := 'Launch';
-    NotificationCenter1.PresentNotification(MyNotification);
-    NotificationCenter1.ApplicationIconBadgeNumber := 2;
+    NotificationCenter.PresentNotification(MyNotification);
+    NotificationCenter.ApplicationIconBadgeNumber := 2;
   finally
+    NotificationCenter.Free;
     MyNotification.DisposeOf;
   end;
 end;
 
 procedure TMainForm.NotificationCenter1ReceiveLocalNotification(Sender: TObject;
   ANotification: TNotification);
+var
+  app_id: string;
 begin
   self.NotificationCenter1.CancelNotification(ANotification.Name);
-  ShowMessage(self.v_action);
-  if self.v_action = 'TAppDetailForm' then
+  app_id := TPushServiceNotification(Sender).JSON.GetValue('app_id')
+    .Value.Replace('"', '');
+  exit;
+  if TPushServiceNotification(ANotification).JSON.GetValue('formAction')
+    .Value.Replace('"', '') = 'TAppDetailForm' then
   begin
     with TAppDetailForm.Create(Application) do
     begin
       initForm(self.v_app_id.ToInteger);
     end;
   end
-  else if self.v_action = 'TUser2ReviewForm' then
+  else if self.v_action = 'TUser1ReviewForm' then
   begin
     if self.v_user_id.ToInteger > 0 then
     begin
-      with TUser2ReviewForm.Create(Application) do
+      with TUser1ReviewForm.Create(Application) do
       begin
         initForm(self.v_user_id.ToInteger);
       end;
     end;
   end;
-end;
-
-procedure TMainForm.onReceiveNotificationActionForInit;
-begin
-  //
 end;
 
 procedure TMainForm.Rectangle1Click(Sender: TObject);
@@ -393,9 +405,24 @@ begin
   ActionAppsList.Execute;
 end;
 
+procedure TMainForm.RectangleAuthRegClick(Sender: TObject);
+begin
+  AuthAction.Execute;
+end;
+
 procedure TMainForm.RectangleBannerAppsClick(Sender: TObject);
 begin
   ActionAppsList.Execute;
+end;
+
+procedure TMainForm.RectangleHowItWorkClick(Sender: TObject);
+begin
+  RectangleHowItWork.Visible := False;
+end;
+
+procedure TMainForm.RectangleRegClick(Sender: TObject);
+begin
+  ActionRegAmzomveli.Execute;
 end;
 
 procedure TMainForm.PushClientChangeHandler(Sender: TObject;
@@ -425,68 +452,131 @@ begin
   FPushClient.Free;
 end;
 
-procedure TMainForm.ActionRegAmzomveliExecute(Sender: TObject);
+procedure TMainForm.ActionAppsListExecute(Sender: TObject);
 begin
-  // ამზომველის რეგისტრაცია
-  with TUserAmzomveliRegForm.Create(Application) do
+  if Assigned(AppListForm) then
+    AppListForm.initForm
+  else
   begin
-    initForm;
+    with TAppListForm.Create(Application) do
+    begin
+      initForm;
+    end;
   end;
 end;
 
-procedure TMainForm.ActionAppsListExecute(Sender: TObject);
+procedure TMainForm.ActionHowItWorksExecute(Sender: TObject);
 begin
-  with TAppListForm.Create(Application) do
-  begin
-    initForm;
-  end;
+  LabelInfoTitle.Text := FDMemTableServices.FieldByName('pages.title').AsString;
+  TextInfo.Text := FDMemTableInit.FieldByName('pages.content').AsString;
+  RectangleHowItWork.Visible := True;
 end;
 
 procedure TMainForm.ActionLocationsConfigExecute(Sender: TObject);
 begin
-  with TUserLocationsForm.Create(Application) do
+  if Assigned(UserLocationsForm) then
+    UserLocationsForm.initForm
+  else
   begin
-    initForm;
+    with TUserLocationsForm.Create(Application) do
+    begin
+      initForm;
+    end;
   end;
 end;
 
 procedure TMainForm.ActionMyContractsExecute(Sender: TObject);
 begin
-  with TMyContractsForm.Create(Application) do
+  if Assigned(MyContractsForm) then
+    MyContractsForm.initForm
+  else
   begin
-    initForm;
+    with TMyContractsForm.Create(Application) do
+    begin
+      initForm;
+    end;
   end;
+end;
+
+procedure TMainForm.ActionRegAmzomveliExecute(Sender: TObject);
+begin
+  if Assigned(UserAmzomveliRegForm) then
+    UserAmzomveliRegForm.initForm
+  else
+  begin
+    // ამზომველის რეგისტრაცია
+    with TUserAmzomveliRegForm.Create(Application) do
+    begin
+      initForm;
+    end;
+  end;
+end;
+
+procedure TMainForm.ActionService1Execute(Sender: TObject);
+begin
+  FDMemTableServices.First;
+  LabelInfoTitle.Text := FDMemTableServices.FieldByName('title').AsString;
+  TextInfo.Text := FDMemTableServices.FieldByName('content').AsString;
+  RectangleHowItWork.Visible := True;
+end;
+
+procedure TMainForm.ActionService2Execute(Sender: TObject);
+begin
+  FDMemTableServices.First;
+  FDMemTableServices.Next;
+  LabelInfoTitle.Text := FDMemTableServices.FieldByName('title').AsString;
+  TextInfo.Text := FDMemTableServices.FieldByName('content').AsString;
+  RectangleHowItWork.Visible := True;
+end;
+
+procedure TMainForm.ActionService3Execute(Sender: TObject);
+begin
+  FDMemTableServices.Last;
+  LabelInfoTitle.Text := FDMemTableServices.FieldByName('title').AsString;
+  TextInfo.Text := FDMemTableServices.FieldByName('content').AsString;
+  RectangleHowItWork.Visible := True;
 end;
 
 procedure TMainForm.ActionServiceTypesExecute(Sender: TObject);
 begin
-  with TUserServiceTypesForm.Create(Application) do
+  if Assigned(UserServiceTypesForm) then
+    UserServiceTypesForm.initForm
+  else
   begin
-    initForm;
+    with TUserServiceTypesForm.Create(Application) do
+    begin
+      initForm;
+    end;
   end;
 end;
 
 procedure TMainForm.ActionSignOutExecute(Sender: TObject);
-var
-  aTask: ITask;
 begin
   TimerVersioning.Enabled := False;
-  aTask := TTask.Create(
-    procedure()
+  RESTRequestSignOut.Params.Clear;
+  RESTRequestSignOut.AddParameter('sesskey', DModule.sesskey);
+  RESTRequestSignOut.AddParameter('user_id', DModule.id.ToString);
+  RESTRequestSignOut.ExecuteAsync(
+    procedure
     begin
-      RESTRequestSignOut.Params.Clear;
-      RESTRequestSignOut.AddParameter('sesskey', DModule.sesskey);
-      RESTRequestSignOut.AddParameter('user_id', DModule.id.ToString);
-      RESTRequestSignOut.Execute;
-    end);
-  aTask.Start;
+      RectangleProfile.Visible := False;
+      RectangleNonAuth.Visible := True;
+      TabItemBidedApps.Visible := False;
+      DModule.SignOut;
+      self.clearINIParams;
+    end, True, True);
 end;
 
 procedure TMainForm.ActionUserAreaExecute(Sender: TObject);
 begin
-  with TUserAreaForm.Create(Application) do
+  if Assigned(UserAreaForm) then
+    UserAreaForm.initForm
+  else
   begin
-    initForm;
+    with TUserAreaForm.Create(Application) do
+    begin
+      initForm;
+    end;
   end;
 end;
 
@@ -498,30 +588,24 @@ begin
   end;
 end;
 
-procedure TMainForm.AuthActionExecute(Sender: TObject);
+procedure TMainForm.AppOfferedFrame1RESTRequestOffersAfterExecute
+  (Sender: TCustomRESTRequest);
 begin
-  with TauthForm.Create(Application) do
-  begin
-    initForm;
-  end;
+  AppOfferedFrame1.RESTRequestOffersAfterExecute(Sender);
+  TabItemAmzomvelebi.Visible := True;
 end;
 
-procedure TMainForm.loadMyBidedApps;
-var
-  aTask: ITask;
+procedure TMainForm.AuthActionExecute(Sender: TObject);
 begin
-  aTask := TTask.Create(
-    procedure()
+  if Assigned(authForm) then
+    authForm.initForm
+  else
+  begin
+    with TauthForm.Create(Application) do
     begin
-      if not DModule.sesskey.IsEmpty then
-      begin
-        RESTRequestMyBidedApps.Params.Clear;
-        RESTRequestMyBidedApps.AddParameter('sesskey', DModule.sesskey);
-        RESTRequestMyBidedApps.AddParameter('user_id', DModule.id.ToString);
-        RESTRequestMyBidedApps.Execute;
-      end;
-    end);
-  aTask.Start;
+      initForm;
+    end;
+  end;
 end;
 
 procedure TMainForm.Button1Click(Sender: TObject);
@@ -539,39 +623,29 @@ end;
 procedure TMainForm.Button4Click(Sender: TObject);
 begin
   self.MultiView1.HideMaster;
-  with TAppListForm.Create(Application) do
+  if Assigned(AppListForm) then
+    AppListForm.initForm
+  else
   begin
-    initForm;
+    with TAppListForm.Create(Application) do
+    begin
+      initForm;
+    end;
   end;
-end;
-
-procedure TMainForm.RESTRequestMyBidedAppsAfterExecute
-  (Sender: TCustomRESTRequest);
-begin
-  TabItemBidedApps.Visible := True;
-end;
-
-procedure TMainForm.RESTRequestSignOutAfterExecute(Sender: TCustomRESTRequest);
-begin
-  RectangleProfile.Visible := False;
-  RectangleNonAuth.Visible := True;
-  TabItemBidedApps.Visible := False;
-  DModule.SignOut;
-  self.clearINIParams;
 end;
 
 procedure TMainForm.RESTRequestVersioningAfterExecute
   (Sender: TCustomRESTRequest);
+var
+  aTask: ITask;
 begin
+  // self.showConnectionIsOnline;
+  TimerInitActivation.Enabled := True;
   self.PreloaderRectangle.Visible := False;
-  self.checkVersion;
 end;
 
 procedure TMainForm.TabControl1Change(Sender: TObject);
 begin
-  if TabControl1.ActiveTab = TabItemBidedApps then
-    self.loadMyBidedApps;
-
   if TabControl1.ActiveTab = TabItemMain then
   begin
     TabItemMain.ImageIndex := 1;
@@ -597,120 +671,105 @@ begin
   begin
     TabItemMain.ImageIndex := 0;
     TabItemUserArea.ImageIndex := 8;
-    TabItemAmzomvelebi.ImageIndex := 7;
+    TabItemAmzomvelebi.ImageIndex := 6;
     TabItemBidedApps.ImageIndex := 5;
   end;
+end;
+
+procedure TMainForm.TextInfoClick(Sender: TObject);
+begin
+  RectangleHowItWork.Visible := False;
+end;
+
+procedure TMainForm.TextMainPageTextClick(Sender: TObject);
+begin
+  ActionHowItWorks.Execute;
+end;
+
+procedure TMainForm.TimerInitActivationTimer(Sender: TObject);
+begin
+  self.TimerInitActivation.Enabled := False;
+  self.checkVersion;
 end;
 
 procedure TMainForm.TimerVersioningTimer(Sender: TObject);
 var
   aTask: ITask;
+  hash, phone, email: String;
 begin
   TimerVersioning.Enabled := False;
   aTask := TTask.Create(
     procedure()
     var
-      Ini: TIniFile;
       hash, phone, email: String;
     begin
-      Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath,
-        DModule.settingsIniFile));
-      try
-        Ini.AutoSave := True;
-        RESTRequestVersioning.Params.Clear;
-        RESTRequestVersioning.AddParameter('version', DModule.currentVersion);
-        hash := Ini.ReadString('auth', 'hash', '');
-        phone := Ini.ReadString('auth', 'phone', '');
-        email := Ini.ReadString('auth', 'email', '');
-        if Ini.ReadString('auth', 'hash', '').IsEmpty = False then
-        begin
-          RESTRequestVersioning.AddParameter('op', 'login_with_hash');
-          RESTRequestVersioning.AddParameter('hash', hash);
-          RESTRequestVersioning.AddParameter('phone', phone);
-          RESTRequestVersioning.AddParameter('email', email);
-        end;
-        RESTRequestVersioning.Execute;
-      finally
-        Ini.Free;
+      RESTRequestVersioning.Params.Clear;
+      RESTRequestVersioning.AddParameter('version', DModule.currentVersion);
+      hash := self.v_Ini.ReadString('auth', 'hash', '');
+      phone := self.v_Ini.ReadString('auth', 'phone', '');
+      email := self.v_Ini.ReadString('auth', 'email', '');
+      if self.v_Ini.ReadString('auth', 'hash', '').IsEmpty = False then
+      begin
+        RESTRequestVersioning.AddParameter('op', 'login_with_hash');
+        RESTRequestVersioning.AddParameter('hash', hash);
+        RESTRequestVersioning.AddParameter('phone', phone);
+        RESTRequestVersioning.AddParameter('email', email);
       end;
+      RESTRequestVersioning.Execute;
+
     end);
   aTask.Start;
 end;
 
-procedure TMainForm.User2ListFrame1Button1Click(Sender: TObject);
-begin
-  // PreloaderRectangle.Visible := True;
-  User2ListFrame1.Button1Click(Sender);
-end;
-
 procedure TMainForm.checkVersion;
 var
-  jsonObject, UserObject: TJSONObject;
   msg: string;
   action: integer;
 begin
-  jsonObject := TJSONObject.ParseJSONValue
-    (TEncoding.UTF8.GetBytes(self.RESTResponseVersioning.Content), 0)
-    as TJSONObject;
-  UserObject := TJSONObject.ParseJSONValue
-    (TEncoding.UTF8.GetBytes(jsonObject.GetValue('user').ToJSON), 0)
-    as TJSONObject;
-  try
-    action := jsonObject.GetValue('action').Value.ToInteger;
-    msg := jsonObject.GetValue('msg').Value;
-    if action = 1 then
-    begin
-      ShowMessage(msg);
-      self.Close;
-    end;
-
-    if UserObject.GetValue('loginstatus').Value = '1' then
-    begin
-      DModule.id := UserObject.GetValue('id').Value.ToInteger;
-      DModule.user_type_id := UserObject.GetValue('user_type_id')
-        .Value.ToInteger;
-      DModule.full_name := UserObject.GetValue('full_name').Value;
-      DModule.phone := UserObject.GetValue('phone').Value;
-      DModule.email := UserObject.GetValue('email').Value;
-      DModule.sesskey := UserObject.GetValue('sesskey').Value;
-      DModule.notifications := UserObject.GetValue('notifications')
-        .Value.ToInteger;
-      self.DoAuthenticate;
-    end
-    else
-      self.clearINIParams;
-    // LabelTotalAppsCount.Text := jsonObject.GetValue('total_apps_count').Value;
-    // LabelWeekApps.Text := jsonObject.GetValue('week_apps_count').Value;
-    FPushClient.GCMAppID := jsonObject.GetValue('Amzomvelebi_GCMAppID').Value;
-    FPushClient.ServerKey := jsonObject.GetValue
-      ('Amzomvelebi_GCMServerKey').Value;
-
-    FPushClient.UseSandbox := False; // Change this to False for production use!
-    FPushClient.OnChange := PushClientChangeHandler;
-    FPushClient.OnReceiveNotification := PushClientReceiveNotificationHandler;
-    self.onReceiveNotificationActionForInit;
-  finally
-    jsonObject.Free;
-    UserObject.Free;
+  action := FDMemTableInit.FieldByName('mainFields.action').AsInteger;
+  msg := FDMemTableInit.FieldByName('mainFields.msg').AsString;
+  if action = 1 then
+  begin
+    ShowMessage(msg);
+    self.Close;
   end;
+
+  if FDMemTableInit.FieldByName('user.loginstatus')
+    .AsString = '1'
+  then
+  begin
+    DModule.id := FDMemTableInit.FieldByName('user.id').AsInteger;
+    DModule.user_type_id := FDMemTableInit.FieldByName('user.user_type_id')
+      .AsInteger;
+    DModule.full_name := FDMemTableInit.FieldByName('user.full_name').AsString;
+    DModule.phone := FDMemTableInit.FieldByName('user.phone').AsString;
+    DModule.email := FDMemTableInit.FieldByName('user.email').AsString;
+    DModule.sesskey := FDMemTableInit.FieldByName('user.sesskey').AsString;
+    DModule.notifications := FDMemTableInit.FieldByName('user.notifications')
+      .AsInteger;
+    self.DoAuthenticate;
+  end
+  else
+    self.clearINIParams;
+  FPushClient.GCMAppID := FDMemTableInit.FieldByName
+    ('mainFields.Amzomvelebi_GCMAppID').AsString;
+  FPushClient.ServerKey := FDMemTableInit.FieldByName
+    ('mainFields.Amzomvelebi_GCMServerKey').AsString;
+
+  FPushClient.UseSandbox := False; // Change this to False for production use!
+  FPushClient.OnChange := PushClientChangeHandler;
+  FPushClient.OnReceiveNotification := PushClientReceiveNotificationHandler;
 end;
 
 procedure TMainForm.clearINIParams;
 var
   Ini: TIniFile;
 begin
-  Ini := TIniFile.Create(TPath.Combine(TPath.GetHomePath,
-    DModule.settingsIniFile));
-  try
-    Ini.AutoSave := True;
-    Ini.WriteString('auth', 'hash', '');
-    Ini.WriteString('auth', 'full_name', '');
-    Ini.WriteString('auth', 'phone', '');
-    Ini.WriteString('auth', 'email', '');
-    Ini.WriteString('auth', 'fname', '');
-  finally
-    Ini.Free;
-  end;
+  self.v_Ini.WriteString('auth', 'hash', '');
+  self.v_Ini.WriteString('auth', 'full_name', '');
+  self.v_Ini.WriteString('auth', 'phone', '');
+  self.v_Ini.WriteString('auth', 'email', '');
+  self.v_Ini.WriteString('auth', 'fname', '');
 end;
 
 {$IFDEF IOS}
@@ -742,11 +801,71 @@ begin
   Result := 'deprecated';
 end;
 
+procedure TMainForm.Image2Click(Sender: TObject);
+begin
+  AuthAction.Execute;
+end;
+
+procedure TMainForm.Image3Click(Sender: TObject);
+begin
+  ActionRegAmzomveli.Execute;
+end;
+
 {$ENDIF ANDROID}
+
+procedure TMainForm.Image5Click(Sender: TObject);
+begin
+  ActionService1.Execute
+end;
+
+procedure TMainForm.Image6Click(Sender: TObject);
+begin
+  ActionService2.Execute
+end;
+
+procedure TMainForm.Image8Click(Sender: TObject);
+begin
+  ActionService3.Execute
+end;
+
+procedure TMainForm.InfoButtonAddAppClick(Sender: TObject);
+begin
+  ActionAppAdding.Execute;
+end;
+
+procedure TMainForm.Label1Click(Sender: TObject);
+begin
+  AuthAction.Execute;
+end;
+
+procedure TMainForm.Label3Click(Sender: TObject);
+begin
+  ActionRegAmzomveli.Execute;
+end;
+
+procedure TMainForm.Label4Click(Sender: TObject);
+begin
+  ActionService1.Execute
+end;
+
+procedure TMainForm.Label5Click(Sender: TObject);
+begin
+  ActionService2.Execute
+end;
+
+procedure TMainForm.Label7Click(Sender: TObject);
+begin
+  ActionService3.Execute
+end;
 
 procedure TMainForm.LabelAppsClick(Sender: TObject);
 begin
   ActionAppsList.Execute;
+end;
+
+procedure TMainForm.LabelInfoTitleClick(Sender: TObject);
+begin
+  RectangleHowItWork.Visible := False;
 end;
 
 procedure TMainForm.LabelTotalAppsCountClick(Sender: TObject);
@@ -754,16 +873,13 @@ begin
   ActionAppsList.Execute;
 end;
 
-procedure TMainForm.ListView1ItemClick(const Sender: TObject;
-const AItem: TListViewItem);
-var
-  id: integer;
+procedure TMainForm.ColorPanel1Change(Sender: TObject);
 begin
-  id := self.FDMemTableBidedApps.FieldByName('id').AsInteger;
-  with TAppDetailForm.Create(Application) do
-  begin
-    initForm(id);
-  end;
+  TmyWindow.StatusBarColor(self, $FFFF3434);
 end;
+
+initialization
+
+TmyWindow.Init;
 
 end.

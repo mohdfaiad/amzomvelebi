@@ -14,13 +14,10 @@ uses
   FireDAC.Comp.Client, REST.Response.Adapter, REST.Client,
   Data.Bind.ObjectScope,
   Data.Bind.DBScope, System.Threading, IdURI, System.Actions, FMX.ActnList,
-  FMX.Gestures, FMX.LoadingIndicator;
+  FMX.Gestures, FMX.LoadingIndicator, Header;
 
 type
   TUserLocationsForm = class(TForm)
-    RectangleHeader: TRectangle;
-    ButtonBack: TButton;
-    LabelAppName: TLabel;
     RectangleLocation: TRectangle;
     ListBoxLocationsMaster: TListBox;
     RectangleDetail: TRectangle;
@@ -60,8 +57,11 @@ type
     FDMemTableLocationDetailsuser_id: TWideStringField;
     LinkListControlToField2: TLinkListControlToField;
     FMXLoadingIndicator1: TFMXLoadingIndicator;
+    HeaderFrame1: THeaderFrame;
+    StyleBook1: TStyleBook;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure ButtonBackClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure ListBoxDetailsChangeCheck(Sender: TObject);
     procedure ListBoxLocationsMasterChangeCheck(Sender: TObject);
@@ -75,6 +75,7 @@ type
     procedure TimerSetCheckedTimer(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure HeaderFrame1ButtonBackClick(Sender: TObject);
   private
     procedure setLocations;
     { Private declarations }
@@ -105,14 +106,6 @@ begin
   setLocations;
 end;
 
-procedure TUserLocationsForm.ButtonBackClick(Sender: TObject);
-begin
-  if RectangleDetail.Visible = True then
-    RectangleDetail.Visible := False
-  else
-    self.Close;
-end;
-
 procedure TUserLocationsForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -126,10 +119,19 @@ begin
     self.Free;
 end;
 
+procedure TUserLocationsForm.HeaderFrame1ButtonBackClick(Sender: TObject);
+begin
+  if RectangleDetail.Visible = True then
+    RectangleDetail.Visible := False
+  else
+    self.Close;
+end;
+
 procedure TUserLocationsForm.initForm;
 var
   aTask: ITask;
 begin
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
   RectanglePreloader.Visible := True;
   if DModule.user_type_id <> 2 then
     self.Close;
@@ -352,4 +354,3 @@ begin
 end;
 
 end.
-

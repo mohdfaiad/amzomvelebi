@@ -16,7 +16,8 @@ uses
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
   System.Threading, System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors,
   Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.DBScope, Data.Bind.Controls,
-  FMX.Bind.Navigator, System.ImageList, FMX.ImgList;
+  FMX.Bind.Navigator, System.ImageList, FMX.ImgList, FMX.Controls.Presentation,
+  FMX.StdCtrls;
 
 type
   TMyContractsForm = class(TForm)
@@ -40,6 +41,8 @@ type
     FDMemTableContractscreate_date: TWideStringField;
     FDMemTableContractsimageindex: TWideStringField;
     ImageList1: TImageList;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
@@ -83,6 +86,7 @@ var
   aTask: ITask;
 begin
   self.show;
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
   HeaderFrame1.LabelAppName.Text := 'ჩემი შეთანხმებების სია';
   RectanglePreloader.Visible := True;
   aTask := TTask.Create(

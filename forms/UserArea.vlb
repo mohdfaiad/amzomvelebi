@@ -16,21 +16,11 @@ Coordinates=254,781,116,69
 [RESTResponseDataSetAdapterUserDetails]
 Coordinates=752,1,224,33
 
-[Label1]
-Coordinates=679,781,46,51
-Visible=True
-
 [RESTResponseUserDetails]
 Coordinates=620,10,147,285
 
 [RectanglePreloader]
 Coordinates=134,894,111,33
-
-[ButtonBack]
-Coordinates=581,781,72,51
-
-[RectangleHeader]
-Coordinates=10,894,98,33
 
 [RESTRequestUserDetails]
 Coordinates=10,632,139,123
@@ -40,7 +30,8 @@ Coordinates=416,904,135,33
 Visible=True
 
 []
-Coordinates=519,365,144,33
+Coordinates=10,894,98,33
+Visible=True
 
 [BindSourceDB1]
 Coordinates=271,894,121,249

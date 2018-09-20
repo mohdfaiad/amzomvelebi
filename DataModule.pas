@@ -28,6 +28,8 @@ type
   const
     currentVersion = '1.0.0';
     settingsIniFile = 'AmzomvelebiSettings.ini';
+    statusBarTitle = ''; // '     Azomva';
+    statusBarOpacity = 0.6;
   end;
 
 var

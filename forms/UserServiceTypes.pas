@@ -14,7 +14,7 @@ uses
   FireDAC.Comp.Client, REST.Response.Adapter, REST.Client,
   Data.Bind.ObjectScope, FMX.StdCtrls,
   FMX.ListBox, FMX.Objects, System.Threading, IdURI, FMX.Controls.Presentation,
-  FMX.Layouts, FMX.Ani, FMX.LoadingIndicator;
+  FMX.Layouts, FMX.Ani, FMX.LoadingIndicator, Header;
 
 type
   TUserServiceTypesForm = class(TForm)
@@ -22,9 +22,6 @@ type
     ListBoxServiceTypes: TListBox;
     Button1: TButton;
     RectanglePreloader: TRectangle;
-    RectangleHeader: TRectangle;
-    ButtonBack: TButton;
-    LabelAppName: TLabel;
     TimerSetChecked: TTimer;
     RESTRequestServiceTypes: TRESTRequest;
     RESTResponseServiceTypes: TRESTResponse;
@@ -39,16 +36,20 @@ type
     RESTRequestSetServiceTypes: TRESTRequest;
     RESTResponseSetServiceTypes: TRESTResponse;
     FMXLoadingIndicator1: TFMXLoadingIndicator;
+    HeaderFrame1: THeaderFrame;
+    StyleBook1: TStyleBook;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
     procedure ListBoxServiceTypesChangeCheck(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure RESTRequestServiceTypesAfterExecute(Sender: TCustomRESTRequest);
-    procedure ButtonBackClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RESTRequestSetServiceTypesAfterExecute
       (Sender: TCustomRESTRequest);
     procedure TimerSetCheckedTimer(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure HeaderFrame1ButtonBackClick(Sender: TObject);
   private
     procedure setServiceTypes;
     procedure checkCheckboxSelections;
@@ -81,6 +82,7 @@ begin
   if DModule.user_type_id <> 2 then
     self.Close;
   self.Show;
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
   RectanglePreloader.Visible := True;
   aTask := TTask.Create(
     procedure()
@@ -187,11 +189,6 @@ begin
     RectanglePreloader.Visible := False;
 end;
 
-procedure TUserServiceTypesForm.ButtonBackClick(Sender: TObject);
-begin
-  self.Close;
-end;
-
 procedure TUserServiceTypesForm.checkCheckboxSelections;
 var
   I: integer;
@@ -217,6 +214,11 @@ var KeyChar: Char; Shift: TShiftState);
 begin
   if Key = 137 then
     self.Free;
+end;
+
+procedure TUserServiceTypesForm.HeaderFrame1ButtonBackClick(Sender: TObject);
+begin
+  HeaderFrame1.ButtonBackClick(Sender);
 end;
 
 end.

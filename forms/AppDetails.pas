@@ -17,7 +17,8 @@ uses
   Data.Bind.DBScope, FMX.DateTimeCtrls,
   FMX.ScrollBox, FMX.Memo, FMX.Edit, IdURI,
   FMX.Ani, FMX.ListView, FMX.TabControl, FMX.Bind.GenData, FMX.Layouts,
-  FMX.LoadingIndicator, Header;
+  FMX.LoadingIndicator, Header, System.ImageList, FMX.ImgList, System.Actions,
+  FMX.ActnList;
 
 type
   TAppDetailForm = class(TForm)
@@ -36,9 +37,8 @@ type
     EditOfferedPrice: TEdit;
     MemoOfferDescription: TMemo;
     Label1: TLabel;
-    DateEditStartDate: TDateEdit;
     RESTRequestOffer: TRESTRequest;
-    RESTResponse1: TRESTResponse;
+    RESTResponseOffer: TRESTResponse;
     Label2: TLabel;
     SpeedButtonApplied: TSpeedButton;
     Image1: TImage;
@@ -125,16 +125,45 @@ type
     FDMemTableAppbidscount: TWideStringField;
     FDMemTableApplocation_name: TWideStringField;
     FDMemTableAppcanbid: TWideStringField;
-    procedure RESTRequestAppAfterExecute(Sender: TCustomRESTRequest);
+    StyleBookAppDetails: TStyleBook;
+    LabelDetails: TLabel;
+    Image2: TImage;
+    RectangleOffer: TRectangle;
+    RectangleBody: TRectangle;
+    ButtonApprove: TButton;
+    FMXLoadingIndicatorApproved: TFMXLoadingIndicator;
+    ButtonCancel: TButton;
+    Image3: TImage;
+    EditPrice: TEdit;
+    RectanglePrice: TRectangle;
+    LabelPrice: TLabel;
+    RectangleStatusBar: TRectangle;
+    LabelStatusBar: TLabel;
+    ImageListAppDetails: TImageList;
+    Label4: TLabel;
+    Image4: TImage;
+    Label5: TLabel;
+    Image5: TImage;
+    Label6: TLabel;
+    Image6: TImage;
+    LabelLari: TLabel;
+    ActionListAppDetails: TActionList;
+    ActionSendAppOffer: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ButtonBackClick(Sender: TObject);
     procedure ButtonOfferClick(Sender: TObject);
     procedure ButtonSubmitClick(Sender: TObject);
-    procedure RESTRequestOfferAfterExecute(Sender: TCustomRESTRequest);
     procedure Button1Click(Sender: TObject);
     procedure HeaderFrame1ButtonBackClick(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
     procedure TabControl1Change(Sender: TObject);
+    procedure ButtonCancelClick(Sender: TObject);
+    procedure ListViewOffersUpdateObjects(const Sender: TObject;
+      const AItem: TListViewItem);
+    procedure EditPriceKeyDown(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure ActionSendAppOfferExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -155,7 +184,7 @@ uses DataModule, Main;
 
 procedure TAppDetailForm.ButtonOfferClick(Sender: TObject);
 begin
-  PanelBids.Visible := True;
+  RectangleOffer.Visible := True;
 end;
 
 procedure TAppDetailForm.ButtonSubmitClick(Sender: TObject);
@@ -170,14 +199,46 @@ begin
           RESTRequestOffer.Params.Clear;
           RESTRequestOffer.AddParameter('app_id', self.app_id.ToString);
           RESTRequestOffer.AddParameter('offered_price', EditOfferedPrice.Text);
-          RESTRequestOffer.AddParameter('start_date', DateEditStartDate.Text);
-          RESTRequestOffer.AddParameter('offer_description', TIdURI.ParamsEncode(MemoOfferDescription.Text));
+          { RESTRequestOffer.AddParameter('offer_description',
+            TIdURI.ParamsEncode(MemoOfferDescription.Text)); }
           RESTRequestOffer.AddParameter('sesskey', DModule.sesskey);
           RESTRequestOffer.AddParameter('user_id', DModule.id.ToString);
           RESTRequestOffer.Execute;
         end);
     end);
   aTask.Start;
+end;
+
+procedure TAppDetailForm.EditPriceKeyDown(Sender: TObject; var Key: Word;
+var KeyChar: Char; Shift: TShiftState);
+begin
+  if (Key = 10) or (Key = 13) then
+    ActionSendAppOffer.Execute;
+end;
+
+procedure TAppDetailForm.ActionSendAppOfferExecute(Sender: TObject);
+begin
+  if EditPrice.Text.IsEmpty = True then
+  begin
+    ShowMessage('გთხოვთ შეავსოთ ფასის ველი');
+    exit;
+  end;
+  FMXLoadingIndicatorApproved.Visible := True;
+  RESTRequestOffer.Params.Clear;
+  RESTRequestOffer.AddParameter('app_id', self.app_id.ToString);
+  RESTRequestOffer.AddParameter('offered_price', EditPrice.Text);
+  RESTRequestOffer.AddParameter('offer_description',
+    TIdURI.ParamsEncode(MemoOfferDescription.Text));
+  RESTRequestOffer.AddParameter('sesskey', DModule.sesskey);
+  RESTRequestOffer.AddParameter('user_id', DModule.id.ToString);
+  RESTRequestOffer.ExecuteAsync(
+    procedure
+    begin
+      self.initForm(self.app_id);
+      RectangleOffer.Visible := false;
+      FMXLoadingIndicatorApproved.Visible := false;
+      ShowMessage(self.RESTResponseOffer.Content);
+    end, True, True);
 end;
 
 procedure TAppDetailForm.Button1Click(Sender: TObject);
@@ -190,12 +251,23 @@ begin
   self.Close;
 end;
 
-procedure TAppDetailForm.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TAppDetailForm.ButtonCancelClick(Sender: TObject);
+begin
+  RectangleOffer.Visible := false;
+end;
+
+procedure TAppDetailForm.FormClose(Sender: TObject;
+
+var Action: TCloseAction);
 begin
   Action := TCloseAction.caFree;
 end;
 
-procedure TAppDetailForm.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+procedure TAppDetailForm.FormKeyUp(Sender: TObject;
+
+var Key: Word;
+
+var KeyChar: Char; Shift: TShiftState);
 begin
   if Key = 137 then
     self.Free;
@@ -208,55 +280,55 @@ end;
 
 procedure TAppDetailForm.initForm(papp_id: integer; showOwner: boolean = false);
 begin
+  self.LabelStatusBar.Text := DModule.statusBarTitle;
   TabItemOwner.Visible := showOwner;
   self.app_id := papp_id;
   HeaderFrame1.LabelAppName.Text := 'განცხადება N ' + papp_id.ToString;
   self.Show;
-  DateEditStartDate.Format := 'dd-mm-yyyy';
-  DateEditStartDate.DateTime := Now() + 1;
+  // DateEditStartDate.Format := 'dd-mm-yyyy';
+  // DateEditStartDate.DateTime := Now() + 1;
   RectanglePreloader.Visible := True;
-  if (not DModule.sesskey.IsEmpty) and (showOwner = False) then
+  if (not DModule.sesskey.IsEmpty) and (showOwner = false) then
     ButtonOffer.Visible := True
   else
     ButtonOffer.Visible := false;
-
-  {aTask := TTask.Create(
-    procedure()
-    begin    }
-      RESTRequestApp.Params.Clear;
-      RESTRequestApp.AddParameter('app_id', self.app_id.ToString);
-      if not DModule.sesskey.IsEmpty then
-      begin
-        RESTRequestApp.AddParameter('sesskey', DModule.sesskey);
-        RESTRequestApp.AddParameter('user_id', DModule.id.ToString);
-        if showOwner = True then
-        begin
-          RESTRequestApp.AddParameter('op', 'showownerinfo');
-          TabControl1.ActiveTab := TabItemOwner;
-        end
-        else
-          TabControl1.ActiveTab := TabItemDetails;
-      end
-      else
-      begin
-        TabItemOffer.Visible := false;
-      end;
-      RESTRequestApp.Execute;
-   { end);
-  aTask.Start; }
+  RESTRequestApp.Params.Clear;
+  RESTRequestApp.AddParameter('app_id', self.app_id.ToString);
+  if not DModule.sesskey.IsEmpty then
+  begin
+    RESTRequestApp.AddParameter('sesskey', DModule.sesskey);
+    RESTRequestApp.AddParameter('user_id', DModule.id.ToString);
+    if showOwner = True then
+    begin
+      RESTRequestApp.AddParameter('op', 'showownerinfo');
+      TabControl1.ActiveTab := TabItemOwner;
+    end
+    else
+      TabControl1.ActiveTab := TabItemDetails;
+  end
+  else
+  begin
+    TabItemOffer.Visible := false;
+  end;
+  RESTRequestApp.ExecuteAsync(
+    procedure
+    begin
+      self.RectanglePreloader.Visible := false;
+    end, True, True);
 end;
 
-procedure TAppDetailForm.RESTRequestAppAfterExecute(Sender: TCustomRESTRequest);
+procedure TAppDetailForm.ListViewOffersUpdateObjects(const Sender: TObject;
+const AItem: TListViewItem);
 begin
-  self.RectanglePreloader.Visible := false;
-end;
-
-procedure TAppDetailForm.RESTRequestOfferAfterExecute(Sender: TCustomRESTRequest);
-begin
-  self.initForm(self.app_id);
-  PanelBids.Visible := false;
-  RectanglePreloader.Visible := false;
-  ShowMessage(self.RESTResponse1.Content);
+  if TListItemText(AItem.Objects.DrawableByName('approved_id')).Text.ToInteger > 0
+  then
+  begin
+    TListItemImage(AItem.Objects.FindDrawable('approved_icon')).ImageIndex := 2;
+  end
+  else
+  begin
+    TListItemImage(AItem.Objects.FindDrawable('approved_icon')).ImageIndex := 1;
+  end;
 end;
 
 procedure TAppDetailForm.TabControl1Change(Sender: TObject);
