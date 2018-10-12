@@ -38,7 +38,7 @@ uses
   Androidapi.JNI.Provider,
   Androidapi.JNI.Util,
   Androidapi.JNI.Support,
-  System.Android.Notification, MyContractsUnit, AppOfferedUnit
+  System.Android.Notification, MyContractsUnit, AppOfferedUnit, FMX.TMSHTMLText
 {$ENDIF ANDROID}
 {$IFDEF IOS}
     , FMX.PushNotification.IOS
@@ -198,6 +198,7 @@ type
     FDMemTableServicescreate_date: TWideStringField;
     FDMemTableServicesmodify_date: TWideStringField;
     ActionHowItWorks: TAction;
+    TMSFMXHTMLText1: TTMSFMXHTMLText;
     procedure ActionUserAreaExecute(Sender: TObject);
     procedure TimerVersioningTimer(Sender: TObject);
     procedure RESTRequestVersioningAfterExecute(Sender: TCustomRESTRequest);
@@ -335,6 +336,24 @@ begin
     DModule.settingsIniFile));
   self.v_Ini.AutoSave := True;
   // User2ListFrame1.initFrame;
+
+  TMSFMXHTMLText1.Text :=
+    'სარეგისტრაციოდ წარდგენილ დოკუმენტაციაზე თანდართული აზომვითი ნახაზის' +
+    sLineBreak +
+    '(ქაღალდზე დაბეჭდილი  და მისი იდენტური ელექტრონული ვერსია მყარ დისკზე ჩაწერილი) მომზადება,'
+    + sLineBreak +
+    'რომელსაც ქმნის უფლებამოსილი პირი, ან კომპანია თქვენი დაკვეთის' + sLineBreak
+    + sLineBreak + sLineBreak +
+    'ნახაზის წარდგენა საჭიროა საჯარო რეესტრში მიწის ნაკვეთის პირველადი რეგისტრაციისას, ან დაზუსტებისას.'
+    + sLineBreak +
+    'აგრეთვე, უკვე რეგისტრირებული მიწის ნაკვეთის დაყოფა/გაერთიანებისას.' +
+    sLineBreak + sLineBreak + sLineBreak +
+    'ყურადღება: მიწის ნაკვეთის საკადასტრო აგეგმვითი/აზომვითი სამუშაოს შესრულებისას გამიჯნულია'
+    + sLineBreak + 'პასუხისმგებლობა ამზომველსა და მესაკუთრეს შორის.' +
+    sLineBreak +
+    'კერძოდ, უძრავი ნივთის ადგილმდებარეობასა და საზღვრის იდენტიფიცირებაზე პასუხისმგებელია მესაკუთრე,'
+    + sLineBreak +
+    'ხოლო აზომვითი სამუშაოების სრულყოფილად შესრულებასა და ნახაზის სისწორეზე - ამზომველი.';
 end;
 
 procedure TMainForm.PushClientReceiveNotificationHandler(Sender: TObject;
@@ -734,9 +753,7 @@ begin
     self.Close;
   end;
 
-  if FDMemTableInit.FieldByName('user.loginstatus')
-    .AsString = '1'
-  then
+  if FDMemTableInit.FieldByName('user.loginstatus').AsString = '1' then
   begin
     DModule.id := FDMemTableInit.FieldByName('user.id').AsInteger;
     DModule.user_type_id := FDMemTableInit.FieldByName('user.user_type_id')

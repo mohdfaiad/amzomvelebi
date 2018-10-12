@@ -323,10 +323,10 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Android)'!=''">
-        <VerInfo_Build>51</VerInfo_Build>
+        <VerInfo_Build>53</VerInfo_Build>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <EL_Maps>true</EL_Maps>
-        <VerInfo_Keys>package=com.azomva.com.ge.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=51;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=No TitleBar;hardwareAccelerated=true;apiKey=AIzaSyBEXqFdpYNyWacE9K5dia6LemR-h7bDtqE</VerInfo_Keys>
+        <VerInfo_Keys>package=com.azomva.com.ge.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=53;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=auto;largeHeap=False;theme=No TitleBar;hardwareAccelerated=true;apiKey=AIzaSyBEXqFdpYNyWacE9K5dia6LemR-h7bDtqE</VerInfo_Keys>
         <EL_ApsEnvironment>true</EL_ApsEnvironment>
         <PF_KeyStore>keystore\amzomvelebi.keystore</PF_KeyStore>
         <PF_KeyStorePass>54E50DFE644355A9A301713BD13FE36081DA0549A057979297EE0FB48E3E3CD9DB5DA38CE3371C4DC1B0577DFADEC37ABAF93641045722CE16654589E5A6228C18C3B938EE93A8CED3DF3B0172258597F7DE331CC3407260EB0F6E6B1210</PF_KeyStorePass>
@@ -721,14 +721,14 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\release\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile"/>
-                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
-                    <Platform Name="Android">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\iOS\iPad\FM_LaunchImageLandscape_1024x748.png" Configuration="Debug" Class="iPad_Launch1024">
                     <Platform Name="iOSSimulator">
                         <RemoteName>Default-Landscape.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\Release\AndroidManifest.xml" Configuration="Release" Class="ProjectAndroidManifest">
+                    <Platform Name="Android">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
