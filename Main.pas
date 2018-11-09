@@ -22,10 +22,10 @@ uses
   DW.PushClient,
   IdURI, System.IOUtils,
   Inifiles, FMX.Header, User2ListFR,
-  FMX.LoadingIndicator
+  FMX.LoadingIndicator, MyContractsUnit, AppOfferedUnit
 {$IFDEF ANDROID}
-    , // System.Android.Service,
-  FMX.PushNotification.Android,
+     // System.Android.Service,
+ {FMX.PushNotification.Android,
   Androidapi.JNI.App,
   Androidapi.JNI.GraphicsContentViewText,
   Androidapi.JNI.Os,
@@ -38,7 +38,7 @@ uses
   Androidapi.JNI.Provider,
   Androidapi.JNI.Util,
   Androidapi.JNI.Support,
-  System.Android.Notification, MyContractsUnit, AppOfferedUnit, FMX.TMSHTMLText
+  System.Android.Notification,}
 {$ENDIF ANDROID}
 {$IFDEF IOS}
     , FMX.PushNotification.IOS
@@ -198,7 +198,6 @@ type
     FDMemTableServicescreate_date: TWideStringField;
     FDMemTableServicesmodify_date: TWideStringField;
     ActionHowItWorks: TAction;
-    TMSFMXHTMLText1: TTMSFMXHTMLText;
     procedure ActionUserAreaExecute(Sender: TObject);
     procedure TimerVersioningTimer(Sender: TObject);
     procedure RESTRequestVersioningAfterExecute(Sender: TCustomRESTRequest);
@@ -337,7 +336,7 @@ begin
   self.v_Ini.AutoSave := True;
   // User2ListFrame1.initFrame;
 
-  TMSFMXHTMLText1.Text :=
+  {TMSFMXHTMLText1.Text :=
     'სარეგისტრაციოდ წარდგენილ დოკუმენტაციაზე თანდართული აზომვითი ნახაზის' +
     sLineBreak +
     '(ქაღალდზე დაბეჭდილი  და მისი იდენტური ელექტრონული ვერსია მყარ დისკზე ჩაწერილი) მომზადება,'
@@ -353,7 +352,7 @@ begin
     sLineBreak +
     'კერძოდ, უძრავი ნივთის ადგილმდებარეობასა და საზღვრის იდენტიფიცირებაზე პასუხისმგებელია მესაკუთრე,'
     + sLineBreak +
-    'ხოლო აზომვითი სამუშაოების სრულყოფილად შესრულებასა და ნახაზის სისწორეზე - ამზომველი.';
+    'ხოლო აზომვითი სამუშაოების სრულყოფილად შესრულებასა და ნახაზის სისწორეზე - ამზომველი.';}
 end;
 
 procedure TMainForm.PushClientReceiveNotificationHandler(Sender: TObject;
